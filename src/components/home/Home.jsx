@@ -1,7 +1,23 @@
+import { Wrapper, Container, Slider } from "./SubComponents";
+
+import Banner from './Banner';
+import SliedrItem from "./SliderItem";
+import Tickets from "./Tickets";
 
 const Home = () => {
+
   return (
-    <div>Home Page</div>
+    <Wrapper>
+      <Container>
+        <Slider>
+          <SliedrItem />
+          <SliedrItem />
+          <SliedrItem />
+        </Slider>
+        <Banner />
+        <Tickets />
+      </Container>
+    </Wrapper>
   )
 }
 
