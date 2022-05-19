@@ -1,0 +1,189 @@
+import styled from "styled-components";
+
+export const Wrapper = styled.main`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+`
+
+export const Container = styled.section`
+    width: 85%;
+    display: flex;
+    justify-content: space-between;    
+`
+
+export const Left = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 68%;
+`
+
+export const Poster = styled.img`
+    width: 100%;
+`
+
+export const Date = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    font-size: 20px;
+    color: #000;
+    font-weight: 700;
+    background-color: white;
+`
+
+export const Discription = styled.div`
+    padding: 10px;
+    background-color: white;
+    color: #626467;
+    font-size: 15px;
+`
+
+export const TabPanel = styled.ul`
+    list-style: none;
+    padding: 10px;
+    border-top: 1px solid #ededed;
+    margin-top: 20px;
+`
+
+export const TabItem = styled.li`
+
+`
+
+export const A = styled.a`
+    text-decoration: none;
+    padding: 13px;
+    border-top: 1px solid #0066b2;
+    background-color: #f1f5f8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 12px;
+    color: black;
+`
+
+export const Right = styled.div`
+    width: 30%;
+`
+export const Purchase = styled.div`
+    width: 100%;
+    padding-top: 40px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`
+
+export const H1 = styled.h1`
+    margin-top: 0;
+    font-size: 23px;
+    line-height: 1.25;
+    text-align: center;
+`
+
+export const BuyPanel = styled.div`
+    width: 80%;
+`
+
+export const CheckList = styled.div`
+    width: 80%;
+    padding-bottom: 20px;
+
+`
+
+export const RadioInput = styled.span`
+    display: flex;
+    justify-content: center;
+    margin: 7px;
+`
+
+export const Input = styled.input`
+    display: none;
+    
+
+`
+
+export const Label = styled.label`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #f70;
+    color: white;
+    border-radius: 3px;
+    pointer-events: none;
+`
+
+export const Span = styled.span`
+    
+`
+
+export const Category = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+export const Checkout = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const CheckoutButton = styled.a`
+    /* width: 80%; */
+    text-decoration: none;
+    padding: 12px 52px;
+    background-color: #e4e7e9;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 3px;
+    font-weight: 300;
+    color: #626467;
+`
+
+export const EmptyDiv = styled.div`
+    height: 50px;
+`
+
+export const InfosVendeur = styled.div`
+    width: 100%;
+    padding-top: 40px;
+    margin-top:30px;
+    background-color: #fff;
+`
+
+export const Title = styled.h2`
+    width: 50%;
+    outline: 0;
+    border-top: 2px solid #0c9eca;
+    display: inline-block;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 5px 0;
+`
+
+export const Hr = styled.hr`   
+    outline: 0;
+    border-top: 1px solid #ededed;
+
+`
+
+export const ImageLogo = styled.img`
+    padding: 20px 0;
+`
+
+export const RelativeBox = styled.div`
+    position: relative;
+    margin: 0 20px;
+    margin-top: 30px;
+`
+
+// export const 

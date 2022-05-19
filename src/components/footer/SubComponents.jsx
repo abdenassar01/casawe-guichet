@@ -106,5 +106,4 @@ export const Sponsors = styled.div`
 
 export const SponsorsImage = styled.img`
    height: 45px;
-
 `
