@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { RouteLink } from '../routes/RoutesLinks'
 
+
 export const Logo = styled.div`
     
 `
@@ -8,18 +9,40 @@ export const Logo = styled.div`
 export const Img = styled.img`
     width: 100px;
     padding: 20px 0 10px 0;
+
+    @media (max-width: 768px) {
+        width: 80px;
+        padding: 10px 0 5px 0;
+    }
 `
  
 export const NavbarWrapper = styled.nav`
     background-color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     border-bottom: 1px dashed #ccc;
+    position: sticky;
+    top: 0;
+    transition: .32s;
+    
+    @media (max-width: 768px) {
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+
+`
+
+export const NormalNav = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 `
 
 export const Nav = styled.nav`
     display: flex;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `
 
 export const Text = styled.span`
@@ -28,10 +51,49 @@ export const Text = styled.span`
 `
 
 export const NavLink = styled(RouteLink)`
-    padding: 25px;
+    padding: ${props => props.padding ? props.padding : "0" }; 
 
     &:hover{
         color: #0d6eb6;
         background-color: #EDEDED;
+    }
+`
+
+export const BurgerIcon = styled.div`
+    display: none;
+    font-size: 25px;
+    height: fit-content;
+    cursor: pointer;
+    color: #3C4759;
+    padding: 2px 10px;
+    border-radius: 3px;
+    border: .15px solid #ededed;
+
+    &:hover{
+        color: #fff7f7; 
+        background-color: #3c4759 !important;
+    }
+
+    @media (max-width: 768px) {
+        display: grid;
+        place-items: center;
+    }
+`
+
+export const ExtendedMenu = styled.nav`
+    display: ${(props) => props.display ? "block" : "none" };
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+`
+
+export const Hr = styled.hr`
+    display: ${(props) => props.display ? "block" : "none" };
+    color: #3c4759;
+    margin: 5px;
+
+    @media (min-width: 768px) {
+        display: none;
     }
 `

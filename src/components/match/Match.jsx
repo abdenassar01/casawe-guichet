@@ -3,18 +3,28 @@ import { Wrapper, Container, Left,
   TabItem, A, Right, Purchase, H1, BuyPanel,
   CheckList, RadioInput, Input, Label, Span, 
   Category, Checkout, CheckoutButton, EmptyDiv,
-  InfosVendeur, Title, Hr, ImageLogo, RelativeBox
+  InfosVendeur, Title, Hr, ImageLogo, WrapperBox, 
+  TextInfoWrapper, P
 } from "./SubComponents"
 
 import { TiCalendarOutline } from 'react-icons/ti'
 import { AiOutlineClose } from 'react-icons/ai'
 
+import { useState } from 'react';
+
 const Match = () => {
+  
+  const [isAvailable, serIsAvailable] = useState(false)
+
   return (
     <Wrapper>
         <Container>
           <Left>
-            <Poster src="https://guichet.imgix.net/medias/fRBTwT1EDiCwWtdzW8EDseHeXe31mEoPrVTrZWrz.jpeg?w=900&h=600&fit=clip&auto=format,compress&q=80" alt="poster match" draggable="false" />
+            <Poster 
+            src="https://guichet.imgix.net/medias/fRBTwT1EDiCwWtdzW8EDseHeXe31mEoPrVTrZWrz.jpeg?w=900&h=600&fit=clip&auto=format,compress&q=80" 
+            alt="poster match" 
+            draggable="false" 
+            />
             <Date>
              <TiCalendarOutline size={30}/> <b>Samedi 23 Avril 2022 à 22h00</b>
             </Date>
@@ -44,92 +54,97 @@ const Match = () => {
               <CheckList>
                 {/* base radio botton */}
                 <RadioInput>
-                  <Label>
+                  <Input type="radio" value={`value`} name="zone" id="zone4" disabled/>
+                  <Label htmlFor="zone4">
                     <Category>
                       <AiOutlineClose />
                       Zone 04
                     </Category>
                     <Span>50DH</Span>
                   </Label>
-                  <Input type="radio" value={`value`} />
                 </RadioInput>
                   {/* base radio botton */}
                 <RadioInput>
-                  <Label>
+                  <Input type="radio" value={`value`} name="zone" id="zone5"/>
+                  <Label htmlFor="zone5">
                     <Category>
                       <AiOutlineClose />
                       Zone 05
                     </Category>
                     <Span>50DH</Span>
                   </Label>
-                  <Input type="radio" value={`value`} />
                 </RadioInput>
                 <RadioInput>
-                  <Label>
+                  <Input type="radio" value={`value`} name="zone" id="zone6" />
+                  <Label htmlFor="zone6">
                     <Category>
                       <AiOutlineClose />
                       Zone 06
                     </Category>
                     <Span>50DH</Span>
                   </Label>
-                  <Input type="radio" value={`value`} />
                 </RadioInput>
                 <RadioInput>
-                  <Label>
+                  <Input type="radio" value={`value`} name="zone" id="zone7"/>
+                  <Label htmlFor="zone7">
                     <Category>
                       <AiOutlineClose />
                       Zone 07
                     </Category>
                     <Span>50DH</Span>
                   </Label>
-                  <Input type="radio" value={`value`} />
                 </RadioInput>
                 <RadioInput>
-                  <Label>
+                  <Input type="radio" value={`value`} name="zone" id="zone2" />
+                  <Label htmlFor="zone2">
                     <Category>
                       <AiOutlineClose />
                       Zone 02
                     </Category>
                     <Span>100DH</Span>
                   </Label>
-                  <Input type="radio" value={`value`} />
                 </RadioInput>
                 <RadioInput>
-                  <Label>
+                  <Input type="radio" value={`value`} name="zone" id="zone3"/>
+                  <Label id="zone3">
                     <Category>
                       <AiOutlineClose />
                       Zone 03
                     </Category>
                     <Span>100DH</Span>
                   </Label>
-                  <Input type="radio" value={`value`} />
                 </RadioInput>
                 <RadioInput>
-                  <Label>
+                  <Input type="radio" value={`value`} name="zone" id="zone1" />
+                  <Label id="zone1">
                     <Category>
                       <AiOutlineClose />
                       Zone 01
                     </Category>
                     <Span>700DH</Span>
                   </Label>
-                  <Input type="radio" value={`value`} />
                 </RadioInput>
                 <Checkout>
-                  <CheckoutButton href="">
-                      GUICHET FERME
+                  <CheckoutButton href="" >
+                      {isAvailable ? "Acheter Maintenant" : "guichet ferme" }
                   </CheckoutButton>
                 </Checkout>
                 <EmptyDiv></EmptyDiv>
               </CheckList>
             </Purchase>
             <InfosVendeur>
-              <RelativeBox>
+              <WrapperBox>
                 <Hr />
                 <Title>INFOS VENDEUR</Title>
-              </RelativeBox>
-              <ImageLogo src="https://guichet.imgix.net/providers/l72rhrgN4QVbMIDAjG6muv1mHRgCkUoOa8BJkihT.png?w=200&h=150&fit=clip&auto=format,compress&q=80" alt="" />
-              <p>CASAWI</p>
-              <p>Tel: <Tel>0522227745</Tel></p>
+              </WrapperBox>
+              <ImageLogo
+               src="https://guichet.imgix.net/providers/l72rhrgN4QVbMIDAjG6muv1mHRgCkUoOa8BJkihT.png?w=200&h=150&fit=clip&auto=format,compress&q=80" 
+               alt="" 
+               />
+              <TextInfoWrapper>
+                <P bold>CASAWI</P>
+                <P bold>Tel: <Span bold={false}>0522227745</Span></P>
+              </TextInfoWrapper>
             </InfosVendeur>
           </Right>
         </Container>

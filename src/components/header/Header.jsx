@@ -1,7 +1,7 @@
-import { HeaderWrapper, P, Nav } from './SubComponents'
-import { FaPhoneAlt, FaShoppingCart } from 'react-icons/fa'
+import { HeaderWrapper, P, Nav, ConectionLink } from './SubComponents';
+import { FaPhoneAlt, FaShoppingCart } from 'react-icons/fa';
 
-import { RouteLink } from '../routes/RoutesLinks'
+import { RouteLink } from '../routes/RoutesLinks';
 
 const Header = () => {
   return (
@@ -17,9 +17,9 @@ const Header = () => {
                 &nbsp;{0} Mon panier
             </RouteLink>
             <u>
-                <RouteLink to="/connection">
+                <ConectionLink to="/connection">
                     &nbsp; <b>Connexion / Inscription</b>
-                </RouteLink>
+                </ConectionLink>
             </u>   
         </Nav>
     </HeaderWrapper>

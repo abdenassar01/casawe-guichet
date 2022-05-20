@@ -100,12 +100,8 @@ export const RadioInput = styled.span`
     display: flex;
     justify-content: center;
     margin: 7px;
-`
-
-export const Input = styled.input`
-    display: none;
-    
-
+    height: 30px;
+    position: relative;
 `
 
 export const Label = styled.label`
@@ -119,8 +115,34 @@ export const Label = styled.label`
     pointer-events: none;
 `
 
+
+export const Input = styled.input`
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    opacity: 0;
+
+    &:checked + ${Label}{
+        background-color: #2DAAE1;
+    }
+
+    &:disabled + ${Label}{
+        background-color: #FFD6B3;
+    }
+`
+
+
 export const Span = styled.span`
-    
+    font-weight: ${props => props.bold ? "bold" : "normal"};
+`
+export const P = styled.p`
+    font-weight: ${props => props.bold && "bold"};
+    margin: 20px 0px;
 `
 
 export const Category = styled.div`
@@ -138,13 +160,22 @@ export const Checkout = styled.div`
 export const CheckoutButton = styled.a`
     /* width: 80%; */
     text-decoration: none;
-    padding: 12px 52px;
-    background-color: #e4e7e9;
+    padding: 10px 18px;
+    background-color: #037ccc;
     text-transform: uppercase;
     letter-spacing: 2px;
     border-radius: 3px;
     font-weight: 300;
-    color: #626467;
+    color: #ffffff;
+
+    &:hover{
+        background-color: #071D39;
+    }
+
+    &:disabled{
+        background-color: #e4e7e9;
+        color: #626467;
+    }
 `
 
 export const EmptyDiv = styled.div`
@@ -173,17 +204,17 @@ export const Title = styled.h2`
 export const Hr = styled.hr`   
     outline: 0;
     border-top: 1px solid #ededed;
-
 `
 
 export const ImageLogo = styled.img`
     padding: 20px 0;
 `
 
-export const RelativeBox = styled.div`
-    position: relative;
+export const WrapperBox = styled.div`
     margin: 0 20px;
     margin-top: 30px;
 `
 
-// export const 
+export const TextInfoWrapper = styled.div`
+    padding: 20px;
+`

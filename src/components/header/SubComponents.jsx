@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { PrimaryColors } from '../../utils'
+import { RouteLink } from '../routes/RoutesLinks'
 
 export const HeaderWrapper = styled.header`
     background-color: ${PrimaryColors[200]};
@@ -11,11 +12,18 @@ export const HeaderWrapper = styled.header`
 `
 
 export const P = styled.p`
-    color: ${PrimaryColors[100]}
+    color: ${PrimaryColors[100]};
 `
 
 export const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     gap: 30px;
+`
+
+export const ConectionLink = styled(RouteLink)`
+
+    &:hover{
+        color: #141111;
+    }
 `
