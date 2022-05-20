@@ -17,14 +17,13 @@ import { TiSocialTwitter,
         TiSocialFacebook 
       } from 'react-icons/ti'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { RouteLink } from '../routes/RoutesLinks'
       
 
 const SliderItem = () => {
 
     const [id, setId] = useState("20")
-    const [matchid, setmatchid] = useState("20")
     
     function truncateString(str, num) {
       if (str.length > num) {
@@ -34,6 +33,10 @@ const SliderItem = () => {
       }
     }
 
+    useEffect(
+        () => {
+            setId(10);
+        },[])
     
 
   return (
@@ -54,7 +57,7 @@ const SliderItem = () => {
                 <H5>
                     <MdLocationOn size={14}/> Casablanca
                 </H5>
-                <RouteLink to={`/match/${matchid}`}>
+                <RouteLink to={`/match/${id}`}>
                     <H3>
                     {`Wydad Athletic Club vs Chabab Riadhi Belouizdad`} 
                     </H3>
@@ -64,12 +67,12 @@ const SliderItem = () => {
                 </P>
                 </DealContent>
                 <PriceContent>
-                <H3>{`500DH`}</H3>
-                <BuyNow>
-                    <RouteLink to={`/match/${matchid}`}>
-                    <P color="#272630">{`GUICHET FERME`}</P>
-                    </RouteLink>
-                </BuyNow>
+                    <H3>{`500DH`}</H3>
+                    <BuyNow>
+                        <RouteLink to={`/match/${id}`}>
+                        <P color="#272630">{`GUICHET FERME`}</P>
+                        </RouteLink>
+                    </BuyNow>
                 </PriceContent>
                 <ShareOnSocialMedia>
                     <P><BsEmojiSmile size={12}/> Offre Special</P>

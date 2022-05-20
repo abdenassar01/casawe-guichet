@@ -101,7 +101,7 @@ export const RadioInput = styled.span`
     justify-content: center;
     margin: 7px;
     height: 30px;
-    position: relative;
+    /* position: relative; */
 `
 
 export const Label = styled.label`
@@ -117,9 +117,6 @@ export const Label = styled.label`
 
 
 export const Input = styled.input`
-    position: absolute;
-    top: 0%;
-    left: 0%;
     display: block;
     width: 100%;
     height: 100%;

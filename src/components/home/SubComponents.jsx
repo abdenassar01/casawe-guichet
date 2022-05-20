@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     flex-direction: column;
     width: 80%;
     gap: 20px;
@@ -31,23 +32,38 @@ export const Slider = styled.ul`
 
 export const SliderItemWrapper = styled.li`
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     flex:0 0 auto;
 `
 
 export const ImageWrapper = styled.div`
     width: 70%;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: auto;  
+    }
 `
 
 export const Image = styled.img`
     width: 100%;
-    height: 520px;
+    height: 520px;  
+    
+    @media (max-width: 768px) {
+        min-height: 50px;
+        height: auto;  
+    }
 `
 
 export const Panel = styled.div`
     background-color: white;
     width: 30%;
     gap: 30px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const Content = styled.div`
@@ -94,6 +110,7 @@ export const DealContent = styled.ul`
 export const PriceContent = styled.li`
     display: flex;
     justify-content: space-between;
+    padding: 20px 0;
 `
 
 export const BuyNow = styled.li`
@@ -150,20 +167,16 @@ export const Raw = styled.ul`
     display: flex;
     justify-content: space-between;
     padding: 10px 20px 0 20px;
-    gap: 40px;
+    gap: 6%;
     flex-wrap: wrap;
 `
 
 export const RawItem = styled.li`
     display: flex;
-    gap: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    gap: 6%;
+    padding: 10px 0; 
     flex: 1 0 300px;
-    /* min-width: 200px; */
-    width: 25%;
-    padding: 20px 0;
-
+    width: 27%;
 `
 
 export const IconWrapper = styled.img`
@@ -206,7 +219,7 @@ export const CardsRaw = styled.div`
 `
 
 export const Card = styled.div`
-    flex: 1 0 22%;
+    flex: 1 0 25%;
     margin-top: 20px;
     box-sizing: border-box;
 `
@@ -247,5 +260,9 @@ export const MatchTitle = styled.p`
 
     &:hover{
         color: ${props => props.hover ? "#0066b2" : undefined} ;
+    }
+
+    @media screen and (max-width: 768px){
+        font-size: 16px;
     }
 `

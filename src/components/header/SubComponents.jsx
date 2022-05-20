@@ -13,12 +13,22 @@ export const HeaderWrapper = styled.header`
 
 export const P = styled.p`
     color: ${PrimaryColors[100]};
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 
 export const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     gap: 30px;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+        gap: 10px;
+    }
+
 `
 
 export const ConectionLink = styled(RouteLink)`
