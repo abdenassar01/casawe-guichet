@@ -101,7 +101,7 @@ export const RadioInput = styled.span`
     justify-content: center;
     margin: 7px;
     height: 30px;
-    /* position: relative; */
+    position: relative;
 `
 
 export const Label = styled.label`
@@ -123,6 +123,7 @@ export const Input = styled.input`
     margin: 0px;
     padding: 0px;
     opacity: 0;
+    position: absolute;
 
     &:checked + ${Label}{
         background-color: #2DAAE1;

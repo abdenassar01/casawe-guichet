@@ -22,6 +22,7 @@ export const NavbarWrapper = styled.nav`
     position: sticky;
     top: 0;
     transition: .32s;
+    z-index: 1000;
     
     @media (max-width: 768px) {
         justify-content: space-between;
