@@ -5,7 +5,7 @@ import { RouteLink } from '../routes/RoutesLinks'
 export const Wrapper = styled.section`
     width: 100%;
     display: flex;
-    justify-content: center;   
+    justify-content: center;  
     align-items: center;
     padding: 20px 0px 40px 0px;
     flex-direction: column;
@@ -20,6 +20,7 @@ export const CentredBox = styled.div`
 
     @media (max-width: 768px){
         width: 95%;
+        gap: 20px;
     }
 `
 
@@ -27,8 +28,23 @@ export const FormLoginWrapper = styled.div`
     padding: 30px;
     width:40%;
     border-radius: 2px;
+    height: fit-content;
+    background-color: white;
+   
+    @media (max-width: 768px){
+        width: 90%;
+    }
+`
+
+export const FormSignupWrapper = styled.div`
+    padding: 30px;
+    width: 45%;
+    border-radius: 2px;
     background-color: white;
 
+    @media (max-width: 768px){
+        width: 90%;
+    }
 `
 
 export const Form = styled.form`
@@ -42,7 +58,7 @@ export const Heading = styled.h1`
     margin-top: -2px;
     letter-spacing: 2px;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.5;
     color: #272630;
 `
@@ -56,6 +72,10 @@ export const Field = styled.div`
     display: flex;
     flex-direction: column;
     gap: 7px;
+
+    @media (max-width: 768px){
+        width: 95%;
+    }
 `
 
 export const Label = styled.label`
@@ -95,6 +115,16 @@ export const SubmitBox = styled.div`
     gap: 20px;
 `
 
+export const P = styled.p`
+    padding: 20px 0;
+    font-size: 12PX;
+    color: #626467;
+    letter-spacing: .01rem;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.5em;
+`
+
 export const Submit = styled.input`
     padding: 10px 20px;
     border: none;
@@ -108,11 +138,25 @@ export const Submit = styled.input`
 
 `
 
+export const Raw = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+`
+
 export const StyledRouteLink = styled(RouteLink)`
     transition: all .15s ease-in-out;
     
     &:hover{
         color: #0066b2;
     }
+`
 
+export const ErreurBoxMsg = styled.div`
+    padding: 10px;
+    width: 80%;
+    background-color: #F4556D;
+    color: #ffffff;
+    display: ${props => props.disabled ? 'none' : 'flex'} ;
+    justify-content: space-between;
 `

@@ -49,7 +49,7 @@ const Login = () => {
             <Span>&nbsp; Se souvenir de moi</Span>
           </CheckBoxWrapper>
           <SubmitBox>
-            <Submit type="submit" value="connexion" onClick={handleSubmit}/>
+            <Submit type="submit" value="CONNEXION" onClick={handleSubmit}/>
             <StyledRouteLink to="mot-passe-oublie" color="black">
               Mot de Passe Oublie?
             </StyledRouteLink>

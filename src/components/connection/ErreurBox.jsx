@@ -1,8 +1,17 @@
-import React from 'react'
+import { ErreurBoxMsg } from './SubComponents'
+import { ImCross } from 'react-icons/im'
+
+import { useState } from 'react';
 
 const ErreurBox = () => {
+
+  const [ disabled, setDisabled ] = useState(true)
+
   return (
-    <div>ErreurBox</div>
+    <ErreurBoxMsg disabled={disabled}>
+      Ces informations d'identification ne correspondent à aucun utilisateur.
+      <ImCross onClick={ () => setDisabled(!disabled)} />
+    </ErreurBoxMsg>
   )
 }
 

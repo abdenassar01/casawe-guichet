@@ -13,11 +13,25 @@ export const Newsletter = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 150px;
+
+    @media (max-width: 768px) {
+        padding: 20px 0;
+        gap: 15px;
+    }
 `
 
 export const Text = styled.div`
     color: #FFFFFF;
+
+
+    @media (max-width: 768px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
 `
 
 export const Form = styled.form`
@@ -26,6 +40,10 @@ export const Form = styled.form`
 
 export const H3 = styled.h3`
     font-size: 1.75em;
+
+    @media (max-width: 768px) {
+        font-size: 1.5em;
+    }
 `
 
 export const P = styled.p`
@@ -33,6 +51,11 @@ export const P = styled.p`
     color: #626467;
     line-height: 1.5em;
     font-size: ${props => props.size ? props.size : "15px" };
+
+    @media (max-width: 768px) {
+        font-size: 12px;
+        text-align: center;
+    }
 `
 
 export const Mail = styled.div`
@@ -78,10 +101,18 @@ export const About = styled.div`
 
 export const CasaweProfile = styled.section`
     width: 25%;
+
+    @media (max-width: 768px) {
+        width: 70%;
+    }
 `
 export const Image = styled.img`
     width: 120%;
     padding-bottom: 20px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const Copyright = styled.div`
