@@ -12,7 +12,7 @@ export const Container = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 80%;
+    width: 85%;
     gap: 20px;
 `
 
@@ -88,6 +88,7 @@ export const H5 = styled.h5`
 `
 
 export const H3 = styled.h3`
+    font-family: Montserrat,Helvetica,Arial,sans-serif;
     font-size: 1.7rem;
     color: #272630;
 `

@@ -20,6 +20,7 @@ export const NavbarWrapper = styled.nav`
     background-color: white;
     border-bottom: 1px dashed #ccc;
     position: sticky;
+    padding: 0 7.5%;
     top: 0;
     transition: .32s;
     z-index: 1000;
