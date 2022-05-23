@@ -5,9 +5,13 @@ import { Wrapper, Slider, CentredBox, Tab,
 import SliedrItem from "../home/SliderItem";
 import Card from "./Card";
 
-const Matches = (props) => {
+import {useEffect} from "react";
 
+const Matches = (props) => {
   
+  useEffect(() => {
+    document.title = "Sport - Casawe"
+  },[])
 
   return (
     <Wrapper>

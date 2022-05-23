@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding-top: 20px;
+
 `
 
 export const CentredBox = styled.div`
@@ -51,18 +52,26 @@ export const CardsWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+   
+    @media (max-width: 768px) {
+        justify-content: center;
+    }
 `
 
 export const CardContainer = styled.div`
-    flex: 2 1 30%;
+    /* flex: 2 1 30%; */
     border-radius: 3px;
-    max-width: 30%;
+    width: 30%;
     box-shadow: 0 2px 3px -1px rgb(151 171 187 / 70%);
     transition: all .3s;
     background-color: white;
 
     &:hover{
         box-shadow: 0 5px 10px -1px rgb(151 171 187 / 70%);
+    }
+
+    @media (max-width: 768px) {
+        width: 90%;
     }
 `
 

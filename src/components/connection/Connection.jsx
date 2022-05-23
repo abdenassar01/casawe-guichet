@@ -4,8 +4,13 @@ import Login from './login/Login'
 import Logout from './signup/Signup'
 import ErreurBox from './ErreurBox'
 
+import {useEffect} from "react";
+
 const Connection = () => {
 
+  useEffect(() => {
+    document.title = "Connexion / Inscription - Casawe"
+  },[])
 
   return (
     <Wrapper>

@@ -10,10 +10,14 @@ import { Wrapper, Container, Left,
 import { TiCalendarOutline } from 'react-icons/ti'
 import { AiOutlineClose } from 'react-icons/ai'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Match = () => {
   
+  useEffect(() => {
+    document.title = "Wydad Athletic Club vs Chabab Riadhi Belouizdad"
+  },[])
+
   const [isAvailable, serIsAvailable] = useState(false)
 
   return (

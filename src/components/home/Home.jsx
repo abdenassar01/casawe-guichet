@@ -4,7 +4,13 @@ import Banner from './Banner';
 import SliedrItem from "./SliderItem";
 import Tickets from "./Tickets";
 
+import {useEffect} from "react";
+
 const Home = () => {
+
+  useEffect(() => {
+    document.title = "Casawe - Ticket et Billetterie au Maroc"
+  },[])
 
   return (
     <Wrapper>

@@ -11,14 +11,16 @@ export const Wrapper = styled.main`
 export const Container = styled.section`
     width: 85%;
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;  
+    flex-wrap: wrap;
+  
 `
 
 export const Left = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 68%;
+    min-width: 68%;
 `
 
 export const Poster = styled.img`
@@ -67,7 +69,7 @@ export const A = styled.a`
 `
 
 export const Right = styled.div`
-    width: 30%;
+    min-width: 30%;
 `
 export const Purchase = styled.div`
     width: 100%;

@@ -8,6 +8,8 @@ import { useState } from "react"
 
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
+import {useEffect} from "react";
+
 const Contact = () => {
 
   const [ email, setEmail ] = useState("") 
@@ -16,6 +18,10 @@ const Contact = () => {
   const [ message, setMessage ] = useState("")  
   const [ sujet, setSujet ] = useState("") 
   const [ telephone, setTelephone ] = useState("") 
+
+  useEffect(() => {
+    document.title = "Contacter-nous"
+  },[])
 
   const handleSubmit = (e) => {
     e.preventDefault();
