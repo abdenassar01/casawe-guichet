@@ -13,6 +13,7 @@ import Connection from "./components/connection/Connection";
 import Matches from "./components/matches/Matches";
 import Contact from "./components/contact/Contact";
 import Panier from "./components/panier/Panier";
+import Profile from "./components/profile/Profile";
 
 function App() {
 
@@ -27,7 +28,24 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/connection" element={<Connection />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/panier" element={loggin ? <Panier setLoggin={setLoggin}/> : <Navigate to="/" replace />} />
+        <Route 
+          path="/panier" 
+          element={ 
+            loggin ? 
+              <Panier setLoggin={setLoggin}/> 
+                  : 
+              <Navigate to="/connection" replace />
+            } 
+        />
+        <Route 
+          path="/profile" 
+          element={
+            loggin ? 
+              <Profile setLoggin={setLoggin}/> 
+                : 
+              <Navigate to="/connection" replace />
+            } 
+        />
         <Route path="/billetterie/sport" element={<Matches />} />
         <Route path="/match">
           <Route path=":id" element={<Match />} />

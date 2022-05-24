@@ -84,7 +84,8 @@ export const BurgerIcon = styled.div`
 
 export const ExtendedMenu = styled.nav`
     display: ${(props) => props.display ? "block" : "none" };
-
+    padding: 10px 0;
+    
     @media (min-width: 768px) {
         display: none;
     }

@@ -1,6 +1,6 @@
 import { ProfileBox, DropDownContainer, DropDownHeader,
   DropDownListContainer, DropDownList, AccountLink,
-  ProfilePanel, Avatar, User
+  ProfilePanel, Avatar, User, DropDownItem
 } from '../SubComponents';
 
 import { RiArrowDropDownFill } from 'react-icons/ri';
@@ -30,9 +30,15 @@ const Profile = () => {
         {isOpen && (
           <DropDownListContainer>
             <DropDownList>
-              <AccountLink to="/profile" onClick={toggling}>Profile</AccountLink>
-              <AccountLink to="/mes-commandes" onClick={toggling}>Mes commandes</AccountLink>
-              <AccountLink to="/deconnexion" onClick={toggling}>Deconnexion</AccountLink>
+              <DropDownItem>
+                <AccountLink to="/profile" onClick={toggling}>Profile</AccountLink>
+              </DropDownItem>
+              <DropDownItem>
+                <AccountLink to="/mes-commandes" onClick={toggling}>Mes commandes</AccountLink>
+              </DropDownItem>
+              <DropDownItem>
+                <AccountLink to="/deconnexion" onClick={toggling}>Deconnexion</AccountLink>
+              </DropDownItem>
             </DropDownList>
           </DropDownListContainer>
         )}

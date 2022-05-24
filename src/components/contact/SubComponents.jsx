@@ -80,6 +80,7 @@ export const Input = styled.input`
         border: 1px solid #66afe9;
         box-shadow: 1px 1px 5px #66afe9;
     }
+
 `
 
 export const Textarea = styled.textarea`

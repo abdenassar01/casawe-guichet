@@ -20,7 +20,6 @@ export const HeaderWrapper = styled.header`
    
     @media (max-width: 768px) {
         justify-content: flex-end;
-        padding-right: 15px;
     }
 `
 
@@ -42,6 +41,8 @@ export const Nav = styled.nav`
 
     @media (max-width: 768px) {
         gap: 15px;
+        flex-wrap: nowrap;
+        font-size: .6rem;
     }
 `
 
@@ -56,8 +57,10 @@ export const ConectionLink = styled(RouteLink)`
 export const ProfileBox = styled.div`
     width: fit-content;
     position: relative;
-
     
+    @media (max-width: 768px) {
+        /* margin-left: 20px; */
+    }
 `
 
 export const DropDownContainer = styled.div`
@@ -74,30 +77,45 @@ export const DropDownHeader = styled.div`
 `
 
 export const DropDownListContainer = styled.div`
-    background-color: white;
-    border: 1px solid #ededed;
-    position: absolute;
-    width: 100%;
-    z-index: 10000;
 
-    animation: slide .5s forwards linear;
-
-    @keyframes slide {
-        from { top: 20px; opacity: 0;}
-        to { top: 40px; opacity: 1;}
-    }
+    
 `
 
 export const DropDownList = styled.ul`
     padding: 5px 0;
     margin: 0;
+    position: absolute;
     width: 100%;
+    z-index: 10000;
+    top: 40px;
+    background-color: white;
+    border: 1px solid #ededed;
+    list-style: none;
+
+    animation: slide .5s forwards ease-in;
+
+    @keyframes slide {
+        from { 
+            top: 20px; 
+            /* opacity: 0; */
+            /* max-height: 0px; */
+        }
+        to { 
+            top: 40px; 
+            /* opacity: 1; */
+            /* max-height: 300%; */
+        }
+    }
+`
+
+export const DropDownItem = styled.li`
+
 `
 
 export const AccountLink = styled(RouteLink)`
     padding: 5px 10px;
     color: #7d8693;
-
+    transition: all .5 ease-in;
 
     &:hover {
         background-color: #F5F5F5;

@@ -45,11 +45,11 @@ const Navbar = () => {
       </NormalNav> 
       <Hr display={isExtebded}/>
       <ExtendedMenu display={isExtebded}>
-        <NavLink to="/" color="black" padding="20px 0 10px 20px" >
+        <NavLink to="/" color="black" padding="10px 0 5px 20px" >
               <FaHome size={16}/> 
               &nbsp;<Text>ACCEUIL</Text>
           </NavLink>
-          <NavLink to="/billetterie/sport" padding="10px 0 5px 10px" color={(props) => (props.isActive  ? "#0d6eb6" : "black")}>
+          <NavLink to="/billetterie/sport" padding="10px 0 5px 20px" color={(props) => (props.isActive  ? "#0d6eb6" : "black")}>
               <BiFootball size={16}/> 
               &nbsp;<Text>MATCHES</Text>
           </NavLink>  
