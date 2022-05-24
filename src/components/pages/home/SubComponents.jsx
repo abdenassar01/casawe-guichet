@@ -35,6 +35,7 @@ export const SliderItemWrapper = styled.li`
     flex-wrap: wrap;
     width: 100%;
     flex:0 0 auto;
+
 `
 
 export const ImageWrapper = styled.div`

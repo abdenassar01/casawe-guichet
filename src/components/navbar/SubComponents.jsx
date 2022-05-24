@@ -36,7 +36,6 @@ export const NormalNav = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
 `
 
 export const Nav = styled.nav`
@@ -85,7 +84,6 @@ export const BurgerIcon = styled.div`
 export const ExtendedMenu = styled.nav`
     display: ${(props) => props.display ? "block" : "none" };
     padding: 10px 0;
-    
     @media (min-width: 768px) {
         display: none;
     }

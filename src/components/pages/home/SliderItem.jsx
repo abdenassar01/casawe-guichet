@@ -78,19 +78,19 @@ const SliderItem = () => {
                     <P><BsEmojiSmile size={12}/> Offre Special</P>
                     <HelperText> Partagez cet événement </HelperText>
                     <SocialMedia>
-                    <a href="https://facebook.com">
+                    <a href="https://facebook.com" target="_blank" rel="noreferrer">
                         <Icon color="#3b5999"><TiSocialFacebook size={24}/></Icon>
                     </a>
-                    <a href="https://twitter.com">
+                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
                         <Icon color="#00aced"><TiSocialTwitter size={24} /></Icon>
                     </a>
-                    <a href="https://paiterest.com">
+                    <a href="https://paiterest.com" target="_blank" rel="noreferrer">
                         <Icon color="#c8232c"><TiSocialPinterest size={24} /></Icon>
                     </a>
-                    <a href="https://linkedin.com">
+                    <a href="https://linkedin.com" target="_blank" rel="noreferrer">
                         <Icon color="#0976b4"><TiSocialLinkedin  size={24} /></Icon>
                     </a>
-                    <a href="https://google.com">
+                    <a href="https://google.com" target="_blank" rel="noreferrer">
                         <Icon color="#dd4b39"><TiSocialGooglePlus size={24} /></Icon>
                     </a>
                     </SocialMedia>

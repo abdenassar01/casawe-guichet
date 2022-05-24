@@ -12,15 +12,18 @@ export const Container = styled.section`
     width: 85%;
     display: flex;
     justify-content: space-between;  
-    flex-wrap: wrap;
-  
+    gap: 10px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `
 
 export const Left = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    min-width: 68%;
+    min-width: 65%;
 `
 
 export const Poster = styled.img`
