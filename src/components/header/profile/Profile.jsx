@@ -30,13 +30,13 @@ const Profile = () => {
         {isOpen && (
           <DropDownListContainer>
             <DropDownList>
-              <DropDownItem>
+              <DropDownItem key={1}>
                 <AccountLink to="/profile" onClick={toggling}>Profile</AccountLink>
               </DropDownItem>
-              <DropDownItem>
+              <DropDownItem key={2}>
                 <AccountLink to="/mes-commandes" onClick={toggling}>Mes commandes</AccountLink>
               </DropDownItem>
-              <DropDownItem>
+              <DropDownItem key={3}>
                 <AccountLink to="/deconnexion" onClick={toggling}>Deconnexion</AccountLink>
               </DropDownItem>
             </DropDownList>

@@ -6,14 +6,19 @@ import { FormLoginWrapper, Tab, Form, Heading,
 import { useState } from 'react'
 
 
-const Login = () => {
+const Login = ({ setLoggin, loggin }) => {
 
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Form submitted");
+    if(email !== "" && password !== ""){
+      setLoggin(!loggin);
+      !loggin ? alert("You are logged in") : alert("You are logged out");
+      return;
+    }
+    alert("provide messing data")
   }
 
   return (
@@ -24,19 +29,21 @@ const Login = () => {
       </Tab>
         <Form>
           <Field>
-            <Label htmlFor="">E-mail <Span color="#e02222">*</Span></Label>
+            <Label htmlFor="email-login">E-mail <Span color="#e02222">*</Span></Label>
             <Input 
-              id="login" value={email} 
-              type="email" name="email" 
+              id="email-login" value={email}
+              required 
+              type="email" name="email-login" 
               placeholder="Votre address e-mail"
               onChange={(e) => setEmail(e.target.value) }
             />
           </Field>
           <Field>
-            <Label htmlFor="">Password <Span color="#e02222">*</Span></Label>
+            <Label htmlFor="password-login">Password <Span color="#e02222">*</Span></Label>
             <Input 
-              id="password" value={password} 
-              type="password" name="password" 
+              id="password-login" value={password}
+              required 
+              type="password" name="password-login" 
               placeholder="Mot de passe"
               onChange={(e) => setPassword(e.target.value) }
             />
@@ -50,7 +57,7 @@ const Login = () => {
           </CheckBoxWrapper>
           <SubmitBox>
             <Submit type="submit" value="CONNEXION" onClick={handleSubmit}/>
-            <StyledRouteLink to="mot-passe-oublie" color="black">
+            <StyledRouteLink to="mot-passe-oublie" color="#000">
               Mot de Passe Oublie?
             </StyledRouteLink>
           </SubmitBox>

@@ -41,6 +41,7 @@ const Signup = () => {
               <Label htmlFor="">Prénom <Span color="#e02222">*</Span></Label>
               <Input 
                 id="prenom" value={prenom} 
+                required
                 type="text" name="prenom" 
                 placeholder="Votre Prénom"
                 onChange={(e) => setPrenom(e.target.value) }
@@ -50,6 +51,7 @@ const Signup = () => {
               <Label htmlFor="">Nom <Span color="#e02222">*</Span></Label>
               <Input 
                 id="nom" value={nom} 
+                required
                 type="text" name="nom" 
                 placeholder="Votre Nom"
                 onChange={(e) => setNom(e.target.value) }
@@ -61,6 +63,7 @@ const Signup = () => {
               <Label htmlFor="">E-mail <Span color="#e02222">*</Span></Label>
               <Input 
                 id="email" value={email} 
+                required
                 type="email" name="email" 
                 placeholder="Votre address e-mail"
                 onChange={(e) => setEmail(e.target.value) }
@@ -70,6 +73,7 @@ const Signup = () => {
               <Label htmlFor="">Téléphone <Span color="#e02222">*</Span></Label>
               <Input 
                 id="tel" value={telephone} 
+                required
                 type="text" name="tel" 
                 placeholder="Téléphone"
                 onChange={(e) => setTelephone(e.target.value) }
@@ -81,14 +85,16 @@ const Signup = () => {
               <Label htmlFor="">Mot de passe <Span color="#e02222">*</Span></Label>
               <Input 
                 id="password" value={password} 
+                required
                 type="password" name="password" 
                 placeholder="Votre address e-mail"
                 onChange={(e) => setPassword(e.target.value) }
               />
             </Field>
             <Field>
-              <Label htmlFor="">Confirmation de mot de passe <Span color="#e02222">*</Span></Label>
+              <Label htmlFor="password_conf">Confirmation de mot de passe <Span color="#e02222">*</Span></Label>
               <Input 
+                required
                 id="password_conf" value={passwordConfirm} 
                 type="password" name="password_conf" 
                 placeholder="Confirmation de Mot de passe"

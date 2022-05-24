@@ -18,7 +18,7 @@ import Commandes from "./components/pages/commandes/Commandes";
 
 function App() {
 
-  const [loggin, setLoggin] = useState(true);
+  const [loggin, setLoggin] = useState(false);
 
   return (
     <>
@@ -27,7 +27,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connection" element={<Connection />} />
+        <Route path="/connection" element={<Connection loggin={loggin} setLoggin={setLoggin} />} />
         <Route path="/contact" element={<Contact />} />
         <Route 
           path="/panier" 
@@ -56,6 +56,10 @@ function App() {
               <Navigate to="/connection" replace />
             } 
         />
+        {/* <Route 
+          path="/deconnection" 
+          element={ } 
+        /> */}
         <Route path="/billetterie/sport" element={<Matches />} />
         <Route path="/match">
           <Route path=":id" element={<Match />} />

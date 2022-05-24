@@ -30,28 +30,28 @@ const Navbar = () => {
             </RouteLink>
         </Logo>
         <Nav>
-          <NavLink to="/" color="black" padding="25px">
+          <NavLink to="/" padding="25px">
               <FaHome size={16}/> 
               &nbsp;<Text>ACCEUIL</Text>
           </NavLink>
-          <NavLink to="/billetterie/sport" padding="25px" color={(props) => (props.isActive  ? "#0d6eb6" : "black")}>
+          <NavLink to="/billetterie/sport" padding="25px" >
               <BiFootball size={16}/> 
-              &nbsp;<Text>MATCHES</Text>
+              &nbsp;<Text>MATCHS</Text>
           </NavLink>  
         </Nav>
         <BurgerIcon onClick={toggleMenu}>
            &#9776;
         </BurgerIcon>       
       </NormalNav> 
-      <Hr display={isExtebded}/>
-      <ExtendedMenu display={isExtebded}>
-        <NavLink to="/" color="black" padding="10px 0 5px 20px" >
+      <Hr isDisplayed={isExtebded}/>
+      <ExtendedMenu isDisplayed={isExtebded}>
+        <NavLink to="/" color="#000" padding="10px 0 5px 20px" >
               <FaHome size={16}/> 
               &nbsp;<Text>ACCEUIL</Text>
           </NavLink>
-          <NavLink to="/billetterie/sport" padding="10px 0 5px 20px" color={(props) => (props.isActive  ? "#0d6eb6" : "black")}>
+          <NavLink to="/billetterie/sport" color="#000"  padding="10px 0 5px 20px" >
               <BiFootball size={16}/> 
-              &nbsp;<Text>MATCHES</Text>
+              &nbsp;<Text>MATCHS</Text>
           </NavLink>  
       </ExtendedMenu>
     </NavbarWrapper>

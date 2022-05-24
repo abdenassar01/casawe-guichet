@@ -19,10 +19,10 @@ export const Img = styled.img`
 export const NavbarWrapper = styled.nav`
     background-color: white;
     border-bottom: 1px dashed #ccc;
-    position: sticky;
     padding: 0 7.5%;
+    position: sticky;
     top: 0;
-    transition: .32s;
+    /* transition: .5s; */
     z-index: 1000;
     
     @media (max-width: 768px) {
@@ -53,7 +53,8 @@ export const Text = styled.span`
 
 export const NavLink = styled(RouteLink)`
     padding: ${props => props.padding ? props.padding : "0" }; 
-
+    color: black;
+    
     &:hover{
         color: #0d6eb6;
         background-color: #EDEDED;
@@ -82,7 +83,7 @@ export const BurgerIcon = styled.div`
 `
 
 export const ExtendedMenu = styled.nav`
-    display: ${(props) => props.display ? "block" : "none" };
+    display: ${(props) => props.isDisplayed ? "block" : "none" };
     padding: 10px 0;
     @media (min-width: 768px) {
         display: none;
@@ -90,7 +91,7 @@ export const ExtendedMenu = styled.nav`
 `
 
 export const Hr = styled.hr`
-    display: ${(props) => props.display ? "block" : "none" };
+    display: ${(props) => props.isDisplayed ? "block" : "none" };
     color: #3c4759;
     margin: 5px;
 

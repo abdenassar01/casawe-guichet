@@ -3,7 +3,7 @@ import { ProfileWrapper, ProfileContentWrapper, Tab,
     SelectColumn, Submit
 } from './SubComponents'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Select from 'react-select'
 
@@ -28,6 +28,9 @@ const Profile = (props) => {
         alert('form submitted for : ' + nom)
     }
 
+    useEffect(() => {
+        document.title = "Mon compte - Profil"
+    }, [])
   return (
     <ProfileWrapper>
         <ProfileContentWrapper>

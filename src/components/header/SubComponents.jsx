@@ -13,6 +13,7 @@ export const Container = styled.div`
 
 export const HeaderWrapper = styled.header`
     font-size: .8rem;
+    padding: 5px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,7 +109,7 @@ export const DropDownList = styled.ul`
     }
 `
 
-export const DropDownItem = styled.li`
+export const DropDownItem = styled.div`
 
 `
 

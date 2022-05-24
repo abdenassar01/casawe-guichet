@@ -1,12 +1,12 @@
 import { Wrapper, CentredBox } from './SubComponents'
 
 import Login from './login/Login'
-import Logout from './signup/Signup'
+import Signup from './signup/Signup'
 import ErreurBox from './ErreurBox'
 
 import {useEffect} from "react";
 
-const Connection = () => {
+const Connection = ({loggin, setLoggin}) => {
 
   useEffect(() => {
     document.title = "Connexion / Inscription - Casawe"
@@ -16,8 +16,8 @@ const Connection = () => {
     <Wrapper>
         <ErreurBox />
         <CentredBox>
-            <Login />
-            <Logout />
+            <Login setLoggin={setLoggin} loggin={loggin}/>
+            <Signup />
         </CentredBox>
     </Wrapper>
   )

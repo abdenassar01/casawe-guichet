@@ -143,5 +143,7 @@ export const StyledRouteLink = styled(RouteLink)`
    &:disabled{
        background-color: #CBCBCC;
        color: #626467;
+       pointer-events: none;
+       cursor: not-allowed;
    }
 `
