@@ -16,6 +16,7 @@ const Match = () => {
   
   useEffect(() => {
     document.title = "Wydad Athletic Club vs Chabab Riadhi Belouizdad"
+    serIsAvailable(false)
   },[])
 
   const [isAvailable, serIsAvailable] = useState(false)

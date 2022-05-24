@@ -2,7 +2,7 @@ import { AvailableTickets, CardsRaw, Card,
     CardImage, ButtonBuy, Footer, Title, MatchTitle, H5, 
  } from './SubComponents'
 
-import { RouteLink } from '../routes/RoutesLinks';
+import { RouteLink } from '../../routes/RoutesLinks';
 
 import { MdLocationOn } from 'react-icons/md'
 

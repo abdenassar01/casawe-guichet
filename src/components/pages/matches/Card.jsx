@@ -3,7 +3,7 @@ import {CardContainer, Poster, Title,
     ListItem, StyledRouteLink
   } from "./SubComponents";
 
-import { RouteLink } from "../routes/RoutesLinks";
+import { RouteLink } from "../../routes/RoutesLinks";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 const Card = (props) => {

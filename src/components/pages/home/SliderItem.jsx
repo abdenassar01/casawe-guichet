@@ -18,7 +18,7 @@ import { TiSocialTwitter,
       } from 'react-icons/ti'
 
 import { useState, useEffect } from 'react'
-import { RouteLink } from '../routes/RoutesLinks'
+import { RouteLink } from '../../routes/RoutesLinks'
       
 
 const SliderItem = () => {

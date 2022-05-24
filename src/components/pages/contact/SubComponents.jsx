@@ -42,6 +42,7 @@ export const Heading = styled.h1`
     border-top: 2px solid #0066b2;
     width: fit-content;
     margin-top: -2px;
+    font-family: Montserrat,Helvetica,Arial,sans-serif;
     letter-spacing: 2px;
     font-weight: 700;
     font-size: 18px;

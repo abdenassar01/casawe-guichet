@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RouteLink } from "../routes/RoutesLinks";
+import { RouteLink } from "../../routes/RoutesLinks";
 
 export const Wrapper = styled.div`
     width: 100%;
