@@ -35,7 +35,7 @@ export const Text = styled.div`
 `
 
 export const Form = styled.form`
-    
+
 `
 
 export const H3 = styled.h3`
@@ -62,6 +62,7 @@ export const Mail = styled.div`
     height: 50px;
     background-color: white;
     border-radius: 2px;
+     
 `
 
 export const Input = styled.input`
@@ -132,6 +133,7 @@ export const CopyrightText = styled.p`
 `
 
 export const Sponsors = styled.div`
+
 
 `
 

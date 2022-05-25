@@ -126,7 +126,7 @@ const Match = () => {
                       <AiOutlineClose />
                       Zone 01
                     </Category>
-                    <Span>700DH</Span>
+                    <Span >700DH</Span>
                   </Label>
                 </RadioInput>
                 <Checkout>
@@ -147,7 +147,7 @@ const Match = () => {
                alt="" 
                />
               <TextInfoWrapper>
-                <P bold>CASAWI</P>
+                <strong>CASAWI</strong>
                 <P bold>Tel: <Span bold={false}>0522227745</Span></P>
               </TextInfoWrapper>
             </InfosVendeur>

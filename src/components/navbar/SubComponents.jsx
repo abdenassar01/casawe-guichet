@@ -20,16 +20,15 @@ export const NavbarWrapper = styled.nav`
     background-color: white;
     border-bottom: 1px dashed #ccc;
     padding: 0 7.5%;
+    animation: fadeIn 1s ease-in both; 
     position: sticky;
     top: 0;
-    /* transition: .5s; */
     z-index: 1000;
     
     @media (max-width: 768px) {
         justify-content: space-between;
         padding: 0 10px;
     }
-
 `
 
 export const NormalNav = styled.div`

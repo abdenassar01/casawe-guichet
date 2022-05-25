@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <NavbarWrapper>
-      <NormalNav>
+      <NormalNav> 
         <Logo>
             <RouteLink to="/">
                 <Img 

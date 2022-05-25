@@ -119,7 +119,7 @@ const Tickets = (props) => {
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
-<Card>
+            <Card>
                 <RouteLink  to={`/match/${props.id}`}>
                     <CardImage src="https://guichet.imgix.net/medias/PnwEhLGKqA1jWq050wIFa5oqlkZmBBrlRvhZ5J7y.jpeg?w=305&h=176&fit=clip&auto=format,compress&q=80" alt="wydad vs far"/>
                 </RouteLink>

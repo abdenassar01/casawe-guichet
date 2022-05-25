@@ -161,15 +161,16 @@ export const Checkout = styled.div`
 `
 
 export const CheckoutButton = styled.a`
-    /* width: 80%; */
     text-decoration: none;
-    padding: 10px 18px;
     background-color: #037ccc;
     text-transform: uppercase;
     letter-spacing: 2px;
     border-radius: 3px;
     font-weight: 300;
     color: #ffffff;
+    width: 95%;
+    text-align: center;
+    padding: 10px 0;
 
     &:hover{
         background-color: #071D39;
@@ -192,7 +193,7 @@ export const InfosVendeur = styled.div`
     background-color: #fff;
 `
 
-export const Title = styled.h2`
+export const Title = styled.strong`
     width: 50%;
     outline: 0;
     border-top: 2px solid #0c9eca;
@@ -219,5 +220,6 @@ export const WrapperBox = styled.div`
 `
 
 export const TextInfoWrapper = styled.div`
+    font-size: 15px;
     padding: 20px;
 `

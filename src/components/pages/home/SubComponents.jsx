@@ -35,7 +35,17 @@ export const SliderItemWrapper = styled.li`
     flex-wrap: wrap;
     width: 100%;
     flex:0 0 auto;
+    animation: slideshow 3s ease infinite;
+    animation-delay: 10s;
 
+    @keyframes slideshow {
+        from { 
+            transform: translateX(0); 
+        }
+        to { 
+            transform:translateX(-100%); 
+        }
+    }
 `
 
 export const ImageWrapper = styled.div`
@@ -61,9 +71,22 @@ export const Panel = styled.div`
     background-color: white;
     width: 30%;
     gap: 30px;
+    z-index: -1;
+    animation: slide-right 1s ease-in forwards;
 
     @media (max-width: 768px) {
         width: 100%;
+    }
+
+    @keyframes slide-right {
+        from{
+            opacity: 0;
+            margin-left: -200px;
+        }
+        to{
+            opacity: 1;
+            margin-left: 0px;
+        }
     }
 `
 
@@ -112,7 +135,7 @@ export const DealContent = styled.ul`
 export const PriceContent = styled.li`
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 10px 0;
 `
 
 export const BuyNow = styled.li`
@@ -129,12 +152,16 @@ export const HelperText = styled.p`
     font-weight: 300;
 `
 
+export const AlertArea = styled.div`
+    font-size: 18px;
+    padding: 5px;
+`
+
 export const ShareOnSocialMedia = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding-top: 20px;
     gap: 10px;
 `
 
@@ -200,13 +227,20 @@ export const BannerHelper = styled.p`
     font-size: 13px;
     text-align: justify;
     line-height: 16px;
+
+    @media (max-width: 768px){
+        width: 85%;
+    }
 `
 
 export const GradiantShap = styled.div`
     width: 100%;
     height: 5px;
     background: rgb(62,171,211);
-    background: linear-gradient(90deg, rgba(62,171,211,1) 5%, rgba(185,200,133,1) 18%, rgba(248,154,80,1) 100%);
+    background: linear-gradient(90deg, 
+            rgba(62,171,211,1) 5%, 
+            rgba(185,200,133,1) 18%, 
+            rgba(248,154,80,1) 100%);
 ` 
 
 export const AvailableTickets = styled.div`
@@ -215,15 +249,20 @@ export const AvailableTickets = styled.div`
 
 export const CardsRaw = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 3%;
 `
 
 export const Card = styled.div`
-    flex: 1 0 25%;
+    /* flex: 1 0 25%; */
     margin-top: 20px;
     box-sizing: border-box;
+    width: 22%;
+
+    @media (max-width: 768px){
+        width: 90%;
+    }
 `
 
 export const CardImage = styled.img`
@@ -237,7 +276,7 @@ export const ButtonBuy = styled.div`
     padding-bottom: 10px;
     display: grid;
     place-items: center;
-    border-radius: 5px;
+    border-radius: 2px;
 `
 
 export const Footer = styled.div`

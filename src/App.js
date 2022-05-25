@@ -19,6 +19,9 @@ import Commandes from "./components/pages/commandes/Commandes";
 function App() {
 
   const [loggin, setLoggin] = useState(false);
+ 
+  // mob-x state tree 
+  // react query
 
   return (
     <>
