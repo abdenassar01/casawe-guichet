@@ -29,7 +29,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                        Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>  
@@ -52,7 +52,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                      Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
@@ -73,7 +73,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                        Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
@@ -94,7 +94,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                        Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
@@ -115,7 +115,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                     Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
@@ -136,7 +136,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                        Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
@@ -157,7 +157,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                        Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
@@ -178,7 +178,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                        Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
@@ -199,7 +199,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                    Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            
@@ -220,7 +220,7 @@ const Tickets = (props) => {
                 </Footer>
                 <ButtonBuy>
                     <RouteLink  to={`/match/${props.id}`}>
-                        GUICHET FERME 
+                        Guichet fermé 
                     </RouteLink>
                 </ButtonBuy>
             </Card>            

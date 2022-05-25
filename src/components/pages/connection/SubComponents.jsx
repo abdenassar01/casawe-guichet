@@ -13,7 +13,7 @@ export const Wrapper = styled.section`
 `
 
 export const CentredBox = styled.div`
-    width: 80%;
+    width: 85%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -49,6 +49,7 @@ export const FormSignupWrapper = styled.div`
 
 export const Form = styled.form`
     padding-top: 20px;
+    width: 100%;
 `
 
 export const Heading = styled.h1`
@@ -71,6 +72,8 @@ export const Tab = styled.div`
 export const Field = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    min-width: 47%;
     gap: 7px;
 
     @media (max-width: 768px){
@@ -88,10 +91,16 @@ export const Input = styled.input`
     border: 1px solid #ededed;
     outline: none;
     font-size: 14px;
+    padding-right: 20px;
 
     &:focus{
         border: 1px solid #66afe9;
         box-shadow: 1px 1px 5px #66afe9;
+    }
+
+    &:valid{
+        border: 1px solid #3c763d;
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
     }
 `
 
@@ -142,6 +151,7 @@ export const Raw = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    width: 100%;
 `
 
 export const StyledRouteLink = styled(RouteLink)`

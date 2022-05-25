@@ -35,12 +35,15 @@ export const SliderItemWrapper = styled.li`
     flex-wrap: wrap;
     width: 100%;
     flex:0 0 auto;
-    animation: slideshow 3s ease infinite;
+    animation: slideshow 5s ease infinite;
     animation-delay: 10s;
 
     @keyframes slideshow {
         from { 
             transform: translateX(0); 
+        }
+        60% { 
+            transform:translateX(-100%); 
         }
         to { 
             transform:translateX(-100%); 
@@ -98,8 +101,6 @@ export const Content = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    gap: 10px;
-
 `
 
 export const LinkWrapper = styled.div`
@@ -108,7 +109,7 @@ export const LinkWrapper = styled.div`
 
 export const H5 = styled.h5`
     font-size: 14px;
-    color: ${props => props.color ? props.color : undefined}
+    color: ${props => props.color && props.color }
 `
 
 export const H3 = styled.h3`
@@ -119,7 +120,9 @@ export const H3 = styled.h3`
 
 export const P = styled.p`
     font-weight: normal;
-    font-size: 14px;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 5px 0;
     color: ${props => props.color? props.color : "#b3b3b3"};
 `
 
@@ -255,10 +258,15 @@ export const CardsRaw = styled.div`
 `
 
 export const Card = styled.div`
-    /* flex: 1 0 25%; */
     margin-top: 20px;
     box-sizing: border-box;
     width: 22%;
+    transition: all .3s;
+    box-shadow: 0 2px 3px -1px rgb(151 171 187 / 70%);
+
+    &:hover{
+        box-shadow: 0 1px 10px -1px rgb(151 171 187 / 70%);
+    }
 
     @media (max-width: 768px){
         width: 90%;
@@ -271,18 +279,20 @@ export const CardImage = styled.img`
 
 export const ButtonBuy = styled.div`
     width: 100%;
-    background-color: #0066b2;
+    background-color: #5A9CCD;
     padding-top: 10px;
     padding-bottom: 10px;
     display: grid;
     place-items: center;
     border-radius: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
 `
 
 export const Footer = styled.div`
     display: flex;
     justify-content: flex-end;
-    background-color: #ebebeb;
+    background-color: #EBEBEB;
     padding: 10px;
 `
 
@@ -291,6 +301,7 @@ export const Title = styled.div`
     display: flex;
     padding: 20px;
     flex-direction: column;
+    background-color: white;
     border-left: 5px solid #0066b2;
 `
 

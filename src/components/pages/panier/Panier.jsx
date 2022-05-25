@@ -16,7 +16,7 @@ const Panier = () => {
                 <Heading>Mon Panier</Heading>
             </Tab>
             <PanieBox>
-                Votre panier est vide. 
+                Votre panier est vide. &nbsp;
                 <StyledRouteLink to="/" color="#0066b2">
                     Continuer mes achats
                 </StyledRouteLink>

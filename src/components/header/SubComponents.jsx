@@ -7,13 +7,11 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     background-color: ${PrimaryColors[200]};
-    padding: 5px 0px 5px 0;
     border-bottom: 5px solid black;
 `
 
 export const HeaderWrapper = styled.header`
     font-size: .8rem;
-    padding: 5px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,11 +19,13 @@ export const HeaderWrapper = styled.header`
    
     @media (max-width: 768px) {
         justify-content: flex-end;
+        padding: 10px 0;
     }
 `
 
 export const P = styled.p`
     color: ${PrimaryColors[100]};
+    padding: 15px 0;
 
     @media (max-width: 768px) {
         display: none;
@@ -48,7 +48,7 @@ export const Nav = styled.nav`
 `
 
 export const ConectionLink = styled(RouteLink)`
-    padding-left: 10px;
+    border-bottom: 1px solid;
 
     &:hover{
         color: #141111;
@@ -58,10 +58,7 @@ export const ConectionLink = styled(RouteLink)`
 export const ProfileBox = styled.div`
     width: fit-content;
     position: relative;
-    
-    @media (max-width: 768px) {
-        /* margin-left: 20px; */
-    }
+
 `
 
 export const DropDownContainer = styled.div`
@@ -78,7 +75,6 @@ export const DropDownHeader = styled.div`
 `
 
 export const DropDownListContainer = styled.div`
-
     
 `
 
@@ -98,13 +94,9 @@ export const DropDownList = styled.ul`
     @keyframes slide {
         from { 
             top: 20px; 
-            /* opacity: 0; */
-            /* max-height: 0px; */
         }
         to { 
             top: 40px; 
-            /* opacity: 1; */
-            /* max-height: 300%; */
         }
     }
 `
@@ -127,7 +119,7 @@ export const AccountLink = styled(RouteLink)`
 export const ProfilePanel = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 
     &:hover{
         color: #141111;
@@ -139,12 +131,19 @@ export const Avatar = styled.img`
     width: 30px;
     height: 30px;
     border-radius: 50%;
+
+    @media (max-width: 768px) {
+        width: 24px;
+        height: 24px;
+    }
 `
 
 export const User = styled.p`
-    border-bottom: none;
     font-weight: 600;
     font-size: 13px;
     text-transform: uppercase;
-    
+
+    @media (max-width: 768px) {
+        font-size: 10px;
+    }
 `

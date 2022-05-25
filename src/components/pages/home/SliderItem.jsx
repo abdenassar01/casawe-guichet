@@ -66,10 +66,13 @@ const SliderItem = () => {
                 </P>
                 </DealContent>
                 <PriceContent>
-                    <H3>{`500DH`}</H3>
+                    <H3>{`700DH`}</H3>
                     <BuyNow>
-                        <RouteLink to={`/match/${id}`}>
-                        <P color="#272630">{`GUICHET FERME`}</P>
+                        <RouteLink to={`/match/${id}`} disabled style={{
+                            pointerEvents: "none",
+                            cursor: "not-allowed"
+                        }}>
+                            <P color="#626467">{`Guichet fermé`}</P>
                         </RouteLink>
                     </BuyNow>
                 </PriceContent>

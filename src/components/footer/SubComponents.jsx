@@ -78,6 +78,10 @@ export const Input = styled.input`
         border: 1px solid #0166B2;
         box-shadow: 1px 1px 20px #0166B2;
     }
+
+    @media screen and (max-width: 768px){
+        width: 220px;
+    }
 `
 export const Submit = styled.input`
     height: 100%;

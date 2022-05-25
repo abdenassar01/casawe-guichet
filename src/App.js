@@ -15,7 +15,7 @@ import Contact from "./components/pages/contact/Contact";
 import Panier from "./components/pages/panier/Panier";
 import Profile from "./components/pages/profile/Profile";
 import Commandes from "./components/pages/commandes/Commandes";
-
+import Deconnexion from "./components/pages/deconnexion/Deconnexion";
 function App() {
 
   const [loggin, setLoggin] = useState(false);
@@ -30,7 +30,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connection" element={<Connection loggin={loggin} setLoggin={setLoggin} />} />
+        <Route path="/connexion" element={<Connection loggin={loggin} setLoggin={setLoggin} />} />
         <Route path="/contact" element={<Contact />} />
         <Route 
           path="/panier" 
@@ -38,7 +38,7 @@ function App() {
             loggin ? 
               <Panier setLoggin={setLoggin}/> 
                   : 
-              <Navigate to="/connection" replace />
+              <Navigate to="/connexion" replace />
             } 
         />
         <Route 
@@ -47,7 +47,7 @@ function App() {
             loggin ? 
               <Commandes /> 
                   : 
-              <Navigate to="/connection" replace />
+              <Navigate to="/connexion" replace />
             } 
         />
         <Route 
@@ -56,13 +56,13 @@ function App() {
             loggin ? 
               <Profile setLoggin={setLoggin}/> 
                 : 
-              <Navigate to="/connection" replace />
+              <Navigate to="/connexion" replace />
             } 
         />
-        {/* <Route 
+        <Route 
           path="/deconnection" 
-          element={ } 
-        /> */}
+          element={ <Deconnexion setLoggin={setLoggin} /> } 
+        />
         <Route path="/billetterie/sport" element={<Matches />} />
         <Route path="/match">
           <Route path=":id" element={<Match />} />

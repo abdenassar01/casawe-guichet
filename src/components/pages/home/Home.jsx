@@ -16,11 +16,11 @@ const Home = () => {
     <Wrapper>
       <Container>
         <Slider>
-          <SliedrItem price={20}/>
-          <SliedrItem price={20}/>
-          <SliedrItem price={20}/>
-          <SliedrItem price={20}/>
-          <SliedrItem price={20}/>
+          <SliedrItem />
+          <SliedrItem />
+          <SliedrItem />
+          <SliedrItem />
+          <SliedrItem />
         </Slider>
         <Banner />
         <Tickets />

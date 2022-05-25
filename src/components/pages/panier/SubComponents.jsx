@@ -38,18 +38,17 @@ export const PanieBox = styled.div`
     margin-top: 50px;
     padding: 60px 30px;
     color: #626467;
-    box-shadow: 0 2px 3px -1px rgb(151 171 187 / 70%);
+    /* box-shadow: 0 2px 3px -1px rgb(151 171 187 / 70%); */
     background-color: white;
-    letter-spacing: .01rem;
     font-weight: 300;
     font-size: 15px;
-    font-family: Roboto,sans-serif;
+    letter-spacing: .01rem;
     line-height: 1.5em;
-    display:inline-block;
     width: 100%;
 `
 
 export const StyledRouteLink = styled(RouteLink)`
+    display: inline-block;
 
     &:hover{
         color: #0a0000;

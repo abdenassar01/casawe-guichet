@@ -18,14 +18,12 @@ const Header = ( { loggin } ) => {
                     <FaShoppingCart size={13} />
                     &nbsp;{0} Mon panier
                 </RouteLink>
-                <u>
-                    {
-                        loggin ? <Profile /> : 
-                        <ConectionLink to="/connection">
-                            &nbsp; <b>Connexion / Inscription</b>
-                        </ConectionLink>
-                    }         
-                </u>   
+                {
+                    loggin ? <Profile /> : 
+                    <ConectionLink to="/connexion">
+                        &nbsp; <b>Connexion / Inscription</b>
+                    </ConectionLink>
+                }             
             </Nav>
         </HeaderWrapper>
       </Container>  
