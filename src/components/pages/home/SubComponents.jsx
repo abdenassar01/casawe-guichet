@@ -38,7 +38,7 @@ export const SliderItemWrapper = styled.div`
     animation: slideshow 5s ease infinite;
     animation-delay: 10s;
 
-    @keyframes slideshow {
+    /* @keyframes slideshow {
         from { 
             transform: translateX(0); 
         }
@@ -48,11 +48,11 @@ export const SliderItemWrapper = styled.div`
         to { 
             transform:translateX(-100%); 
         }
-    }
+    } */
 `
 
 export const ImageWrapper = styled.div`
-    width: 70%;
+    width: 67%;
 
     @media (max-width: 768px) {
         width: 100%;
@@ -72,7 +72,7 @@ export const Image = styled.img`
 
 export const Panel = styled.div`
     background-color: white;
-    width: 30%;
+    width: 33%;
     gap: 30px;
     z-index: -1;
     animation: slide-right 1s ease-in forwards;
@@ -114,7 +114,7 @@ export const H5 = styled.h5`
 
 export const H3 = styled.h3`
     font-family: Montserrat,Helvetica,Arial,sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     color: #272630;
 `
 
@@ -175,6 +175,7 @@ export const Icon = styled.div`
     width: 35px;
     height: 35px;
     display: grid;
+    pointer-events: auto;
     place-items: center;
 
     &:hover{
@@ -255,6 +256,7 @@ export const CardsRaw = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     gap: 3%;
+    margin-bottom: 50px;
 `
 
 export const Card = styled.div`
@@ -279,7 +281,7 @@ export const CardImage = styled.img`
 
 export const ButtonBuy = styled.div`
     width: 100%;
-    background-color: #5A9CCD;
+    background-color: ${props => props.disabled ? "#5A9CCD" : "#3888c5" };
     padding-top: 10px;
     padding-bottom: 10px;
     display: grid;
@@ -289,6 +291,10 @@ export const ButtonBuy = styled.div`
     text-transform: uppercase;
     pointer-events: ${props => props.disabled && "none"};
     cursor: ${props => props.disabled && "not-allowed"};
+
+    &:hover{
+        background-color: ${props => !props.disabled && "#0c70bd" };
+    }
 `
 
 export const Footer = styled.div`

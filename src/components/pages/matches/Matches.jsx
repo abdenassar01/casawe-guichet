@@ -7,9 +7,15 @@ import Card from "./Card";
 
 import {useEffect} from "react";
 
-const Matches = (props) => {
+import useEvents from '../../../state/eventsStore'
+import { observer } from "mobx-react-lite";
+
+const Matches = observer(() => {
   
+  const store = useEvents()
+
   useEffect(() => {
+    store.fetchEvents();
     document.title = "Sport - Casawe"
   },[])
 
@@ -17,24 +23,22 @@ const Matches = (props) => {
     <Wrapper>
       <CentredBox>
         <Slider>
-          <SliedrItem />
-          <SliedrItem />
-          <SliedrItem />
+        {store.events.map(event => 
+              <SliedrItem event={event} key={event.id} />
+          )}
         </Slider>
         <Tab>
           <hr />
           <H2>LES ÉVÉNEMENTS PASSÉS</H2>
         </Tab>
         <CardsWrapper>
-          <Card />
-          <Card disabled/>
-          <Card disabled/>
-          <Card disabled/>
-          <Card />
+          {store.events.map(event => 
+              <Card event={event} key={event.id} />
+          )}
         </CardsWrapper>
       </CentredBox>   
     </Wrapper>
   )
-}
+})
 
 export default Matches

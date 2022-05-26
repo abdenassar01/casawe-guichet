@@ -4,29 +4,33 @@ import Banner from './Banner';
 import SliedrItem from "./SliderItem";
 import Tickets from "./Tickets";
 
+import useEvents from '../../../state/eventsStore'
+import { observer } from "mobx-react-lite";
+
 import {useEffect} from "react";
 
-const Home = () => {
+const Home = observer(() => {
+
+  const store = useEvents()
 
   useEffect(() => {
+    store.fetchEvents();
     document.title = "Casawe - Ticket et Billetterie au Maroc"
-  },[])
+  },[store])
 
   return (
     <Wrapper>
       <Container>
         <Slider>
-          <SliedrItem />
-          <SliedrItem />
-          <SliedrItem />
-          <SliedrItem />
-          <SliedrItem />
+          {store.events.map(event => 
+              <SliedrItem event={event} key={event.id} />
+          )}          
         </Slider>
         <Banner />
-        <Tickets />
+        <Tickets events={store.events}/>
       </Container>
     </Wrapper>
   )
-}
+})
 
 export default Home

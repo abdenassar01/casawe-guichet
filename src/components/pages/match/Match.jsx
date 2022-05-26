@@ -10,23 +10,32 @@ import { Wrapper, Container, Left,
 import { TiCalendarOutline } from 'react-icons/ti'
 import { AiOutlineClose } from 'react-icons/ai'
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+
+import { useParams } from 'react-router-dom';
+import { observer } from "mobx-react-lite";
+import { useEvent } from '../../../state/eventsStore'
 
 const Match = () => {
-  
-  useEffect(() => {
-    document.title = "Wydad Athletic Club vs Chabab Riadhi Belouizdad"
-    serIsAvailable(false)
-  },[])
 
-  const [isAvailable, serIsAvailable] = useState(false)
+  const store = useEvent()
+  
+  const matchId = useParams()
+
+  useEffect(() => {
+    store.fetchEventById(matchId);
+    console.log(store.event.title)
+    document.title = store.event.title
+  },[store])
+
+  // Still getting Error
 
   return (
     <Wrapper>
         <Container>
           <Left>
             <Poster 
-            src="https://guichet.imgix.net/medias/fRBTwT1EDiCwWtdzW8EDseHeXe31mEoPrVTrZWrz.jpeg?w=900&h=600&fit=clip&auto=format,compress&q=80" 
+            src={store.event.poster}
             alt="poster match" 
             draggable="false" 
             />
@@ -131,7 +140,8 @@ const Match = () => {
                 </RadioInput>
                 <Checkout>
                   <CheckoutButton href="" >
-                      {isAvailable ? "Acheter Maintenant" : "guichet ferme" }
+                      {/* {isAvailable ? "Acheter Maintenant" : "guichet ferme" } */}
+                      guichet ferme
                   </CheckoutButton>
                 </Checkout>
                 <EmptyDiv></EmptyDiv>
