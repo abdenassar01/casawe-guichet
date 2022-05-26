@@ -21,7 +21,7 @@ const Header = ( { loggin } ) => {
                 {
                     loggin ? <Profile /> : 
                     <ConectionLink to="/connexion">
-                        &nbsp; <b>Connexion / Inscription</b>
+                         <b>Connexion / Inscription</b>
                     </ConectionLink>
                 }             
             </Nav>

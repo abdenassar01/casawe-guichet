@@ -1,4 +1,4 @@
-import { ProfileWrapper, ProfileContentWrapper, Tab, 
+import { ProfileWrapper, ProfileContentWrapper, Tab,
     Heading, Form, Table, Raw, Column, Label, Input, Span,
     SelectColumn, Submit
 } from './SubComponents'
@@ -13,7 +13,7 @@ const options = [
   { value: 'FR', label: 'FRANCE' },
   { value: 'UK', label: 'UNITED KINGDOM' }
 ]
-  
+
 const Profile = (props) => {
 
     const [ nom, setNom ] = useState("")
@@ -21,11 +21,16 @@ const Profile = (props) => {
     const [ ville, setVille ] = useState("")
     const [ telephone, setTelephone ] = useState("")
     const [ adresse, setAdresse ] = useState("")
-    // const [ paye, setPaye ] = useState("")
+    const [ paye, setPaye ] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        alert('form submitted for : ' + nom)
+        alert('form submitted with info  \nNom: ' + nom 
+            + ' \nPrenom: ' + prenom 
+            + ' \nVille: ' + ville 
+            + ' \nTelephone: ' + telephone 
+            + ' \nAdresse: ' + adresse 
+            + ' \nPaye: ' + paye )
     }
 
     useEffect(() => {
@@ -53,9 +58,15 @@ const Profile = (props) => {
                     <Raw>
                         <SelectColumn>
                             <Label htmlFor="paye">Paye<Span color="red">*</Span></Label>
-                            <Select options={options} id="paye" />
-                            {/* Todo: get selected value value  */}
-                        </SelectColumn> 
+                            <Select
+                                options={options} id="paye"
+                                placeholder="Sélectionner..."
+                                value={paye.value}
+                                onChange={(newValue, actionMeta) => {
+                                    setPaye(newValue.value)
+                                }}
+                            />
+                        </SelectColumn>
                         <Column>
                             <Label htmlFor="ville">Ville<Span color="red">*</Span></Label>
                             <Input type="text" id="ville" value={ville} onChange={(e) => {setVille(e.target.value)}}/>
@@ -66,7 +77,7 @@ const Profile = (props) => {
                         <Column>
                             <Label htmlFor="ville">Téléphone<Span color="red">*</Span></Label>
                             <Input type="text" id="ville" value={telephone} onChange={(e) => {setTelephone(e.target.value)}}/>
-                        </Column> 
+                        </Column>
                         <Column>
                             <Label htmlFor="adresse">Adresse<Span color="red">*</Span></Label>
                             <Input type="text" id="adresse" value={adresse} onChange={(e) => {setAdresse(e.target.value)}}/>

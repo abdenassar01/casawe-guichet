@@ -20,8 +20,6 @@ function App() {
 
   const [loggin, setLoggin] = useState(false);
  
-  // mob-x state tree 
-  // react query
 
   return (
     <>

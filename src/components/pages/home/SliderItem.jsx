@@ -48,22 +48,22 @@ const SliderItem = () => {
         <Panel>
             <Content>
                 <DealContent>
-                <LinkWrapper>
-                    <RouteLink to={`/billetterie/sport`} color="#0d6eb6">
-                        Sport
+                    <LinkWrapper>
+                        <RouteLink to={`/billetterie/sport`} color="#0d6eb6">
+                            Sport
+                        </RouteLink>
+                    </LinkWrapper>
+                    <H5>
+                        <MdLocationOn size={14}/> Casablanca
+                    </H5>
+                    <RouteLink to={`/match/${id}`}>
+                        <H3>
+                            {`Wydad Athletic Club vs Chabab Riadhi Belouizdad`} 
+                        </H3>
                     </RouteLink>
-                </LinkWrapper>
-                <H5>
-                    <MdLocationOn size={14}/> Casablanca
-                </H5>
-                <RouteLink to={`/match/${id}`}>
-                    <H3>
-                    {`Wydad Athletic Club vs Chabab Riadhi Belouizdad`} 
-                    </H3>
-                </RouteLink>
-                <P>
-                    {truncateString("Le Wydad Athletic Club reçoit le Chabab Riadhi Belouizdad pour le match retour de la Quart de Finale de la Ligue des Champions de la CAF TotalEnergies 2021-2022, le Samedi 23 Avril 2022 à 22h00 au Complexe sportif Mohammed V", 150)}
-                </P>
+                    <P>
+                        {truncateString("Le Wydad Athletic Club reçoit le Chabab Riadhi Belouizdad pour le match retour de la Quart de Finale de la Ligue des Champions de la CAF TotalEnergies 2021-2022, le Samedi 23 Avril 2022 à 22h00 au Complexe sportif Mohammed V", 150)}
+                    </P>
                 </DealContent>
                 <PriceContent>
                     <H3>{`700DH`}</H3>

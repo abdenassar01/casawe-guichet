@@ -30,7 +30,7 @@ export const Slider = styled.ul`
     }
 `
 
-export const SliderItemWrapper = styled.li`
+export const SliderItemWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -126,7 +126,7 @@ export const P = styled.p`
     color: ${props => props.color? props.color : "#b3b3b3"};
 `
 
-export const DealContent = styled.ul`
+export const DealContent = styled.div`/* was ul */
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -135,13 +135,13 @@ export const DealContent = styled.ul`
     margin-top: 10px;
 `
 
-export const PriceContent = styled.li`
+export const PriceContent = styled.div` /* was li */
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
 `
 
-export const BuyNow = styled.li`
+export const BuyNow = styled.div` /* was li */
     padding: 4px 12px;
     height: fit-content;
     font-weight: normal;
@@ -203,7 +203,7 @@ export const Raw = styled.ul`
     flex-wrap: wrap;
 `
 
-export const RawItem = styled.li`
+export const RawItem = styled.div` /* was li */
     display: flex;
     gap: 6%;
     padding: 10px 0; 
@@ -287,6 +287,8 @@ export const ButtonBuy = styled.div`
     border-radius: 2px;
     font-weight: bold;
     text-transform: uppercase;
+    pointer-events: ${props => props.disabled && "none"};
+    cursor: ${props => props.disabled && "not-allowed"};
 `
 
 export const Footer = styled.div`

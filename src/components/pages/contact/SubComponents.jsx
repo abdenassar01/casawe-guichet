@@ -26,6 +26,7 @@ export const FormWrapper = styled.div`
     width: 60%;
     background-color: white;
     padding: 30px ; 
+    flex-shrink: 1;
 
     @media (max-width: 820px){
         width: 90%;
@@ -134,6 +135,7 @@ export const ContactInfoBox = styled.div`
     background-color: white;
     padding: 30px ; 
     height: fit-content;
+    flex-shrink: 1;
 
     @media (max-width: 820px){
         width: 90%;

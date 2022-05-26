@@ -31,7 +31,7 @@ const Profile = () => {
           <DropDownListContainer>
             <DropDownList>
               <DropDownItem key={1}>
-                <AccountLink to="/profile" onClick={toggling}>Profile</AccountLink>
+                <AccountLink to="/profile" onClick={toggling}>Mon compte</AccountLink>
               </DropDownItem>
               <DropDownItem key={2}>
                 <AccountLink to="/mes-commandes" onClick={toggling}>Mes commandes</AccountLink>

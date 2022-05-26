@@ -6,5 +6,7 @@ export const RouteLink = styled(Link)`
     display: flex;
     color: ${ props => props.color ? props.color : PrimaryColors[100] };
     text-decoration: none;
-    font-size: ${ props => props.size && props.size }
+    font-size: ${ props => props.size && props.size };
+
+    
 `
