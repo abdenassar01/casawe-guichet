@@ -175,7 +175,6 @@ export const Icon = styled.div`
     width: 35px;
     height: 35px;
     display: grid;
-    pointer-events: auto;
     place-items: center;
 
     &:hover{
@@ -188,7 +187,6 @@ export const SocialMedia = styled.div`
     display: flex;
     justify-content: space-around;
     gap: 10px;
-   
 `
 
 export const Section = styled.section`

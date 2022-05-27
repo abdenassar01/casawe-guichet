@@ -7,7 +7,7 @@ import Card from "./Card";
 
 import {useEffect} from "react";
 
-import useEvents from '../../../state/eventsStore'
+import useEvents from '../../../models/events'
 import { observer } from "mobx-react-lite";
 
 const Matches = observer(() => {
@@ -17,7 +17,7 @@ const Matches = observer(() => {
   useEffect(() => {
     store.fetchEvents();
     document.title = "Sport - Casawe"
-  },[])
+  },[store])
 
   return (
     <Wrapper>

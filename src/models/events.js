@@ -1,15 +1,11 @@
 import { types } from 'mobx-state-tree';
-import instance from '../axios/axios';
-import requests from '../axios/requests';
+// import instance from '../axios/axios';
+// import requests from '../axios/requests';
 
 const _fetchEvents = async () => {
-    // async
-    // const data = await instance.get(requests.listingSport);
-    // const events = data.events;
     const response = await fetch("https://api.preprod.guichet.com/events?category_id=6");
     const data = await response.json();
     const events = data.events;
-    // console.log(events);
     return events;
 }
 
@@ -21,32 +17,34 @@ const _fetchEventById = async (id) => {
 }
 
 const Event = types.model({
-    id: types.number,
-    status: types.string,
-    title: types.string,
-    description: types.string,
-    price: types.number,
-    soldOut: types.boolean,
-    cover: types.string 
-}).actions(self => ({
-    setEvent(newEvent){
-        self.id = newEvent.id;
-        self.status = newEvent.status;
-        self.title = newEvent.title;
-        self.description = newEvent.description;
-        self.price = newEvent.price;
-        self.soldOut = newEvent.soldOut;
-        self.cover = newEvent.cover;
+    id: types.optional(types.number, 0),
+    status: types.optional(types.string, ""),
+    title: types.optional(types.string, ""),
+    description: types.optional(types.string, ""),
+    price: types.optional(types.number, 0),
+    soldOut: types.optional(types.boolean, false),
+    cover: types.optional(types.string, "") 
+})
+.actions(self => ({
+    addEvent({id, status, title, description, price, soldOut, cover}){
+        self.id = id;
+        self.status = status;
+        self.title = title;
+        self.description = description;
+        self.price = price;
+        self.soldOut = soldOut;
+        self.cover = cover;
     },
     async fetchEventById(id){
         const data = await _fetchEventById(id);
-        self.setEvent(data);
+        self.addEvent(data);
     }
 }))
 
 const EventList = types.model({
     events: types.array(Event)
-}).actions(self => ({
+})
+.actions(self => ({
     setEvents(newEvents){
         self.events = newEvents;
     },
@@ -80,18 +78,15 @@ let _eventStore
 export const useEvent = () => {
     if(!_eventStore) {
         _eventStore = Event.create({
-            event : {
-                id: "",
-                status: "",
-                title: "",
-                description: "",
-                price: "",
-                soldOut: "",
-                cover: ""
-            }
+            id: 0,
+            status: "",
+            title: "",
+            description: "",
+            price: 0,
+            soldOut: false,
+            cover: ""
         })
     }
-
     return _eventStore;
 }
 

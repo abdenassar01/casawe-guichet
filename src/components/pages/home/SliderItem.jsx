@@ -17,13 +17,10 @@ import { TiSocialTwitter,
         TiSocialFacebook 
       } from 'react-icons/ti'
 
-import { useState, useEffect } from 'react'
 import { RouteLink } from '../../routes/RoutesLinks'
       
 
 const SliderItem = ({ event }) => {
-
-    const [id, setId] = useState("20")
     
     function truncateString(str, num) {
       if (str.length > num) {
@@ -32,10 +29,6 @@ const SliderItem = ({ event }) => {
         return str;
       }
     }
-
-    useEffect(() => {
-        setId(10);
-    },[])
     
 
   return (
@@ -68,10 +61,7 @@ const SliderItem = ({ event }) => {
                 <PriceContent>
                     <H3>{event.price} DH</H3>
                     <BuyNow>
-                        <RouteLink to={`/match/${event.id}`} disabled style={{
-                            pointerEvents: "none",
-                            cursor: "not-allowed"
-                        }}>
+                        <RouteLink to={`/match/${event.id}`} disabled>
                             <P color="#626467">{`Guichet fermé`}</P>
                         </RouteLink>
                     </BuyNow>

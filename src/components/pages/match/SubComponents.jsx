@@ -42,7 +42,7 @@ export const Date = styled.div`
 `
 
 export const Discription = styled.div`
-    padding: 10px;
+    padding: 20px 5px;
     background-color: white;
     color: #626467;
     font-size: 15px;
@@ -92,13 +92,12 @@ export const H1 = styled.h1`
 `
 
 export const BuyPanel = styled.div`
-    width: 80%;
+    width: 90%;
 `
 
 export const CheckList = styled.div`
     width: 80%;
     padding-bottom: 20px;
-
 `
 
 export const RadioInput = styled.span`

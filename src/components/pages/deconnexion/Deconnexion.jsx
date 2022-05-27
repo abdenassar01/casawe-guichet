@@ -5,7 +5,7 @@ const Deconnexion = ({ setLoggin }) => {
     
     useEffect(() =>{
         setLoggin(false)
-    }, [])
+    }, [setLoggin])
 
   return (
     <Navigate to="/" />

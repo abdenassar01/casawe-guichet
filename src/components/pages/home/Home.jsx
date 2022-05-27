@@ -4,7 +4,7 @@ import Banner from './Banner';
 import SliedrItem from "./SliderItem";
 import Tickets from "./Tickets";
 
-import useEvents from '../../../state/eventsStore'
+import useEvents from '../../../models/events'
 import { observer } from "mobx-react-lite";
 
 import {useEffect} from "react";

@@ -11,9 +11,8 @@ const Tickets = ({ events }) => {
   return (
     <AvailableTickets>
         <CardsRaw>
-
             { events.map((event) => (
-                <Card>
+                <Card key={event.id}>
                     <RouteLink  to={`/match/${event.id}`} >
                         <CardImage src={ event.cover } alt="wydad vs far"/>
                     </RouteLink>
