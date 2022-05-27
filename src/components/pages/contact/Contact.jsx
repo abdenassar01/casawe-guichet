@@ -10,6 +10,8 @@ import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
 import {useEffect} from "react";
 
+import axios from "axios";
+
 const Contact = () => {
 
   const [ email, setEmail ] = useState("") 
@@ -25,7 +27,19 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("form submitted " + message)
+
+    const contactMessage =  {
+      email: email,
+      first_name: prenom,
+      last_name : nom,
+      message : message,
+      phone : telephone,
+      subject : sujet
+    }
+
+    axios.post("https://api.preprod.guichet.com/contacts", contactMessage)
+    .then(data => alert(data.data.message))
+    .catch(err => alert(err))
   }
 
   return (
