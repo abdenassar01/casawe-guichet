@@ -13,158 +13,113 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
-import { observer } from "mobx-react-lite";
-import { useEvent } from '../../../state/eventsStore'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+
+const queryClient = new QueryClient()
 
 const Match = () => {
 
-  const store = useEvent()
   
   const matchId = useParams()
 
   useEffect(() => {
-    store.fetchEventById(matchId);
-    console.log(store.event.title)
-    document.title = store.event.title
-  },[store])
+    document.title = "title"
+  },[])
 
-  // Still getting Error
 
   return (
-    <Wrapper>
-        <Container>
-          <Left>
-            <Poster 
-            src={store.event.poster}
-            alt="poster match" 
-            draggable="false" 
-            />
-            <Date>
-             <TiCalendarOutline size={30}/> <b>Samedi 23 Avril 2022 à 22h00</b>
-            </Date>
-            <Discription>
-              <TabPanel>
-                <TabItem>
-                  <A href="#tab-description" aria-controls="home" role="tab" data-toggle="tab">
-                    Description 
-                  </A>
-                </TabItem>
-              </TabPanel>
-              <Discription id="tab-description">
-                  <p>Le Wydad Athletic Club reçoit le Chabab Riadhi Belouizdad pour le match retour de la Quart de Finale de la Ligue des Champions de la CAF TotalEnergies 2021-2022, le Samedi 23 Avril 2022 à 22h00 au Complexe sportif Mohammed V</p>
-              </Discription>
-            </Discription>
-          </Left>
-          <Right>
-            <Purchase>
-              <BuyPanel>
-                <H1>Wydad Athletic Club vs Chabab Riadhi Belouizdad</H1>
-                <center>
-                  <Discription>
-                    Le Wydad Athletic Club reçoit le Chabab Riadhi Belouizdad pour le match retour de la Quart de Finale de la Ligue des Champions de la CAF TotalEnergies 2021-2022, le Samedi 23 Avril 2022 à 22h00 au Complexe sportif Mohammed V
-                  </Discription>
-                </center>
-              </BuyPanel>
-              <CheckList>
-                {/* base radio botton */}
-                <RadioInput>
-                  <Input type="radio" value={`value`} name="zone" id="zone4" disabled/>
-                  <Label htmlFor="zone4">
-                    <Category>
-                      <AiOutlineClose />
-                      Zone 04
-                    </Category>
-                    <Span>50DH</Span>
-                  </Label>
-                </RadioInput>
-                  {/* base radio botton */}
-                <RadioInput>
-                  <Input type="radio" value={`value`} name="zone" id="zone5"/>
-                  <Label htmlFor="zone5">
-                    <Category>
-                      <AiOutlineClose />
-                      Zone 05
-                    </Category>
-                    <Span>50DH</Span>
-                  </Label>
-                </RadioInput>
-                <RadioInput>
-                  <Input type="radio" value={`value`} name="zone" id="zone6" />
-                  <Label htmlFor="zone6">
-                    <Category>
-                      <AiOutlineClose />
-                      Zone 06
-                    </Category>
-                    <Span>50DH</Span>
-                  </Label>
-                </RadioInput>
-                <RadioInput>
-                  <Input type="radio" value={`value`} name="zone" id="zone7"/>
-                  <Label htmlFor="zone7">
-                    <Category>
-                      <AiOutlineClose />
-                      Zone 07
-                    </Category>
-                    <Span>50DH</Span>
-                  </Label>
-                </RadioInput>
-                <RadioInput>
-                  <Input type="radio" value={`value`} name="zone" id="zone2" />
-                  <Label htmlFor="zone2">
-                    <Category>
-                      <AiOutlineClose />
-                      Zone 02
-                    </Category>
-                    <Span>100DH</Span>
-                  </Label>
-                </RadioInput>
-                <RadioInput>
-                  <Input type="radio" value={`value`} name="zone" id="zone3"/>
-                  <Label id="zone3">
-                    <Category>
-                      <AiOutlineClose />
-                      Zone 03
-                    </Category>
-                    <Span>100DH</Span>
-                  </Label>
-                </RadioInput>
-                <RadioInput>
-                  <Input type="radio" value={`value`} name="zone" id="zone1" />
-                  <Label id="zone1">
-                    <Category>
-                      <AiOutlineClose />
-                      Zone 01
-                    </Category>
-                    <Span >700DH</Span>
-                  </Label>
-                </RadioInput>
-                <Checkout>
-                  <CheckoutButton href="" >
-                      {/* {isAvailable ? "Acheter Maintenant" : "guichet ferme" } */}
-                      guichet ferme
-                  </CheckoutButton>
-                </Checkout>
-                <EmptyDiv></EmptyDiv>
-              </CheckList>
-            </Purchase>
-            <InfosVendeur>
-              <WrapperBox>
-                <Hr />
-                <Title>INFOS VENDEUR</Title>
-              </WrapperBox>
-              <ImageLogo
-               src="https://guichet.imgix.net/providers/l72rhrgN4QVbMIDAjG6muv1mHRgCkUoOa8BJkihT.png?w=200&h=150&fit=clip&auto=format,compress&q=80" 
-               alt="" 
-               />
-              <TextInfoWrapper>
-                <strong>CASAWI</strong>
-                <P bold>Tel: <Span bold={false}>0522227745</Span></P>
-              </TextInfoWrapper>
-            </InfosVendeur>
-          </Right>
-        </Container>
-    </Wrapper>
+    <QueryClientProvider client={queryClient}>
+        <EventWrapper matchId={matchId}/>
+    </QueryClientProvider>
   )
 }
 
 export default Match
+
+const EventWrapper = ({matchId}) => {
+
+  const { isLoading, error, data } = useQuery('repoData', () =>
+    fetch(`https://api.preprod.guichet.com/events/${matchId.id}`).then(res =>
+        res.json()
+    )
+  )
+
+  if (isLoading) return 'Loading...😉';
+
+  if (error) return '👨🏻‍💻 An error has occurred: ' + error.message
+
+  return(
+    <Wrapper>
+          <Container>
+            <Left>
+              <Poster 
+                src={data.event.cover}
+                alt={data.event.title}
+                draggable="false" 
+              />
+              <Date>
+              <TiCalendarOutline size={30}/> <b>{data.event.expiredAt}</b>
+              </Date>
+              <Discription>
+                <TabPanel>
+                  <TabItem>
+                    <A href="#tab-description" aria-controls="home" role="tab" data-toggle="tab">
+                      Description 
+                    </A>
+                  </TabItem>
+                </TabPanel>
+                <Discription id="tab-description" >
+                    <p dangerouslySetInnerHTML={{ __html: data.event.description }}></p>
+                </Discription>
+              </Discription>
+            </Left>
+            <Right>
+              <Purchase>
+                <BuyPanel>
+                  <H1>{data.event.title}</H1>
+                  <center>
+                    <Discription  dangerouslySetInnerHTML={{ __html: data.event.description }} />
+                  </center>
+                </BuyPanel>
+                <CheckList>
+                  { data.event.offers.map(offer => 
+                      <RadioInput>
+                        <Input type="radio" value={offer.id} name="offer" id={offer.id} disabled={ offer.status !== "enable" && !offer.soldOut }/>
+                        <Label htmlFor={offer.id}>
+                          <Category>
+                            <AiOutlineClose />
+                            {offer.title}
+                          </Category>
+                          <Span>{offer.price}</Span>
+                        </Label>
+                     </RadioInput>
+                  ) }
+                  
+                    {/* base radio botton */}
+                  <Checkout>
+                    <CheckoutButton href="" >
+                        { !data.event.soldOut ? "Acheter Maintenant" : "guichet ferme" }
+                    </CheckoutButton>
+                  </Checkout>
+                  <EmptyDiv></EmptyDiv>
+                </CheckList>
+              </Purchase>
+              <InfosVendeur>
+                <WrapperBox>
+                  <Hr />
+                  <Title>INFOS VENDEUR</Title>
+                </WrapperBox>
+                <ImageLogo
+                src="https://guichet.imgix.net/providers/l72rhrgN4QVbMIDAjG6muv1mHRgCkUoOa8BJkihT.png?w=200&h=150&fit=clip&auto=format,compress&q=80" 
+                alt="" 
+                />
+                <TextInfoWrapper>
+                  <strong>CASAWI</strong>
+                  <P bold>Tel: <Span bold={false}>0522227745</Span></P>
+                </TextInfoWrapper>
+              </InfosVendeur>
+            </Right>
+          </Container>
+      </Wrapper>
+  )
+}
