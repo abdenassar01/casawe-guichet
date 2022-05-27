@@ -4,7 +4,8 @@ import { FaPhoneAlt, FaShoppingCart } from 'react-icons/fa';
 import { RouteLink } from '../routes/RoutesLinks';
 import Profile from './profile/Profile';
 
-const Header = ( { loggin } ) => {
+const Header = ( ) => {
+
   return (
       <Container>
         <HeaderWrapper>
@@ -19,9 +20,9 @@ const Header = ( { loggin } ) => {
                     &nbsp;{0} Mon panier
                 </RouteLink>
                 {
-                    loggin ? <Profile /> : 
+                    (sessionStorage.getItem("token")) ? <Profile /> : 
                     <ConectionLink to="/connexion">
-                         <b>Connexion / Inscription</b>
+                        <b>Connexion / Inscription</b>
                     </ConectionLink>
                 }             
             </Nav>

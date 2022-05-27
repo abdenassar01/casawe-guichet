@@ -1,7 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import { useState } from "react";
-
 import GlobalStyle from './components/global/GlobalStyles';
 
 import Home from "./components/pages/home/Home";
@@ -16,25 +14,24 @@ import Panier from "./components/pages/panier/Panier";
 import Profile from "./components/pages/profile/Profile";
 import Commandes from "./components/pages/commandes/Commandes";
 import Deconnexion from "./components/pages/deconnexion/Deconnexion";
-function App() {
+import Error404 from "./components/pages/error/Error404";
 
-  const [loggin, setLoggin] = useState(false);
- 
+function App() { 
 
   return (
     <>
       <GlobalStyle />
-      <Header loggin={loggin}/>
+      <Header />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connexion" element={<Connection loggin={loggin} setLoggin={setLoggin} />} />
+        <Route path="/connexion" element={<Connection />} />
         <Route path="/contact" element={<Contact />} />
         <Route 
           path="/panier" 
           element={ 
-            loggin ? 
-              <Panier setLoggin={setLoggin}/> 
+            (sessionStorage.getItem("token"))  ? 
+              <Panier /> 
                   : 
               <Navigate to="/connexion" replace />
             } 
@@ -42,7 +39,7 @@ function App() {
         <Route 
           path="/mes-commandes" 
           element={ 
-            loggin ? 
+            (sessionStorage.getItem("token"))  ? 
               <Commandes /> 
                   : 
               <Navigate to="/connexion" replace />
@@ -51,21 +48,21 @@ function App() {
         <Route 
           path="/profile" 
           element={
-            loggin ? 
-              <Profile setLoggin={setLoggin}/> 
+            (sessionStorage.getItem("token")) ? 
+              <Profile /> 
                 : 
               <Navigate to="/connexion" replace />
             } 
         />
         <Route 
-          path="/deconnection" 
-          element={ <Deconnexion setLoggin={setLoggin} /> } 
+          path="/deconnexion" 
+          element={ <Deconnexion /> } 
         />
         <Route path="/billetterie/sport" element={<Matches />} />
         <Route path="/match">
           <Route path=":id" element={<Match />} />
         </Route>  
-        <Route path="/*" element={<Navigate to="/" replace />} />
+        <Route path="/*" element={<Error404 />} />
       </Routes>
       <Footer />
     </>
