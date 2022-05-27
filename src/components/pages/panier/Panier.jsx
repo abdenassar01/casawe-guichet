@@ -1,5 +1,7 @@
 import { useEffect } from "react" ;
-import { PanierWrapper, Tab, Heading, ContentBox, PanieBox, StyledRouteLink } from "./SubComponents"
+import { PanierWrapper, Tab, Heading, 
+    ContentBox, PanieBox, StyledRouteLink 
+} from "./SubComponents"
 
 
 const Panier = () => {

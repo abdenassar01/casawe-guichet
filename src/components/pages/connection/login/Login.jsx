@@ -1,24 +1,42 @@
 import { FormLoginWrapper, Tab, Form, Heading, 
   Field, Label, Input, Span, CheckBoxWrapper, 
   CheckBox, Submit, SubmitBox, StyledRouteLink
-} from '../SubComponents'
+} from '../SubComponents';
+
+import { Navigate } from "react-router-dom";
 
 import { useState } from 'react'
+import { observer } from "mobx-react-lite";
+import { useUser } from "../../../../models/user"
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
-
-const Login = ({ setLoggin, loggin }) => {
+const Login = observer(() => {
 
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
 
-  const handleSubmit = (e) => {
+  const store = useUser()
+
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    if(email !== "" && password !== ""){
-      setLoggin(!loggin);
-      !loggin ? alert("You are logged in") : alert("You are logged out");
-      return;
+    // if(email !== "" && password !== ""){
+      store.login(email, password)
+      setLogin(true)
+    //   return;
+    // }
+    // alert("provide messing data")
+  }, [email, store, password])
+  const [ login, setLogin ] = useState(false)
+ 
+  useEffect(() =>{
+    if(sessionStorage.getItem("token")){
+      setLogin(true)
     }
-    alert("provide messing data")
+  } ,[store, login])
+
+  if(login){
+    return <Navigate to="/"/>
   }
 
   return (
@@ -64,6 +82,6 @@ const Login = ({ setLoggin, loggin }) => {
         </Form>
     </FormLoginWrapper>
   )
-}
+})
 
 export default Login

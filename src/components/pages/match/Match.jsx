@@ -44,7 +44,7 @@ const EventWrapper = ({matchId}) => {
     )
   )
 
-  if (isLoading) return 'Loading...😉';
+  if (isLoading) return '<h1>data is still Loading...😉</h1>';
 
   if (error) return '👨🏻‍💻 An error has occurred: ' + error.message
 
@@ -87,7 +87,7 @@ const EventWrapper = ({matchId}) => {
                         <Input type="radio" value={offer.id} name="offer" id={offer.id} disabled={ offer.status !== "enable" && !offer.soldOut }/>
                         <Label htmlFor={offer.id}>
                           <Category>
-                            <AiOutlineClose />
+                            { offer.soldOut && <AiOutlineClose /> }                            
                             {offer.title}
                           </Category>
                           <Span>{offer.price}</Span>
@@ -95,7 +95,6 @@ const EventWrapper = ({matchId}) => {
                      </RadioInput>
                   ) }
                   
-                    {/* base radio botton */}
                   <Checkout>
                     <CheckoutButton href="" >
                         { !data.event.soldOut ? "Acheter Maintenant" : "guichet ferme" }

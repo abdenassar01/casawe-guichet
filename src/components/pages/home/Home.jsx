@@ -7,7 +7,7 @@ import Tickets from "./Tickets";
 import useEvents from '../../../models/events'
 import { observer } from "mobx-react-lite";
 
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 const Home = observer(() => {
 
@@ -23,7 +23,7 @@ const Home = observer(() => {
       <Container>
         <Slider>
           {store.events.map(event => 
-              <SliedrItem event={event} key={event.id} />
+            <SliedrItem event={event} key={event.id} />
           )}          
         </Slider>
         <Banner />

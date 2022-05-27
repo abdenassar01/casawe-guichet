@@ -69,20 +69,20 @@ const Contact = () => {
               <Raw>
                 <Field>
                   <Label>E-mail <Span color="red">*</Span></Label>
-                  <Input  type="text" placeholder="Votre adresse e-mail" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                  <Input  type="text" placeholder="Votre adresse e-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </Field> 
                 <Field>
                   <Label>Téléphone </Label>
-                  <Input type="text" placeholder="Votre telephone" value={telephone} onChange={(e) => setTelephone(e.target.value)}/>
+                  <Input type="text" placeholder="Votre telephone" value={telephone} onChange={(e) => setTelephone(e.target.value)} />
                 </Field>
               </Raw>
               <Field width="92%">
                   <Label>Sujet <Span color="red">*</Span></Label>
-                  <Input type="text" placeholder="Sujet de votre demande" value={sujet} onChange={(e) => setSujet(e.target.value)}/>
+                  <Input type="text" placeholder="Sujet de votre demande" value={sujet} onChange={(e) => setSujet(e.target.value)} />
               </Field>
               <Field width="92%">
                   <Label>Message <Span color="red">*</Span></Label>
-                  <Textarea type="text" placeholder="Votre message" rows="5" value={message} onChange={(e) => setMessage(e.target.value)}/>
+                  <Textarea type="text" placeholder="Votre message" rows="5" value={message} onChange={(e) => setMessage(e.target.value)} />
               </Field>
               <Submit type="submit" value="envoyer le message" onClick={handleSubmit}/>
             </Form>

@@ -53,6 +53,7 @@ export const SliderItemWrapper = styled.div`
 
 export const ImageWrapper = styled.div`
     width: 67%;
+    z-index: 1;
 
     @media (max-width: 768px) {
         width: 100%;
@@ -74,7 +75,6 @@ export const Panel = styled.div`
     background-color: white;
     width: 33%;
     gap: 30px;
-    z-index: -1;
     animation: slide-right 1s ease-in forwards;
 
     @media (max-width: 768px) {
@@ -145,9 +145,15 @@ export const BuyNow = styled.div` /* was li */
     padding: 4px 12px;
     height: fit-content;
     font-weight: normal;
+    pointer-events: ${ props => props.disabled && "none" };
     font-size: 12px;
-    background-color: #b3b3b3;
+    background-color: ${ props => props.disabled ? "#b3b3b3" : "#0aa3ad" };
     border-radius: 3px;
+    transition: all .3s ease; 
+
+    &:hover{
+        background-color: ${ props => !props.disabled && "#0a56ad" };
+    }
 `
 
 export const HelperText = styled.p`
@@ -176,6 +182,7 @@ export const Icon = styled.div`
     height: 35px;
     display: grid;
     place-items: center;
+    transition: all .3s ease; 
 
     &:hover{
         background-color: ${props => props.color};

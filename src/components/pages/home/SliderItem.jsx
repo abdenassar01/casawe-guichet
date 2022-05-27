@@ -54,20 +54,19 @@ const SliderItem = ({ event }) => {
                             {event.title} 
                         </H3>
                     </RouteLink>
-                    <P>
-                        {truncateString(event.description, 150)}
-                    </P>
+                    <P dangerouslySetInnerHTML={{ __html: truncateString(event.description, 250) }} />
                 </DealContent>
                 <PriceContent>
                     <H3>{event.price} DH</H3>
-                    <BuyNow>
-                        <RouteLink to={`/match/${event.id}`} disabled>
-                            <P color="#626467">{`Guichet fermé`}</P>
+                    <BuyNow disabled={event.soldOut}>
+                        <RouteLink to={`/match/${event.id}`} >
+                            <P color={event.soldOut ? "#626467" : "#ffffff"}>{event.soldOut ? "Guichet fermé" : "Acheter"}</P>
                         </RouteLink>
                     </BuyNow>
                 </PriceContent>
                 <AlertArea>
-                    {new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDay()}
+                    {/* Todo add expiredAt to model in event store  */}
+                    {/* {event.expiredAt} */}
                 </AlertArea>
                 <ShareOnSocialMedia>
                     <P><BsEmojiSmile size={12}/> Offre Special</P>

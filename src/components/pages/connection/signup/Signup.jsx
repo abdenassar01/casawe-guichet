@@ -3,7 +3,7 @@ import { FormSignupWrapper, Tab, Heading, Form,
  } from '../SubComponents';
 
 import { RouteLink } from '../../../routes/RoutesLinks'
-
+import axios from 'axios';
 import { useState } from 'react'
 
 const Signup = () => {
@@ -18,7 +18,24 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("form submitted");
+
+    if(password !== passwordConfirm){
+      alert("Les champs password confirmation et Mot de passe doivent être identiques.")   
+    }else{
+
+     
+      const registerData = {
+        email: email,
+        first_name: nom,
+        last_name: prenom,
+        password: password,
+        phone: telephone,
+        source: "casawe-guichet"
+      }
+      axios.post("https://api.preprod.guichet.com/users/register", registerData)
+        .then(result => alert(result.data.message))
+        .catch(err => alert(err.error))
+      }
   }
 
   return (
@@ -30,7 +47,8 @@ const Signup = () => {
       <P>
         Si vous avez des difficultés ou des questions pour vous inscrire,
         <Span>
-          <RouteLink color="#0066b2" to="/contact">
+          &nbsp;
+          <RouteLink color="#0066b2" to="/contact" style={{display: 'inline'}}>
             contactez-nous
           </RouteLink>
         </Span> 

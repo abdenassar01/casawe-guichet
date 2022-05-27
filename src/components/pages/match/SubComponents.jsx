@@ -103,7 +103,8 @@ export const CheckList = styled.div`
 export const RadioInput = styled.span`
     display: flex;
     justify-content: center;
-    margin: 7px;
+    align-items: center;
+    margin: 10px;
     height: 30px;
     position: relative;
 `
@@ -150,6 +151,7 @@ export const P = styled.p`
 export const Category = styled.div`
     display: flex;
     align-items: center;
+    gap: 10px;
 `
 
 export const Checkout = styled.div`

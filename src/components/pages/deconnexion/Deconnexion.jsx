@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 
-const Deconnexion = ({ setLoggin }) => {
+const Deconnexion = () => {
     
     useEffect(() =>{
-        setLoggin(false)
-    }, [setLoggin])
+        sessionStorage.removeItem("token")
+    }, [])
 
   return (
     <Navigate to="/" />

@@ -36,9 +36,7 @@ const Card = ({ event }) => {
             <Price>
                 <b>{event.price} DH</b>
             </Price>
-            <MatchDiscription>
-                {truncateString(event.description, 100)}
-            </MatchDiscription>
+            <MatchDiscription dangerouslySetInnerHTML={{ __html: truncateString(event.description, 250) }} />
         <Checkout>
             <ListItem>
                  {/* //TODO: */}

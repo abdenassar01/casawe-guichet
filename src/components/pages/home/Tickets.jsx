@@ -14,7 +14,7 @@ const Tickets = ({ events }) => {
             { events.map((event) => (
                 <Card key={event.id}>
                     <RouteLink  to={`/match/${event.id}`} >
-                        <CardImage src={ event.cover } alt="wydad vs far"/>
+                        <CardImage src={ event.cover } alt={event.title}/>
                     </RouteLink>
                     <Title>
                         <RouteLink to={`/match/${event.id}`}>
