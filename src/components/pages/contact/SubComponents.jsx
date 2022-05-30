@@ -72,7 +72,6 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-    margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ededed;
     outline: none;
@@ -86,7 +85,6 @@ export const Input = styled.input`
 `
 
 export const Textarea = styled.textarea`
-    margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ededed;
     outline: none;
@@ -100,6 +98,12 @@ export const Textarea = styled.textarea`
 
 export const Span = styled.span`
     color: ${props => props.color ? props.color : 'black'};
+`
+
+export const ErrMsg = styled.span`
+    color: #dd2947;
+    margin-bottom: 20px;
+    font-size: 12px;
 `
 
 export const Submit = styled.input`

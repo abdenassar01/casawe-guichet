@@ -1,11 +1,10 @@
 import { Container, CentredBox, FormWrapper, Tab, Heading, 
-  Raw, Field, Label, Input, P, Form, Span, Textarea, 
+  Raw, Field, Label, Input, P, Form, Span, Textarea, ErrMsg,
   Submit, ContactInfoBox 
 } from "./SubComponents"
 import ErreurBox from '../connection/ErreurBox'
 
-import { useState } from "react"
-
+import { useForm } from "react-hook-form";
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
 import {useEffect} from "react";
@@ -14,27 +13,21 @@ import axios from "axios";
 
 const Contact = () => {
 
-  const [ email, setEmail ] = useState("") 
-  const [ nom, setNom ] = useState("") 
-  const [ prenom, setPrenom ] = useState("") 
-  const [ message, setMessage ] = useState("")  
-  const [ sujet, setSujet ] = useState("") 
-  const [ telephone, setTelephone ] = useState("") 
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   useEffect(() => {
     document.title = "Contacter-nous"
   },[])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
 
     const contactMessage =  {
-      email: email,
-      first_name: prenom,
-      last_name : nom,
-      message : message,
-      phone : telephone,
-      subject : sujet
+      email: data.email,
+      first_name: data.prenom,
+      last_name : data.nom,
+      message : data.message,
+      phone : data.tele,
+      subject : data.sujet
     }
 
     axios.post("https://api.preprod.guichet.com/contacts", contactMessage)
@@ -55,36 +48,46 @@ const Contact = () => {
             <P size="15px" color="#626467">
               N'hésitez pas à nous contacter en envoyant un email via le formulaire ci-dessous ou par téléphone sur le 05 22 22 77 45/46/47. Nos conseillers sont à l'écoute !
             </P>
-            <Form>
+            <Form onSubmit={ handleSubmit(onSubmit) }>
               <Raw>
                 <Field>
                   <Label>Nom <Span color="red">*</Span></Label>
-                  <Input  type="text" placeholder="Votre nom" value={nom} onChange={(e) => setNom(e.target.value)}/>
+                  <Input  error={ errors.nom } type="text" placeholder="Votre nom" {...register("nom", { required: true })} />
+                  <ErrMsg>{ errors.nom?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                 </Field>
                 <Field>
                   <Label>Prénom <Span color="red">*</Span></Label>
-                  <Input type="text" placeholder="Votre prénom" value={prenom} onChange={(e) => setPrenom(e.target.value)}/>
+                  <Input type="text" error={ errors.nom } placeholder="Votre prénom" {...register("prenom", { required: true })} />
+                  <ErrMsg>{ errors.prenom?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                 </Field>
               </Raw>
               <Raw>
                 <Field>
                   <Label>E-mail <Span color="red">*</Span></Label>
-                  <Input  type="text" placeholder="Votre adresse e-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <Input error={ errors.nom } type="text" placeholder="Votre adresse e-mail"  {...register("email", {
+                     required: true, 
+                     pattern: {
+                       value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                       message: "email Inccorect"
+                       }})} />
+                  <ErrMsg>{ errors.email?.type === 'required' && "Ce champ est obligatoire." || errors.email?.message }</ErrMsg>
                 </Field> 
                 <Field>
                   <Label>Téléphone </Label>
-                  <Input type="text" placeholder="Votre telephone" value={telephone} onChange={(e) => setTelephone(e.target.value)} />
+                  <Input error={ errors.nom } type="text" placeholder="Votre telephone"  {...register("tele")} />
                 </Field>
               </Raw>
               <Field width="92%">
                   <Label>Sujet <Span color="red">*</Span></Label>
-                  <Input type="text" placeholder="Sujet de votre demande" value={sujet} onChange={(e) => setSujet(e.target.value)} />
+                  <Input error={ errors.nom } type="text" placeholder="Sujet de votre demande"  {...register("sujet", { required: true })} />
+                  <ErrMsg>{ errors.sujet?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
               </Field>
               <Field width="92%">
                   <Label>Message <Span color="red">*</Span></Label>
-                  <Textarea type="text" placeholder="Votre message" rows="5" value={message} onChange={(e) => setMessage(e.target.value)} />
+                  <Textarea error={ errors.nom } type="text" placeholder="Votre message" rows="5"  {...register("message", { required: true })} />
+                  <ErrMsg>{ errors.message?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
               </Field>
-              <Submit type="submit" value="envoyer le message" onClick={handleSubmit}/>
+              <Submit type="submit" value="envoyer le message" />
             </Form>
           </FormWrapper>
           <ContactInfoBox>
