@@ -102,6 +102,7 @@ export const ErrMsg = styled.span`
     color: #dd2947;
     width: 220px;
     font-size: 12px;
+    margin-bottom: 10px;
 `
 
 export const Span = styled.span`

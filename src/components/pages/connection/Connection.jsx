@@ -5,7 +5,7 @@ import Signup from './signup/Signup'
 
 import { useEffect, useState } from "react";
 
-const Connection = ({loggin, setLoggin}) => {
+const Connection = () => {
 
   useEffect(() => {
     document.title = "Connexion / Inscription - Casawe"
