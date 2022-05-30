@@ -1,10 +1,13 @@
 import { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
+import { useUser } from '../../../models/user'
 
 const Deconnexion = () => {
     
+  const store = useUser();
+
     useEffect(() =>{
-        sessionStorage.removeItem("token")
+        store.logout()
     }, [])
 
   return (

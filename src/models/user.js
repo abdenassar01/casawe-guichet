@@ -1,10 +1,20 @@
 import { types } from 'mobx-state-tree';
 
-import axios from 'axios';
 import { get } from 'mobx';
+import instance from '../axios/axios';
+
+const _loginAsync = async (userData) => {
+    const result = await instance.post("/users/login", userData);
+   return result; 
+}
+
 
 const saveToken = (token) => {
     sessionStorage.setItem("token", token);
+}
+
+const removeToken = () => {
+    sessionStorage.removeItem("token");
 }
 
 const User = types.model("user" ,{
@@ -16,7 +26,8 @@ const User = types.model("user" ,{
     paye: types.optional(types.string, ""),
     ville: types.optional(types.string, ""),
     avatar: types.optional(types.string, ""),
-    adresse: types.optional(types.string, "")   
+    adresse: types.optional(types.string, "") ,
+    token: types.optional(types.string, "")
 }).actions(self => ({
     // updateUser(newUser){
     //     self.name = newUser.name,
@@ -42,15 +53,26 @@ const User = types.model("user" ,{
     addAvatar(avatarUrl){
         self.avatar = avatarUrl
     },
-
-    login(token, user){
-        saveToken(token);
-        self.setUser(user);
+    setUserToken(newToken){
+        self.token = newToken
+    },
+    removeUserToken(){
+        self.token = ""
+    },
+    logout(){
+        removeToken();
+        self.removeUserToken()
+    },
+    async userLogin(userData){
+        const result = await _loginAsync(userData);
+        saveToken(result.data.token);
+        self.setUser(result.data.user);
+        self.setUserToken(result.data.token)
     }
 
 })).views(self => ({
     get isLogin(){
-       return self.email && self.password
+       return !(self.token === "") 
     }
 }))
 
@@ -66,7 +88,8 @@ export const useUser = () => {
             paye: "",
             ville: "",
             avatar: "",
-            adresse: ""
+            adresse: "",
+            token: sessionStorage.getItem("token") ? sessionStorage.getItem("token") : ""
         })
     }
     return _user

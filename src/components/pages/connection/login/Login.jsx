@@ -11,32 +11,25 @@ import { observer } from "mobx-react-lite";
 import { useUser } from "../../../../models/user"
 import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
-import  instance  from '../../../../axios/axios';
 
 
 const Login = observer(() => {
   
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [ login, setLogin ] = useState(false)
-  const [ isDisabled, setDisabled ] = useState(true)
   const [ msg, setMsg] = useState("")
 
   const store = useUser()
 
-  const onSubmit = (data) => {
-    instance.post("/users/login", {
+  const onSubmit = async (data) => {
+    const userData = {
       email: data.email_login, 
       password: data.password_login, 
       source: "casawe Sport"
-    })
-    .then(result => {
-      store.login(result.data.token, result.data.user) 
-      setLogin(true)
-    })
-    .then(error => {
-      setMsg(error)
-      setDisabled(false)
-    })
+    }
+
+    await store.userLogin(userData)
+    setLogin(store.login)
   } 
 
   useEffect(() => {
@@ -51,7 +44,7 @@ const Login = observer(() => {
 
   return (
     <FormLoginWrapper>
-      <ErreurBox disabled={isDisabled} msg={msg}/>
+      <ErreurBox disabled={false} resetMsg={() => setMsg(undefined)} msg={msg}/>
       <Tab>
         <hr />
         <Heading>connexion</Heading>
