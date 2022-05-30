@@ -1,18 +1,7 @@
 import { types } from 'mobx-state-tree';
 
 import axios from 'axios';
-
-const _postUserAsync = async (userUsername, userPassword) => 
-    axios.post("https://api.guichet.com/users/login", {
-        email: userUsername,
-        password: userPassword
-    })
-    .then(response => {
-        // console.log(response.data)
-        return response.data ;
-    })
-    .catch(error => error )
-
+import { get } from 'mobx';
 
 const saveToken = (token) => {
     sessionStorage.setItem("token", token);
@@ -53,10 +42,15 @@ const User = types.model("user" ,{
     addAvatar(avatarUrl){
         self.avatar = avatarUrl
     },
-    async login(username, password){
-        const data = await _postUserAsync(username, password);
-        saveToken(data.token);
-        self.setUser(data.user);
+
+    login(token, user){
+        saveToken(token);
+        self.setUser(user);
+    }
+
+})).views(self => ({
+    get isLogin(){
+       return self.email && self.password
     }
 }))
 

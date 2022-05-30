@@ -74,9 +74,9 @@ export const Label = styled.label`
 
 export const Input = styled.input`
     padding: 10px;
-    border: 1px solid ${props => props.error ? "#f8425b" : "#ededed" };
     outline: none;
     font-size: 14px;
+    border: 1px solid ${props => props.error ? "#f8425b" : "#ededed" };
 
     &:focus{
         border: 1px solid ${props => props.error ? "#f8425b" : "#66afe9" };

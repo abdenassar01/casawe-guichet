@@ -86,22 +86,22 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-    margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #ededed;
     outline: none;
     font-size: 14px;
     padding-right: 20px;
+    border: 1px solid ${props => props.error ? "#f8425b" : "#ededed" };
 
     &:focus{
-        border: 1px solid #66afe9;
-        box-shadow: 1px 1px 5px #66afe9;
+        border: 1px solid ${props => props.error ? "#f8425b" : "#66afe9" };
+        box-shadow: 1px 1px 5px ${props => props.error ? "#f8425b" : "#66afe9" };
     }
+`
 
-    &:valid{
-        border: 1px solid #3c763d;
-        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-    }
+export const ErrMsg = styled.span`
+    color: #dd2947;
+    margin-bottom: 20px;
+    font-size: 12px;
 `
 
 export const Span = styled.span`
