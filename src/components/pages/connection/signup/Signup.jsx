@@ -1,45 +1,54 @@
 import { FormSignupWrapper, Tab, Heading, Form,
-  Field, Label, Raw, Input, Span, Submit, SubmitBox, P
+  Field, Label, Raw, Input, Span, Submit, SubmitBox, 
+  P, ErrMsg
  } from '../SubComponents';
+import ErreurBox from '../ErreurBox'
 
 import { RouteLink } from '../../../routes/RoutesLinks'
-import axios from 'axios';
-import { useState } from 'react'
+import { useForm } from "react-hook-form";
+import { useState, useEffect } from 'react'
+import instance from '../../../../axios/axios';
+import { useUser } from '../../../../models/user'; 
 
 const Signup = () => {
 
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const [ login, setLogin ] = useState(false);
+  const [ isDisabled, setDisabled ] = useState(true)
+  const [ msg, setMsg] = useState("")
 
-  const [ email, setEmail ] = useState("")
-  const [ password, setPassword ] = useState("")
-  const [ passwordConfirm, setPasswordConfirm ] = useState("")
-  const [ prenom, setPrenom ] = useState("")
-  const [ nom, setNom ] = useState("")
-  const [ telephone, setTelephone ] = useState("")
+  const store = useUser();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+  }, [login])
 
-    if(password !== passwordConfirm){
-      alert("Les champs password confirmation et Mot de passe doivent être identiques.")   
-    }else{
+  const onSubmit = (data) => {
 
-     
-      const registerData = {
-        email: email,
-        first_name: nom,
-        last_name: prenom,
-        password: password,
-        phone: telephone,
-        source: "casawe-guichet"
-      }
-      axios.post("https://api.preprod.guichet.com/users/register", registerData)
-        .then(result => alert(result.data.message))
-        .catch(err => alert(err.error))
-      }
+     instance.post("/users/register", {
+        email :  data.email_signup,
+        first_name : data.nom_signup,
+        last_name : data.prenom_signup,
+        password : data.password_signup,
+        phone : data.tel_signup,
+        source : "guichet"
+    })
+    .then(result => {
+      setMsg(result.data.message);
+      store.login(result.data.token, result.data.user) 
+      setLogin(true)
+    })
+    .catch(err => {
+      console.log(err.response.data.error)
+      setMsg(err.response.data.error)
+      setDisabled(false)
+    })    
   }
+
+  // desplay the error message
 
   return (
     <FormSignupWrapper>
+      <ErreurBox disabled={isDisabled} msg={msg}/>
       <Tab>
         <hr />
         <Heading>Nouveau copmte?</Heading>
@@ -53,79 +62,93 @@ const Signup = () => {
           </RouteLink>
         </Span> 
       </P>
-      <Form>
+      <Form onSubmit={ handleSubmit(onSubmit) }>
           <Raw>
             <Field>
-              <Label htmlFor="">Prénom <Span color="#e02222">*</Span></Label>
+              <Label htmlFor="prenom_signup">Prénom <Span color="#e02222">*</Span></Label>
               <Input 
-                id="prenom" value={prenom} 
-                required
-                type="text" name="prenom" 
+                id="prenom_signup" 
+                error={ errors.prenom_signup }
+                type="text" 
+                {...register("prenom_signup",{ required: true })} 
                 placeholder="Votre Prénom"
-                onChange={(e) => setPrenom(e.target.value) }
               />
+              <ErrMsg>{ errors.prenom_signup?.type === 'required' && "Ce champ est obligatoire."  }</ErrMsg>
+
             </Field>
             <Field>
-              <Label htmlFor="">Nom <Span color="#e02222">*</Span></Label>
+              <Label htmlFor="nom_signup">Nom <Span color="#e02222">*</Span></Label>
               <Input 
-                id="nom" value={nom} 
-                required
-                type="text" name="nom" 
+                error={ errors.nom_signup }
+                id="nom_signup"
+                {...register("nom_signup",{ required: true })} 
+                type="text" 
                 placeholder="Votre Nom"
-                onChange={(e) => setNom(e.target.value) }
               />
+              <ErrMsg>{ errors.nom_signup?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
             </Field>
           </Raw>
           <Raw>
             <Field>
-              <Label htmlFor="">E-mail <Span color="#e02222">*</Span></Label>
-              <Input 
-                id="email" value={email} 
-                required
-                type="email" name="email" 
+              <Label htmlFor="email_signup">E-mail <Span color="#e02222">*</Span></Label>
+              <Input      
+                id="email_signup"
+                {...register("email_signup",{ required: true, 
+                  pattern: {
+                    value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                    message: "email Inccorect"
+                    }})} 
+                type="text"
+                error={ errors.email_signup }
                 placeholder="Votre address e-mail"
-                onChange={(e) => setEmail(e.target.value) }
-              />
+              />            
+              <ErrMsg>{ errors.email_signup?.type === 'required' && "Ce champ est obligatoire." || errors.email_signup?.message }</ErrMsg>
             </Field>
             <Field>
-              <Label htmlFor="">Téléphone <Span color="#e02222">*</Span></Label>
+              <Label htmlFor="tel_signup">Téléphone <Span color="#e02222">*</Span></Label>
               <Input 
-                id="tel" value={telephone} 
-                required
-                type="text" name="tel" 
+                error={ errors.tel_signup }
+                id="tel_signup"
+                {...register("tel_signup",{ required: true })} 
+                type="text"  
                 placeholder="Téléphone"
-                onChange={(e) => setTelephone(e.target.value) }
-              />
+              />                            
+              <ErrMsg>{ errors.tel_signup?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
             </Field>
           </Raw>
           <Raw>
             <Field>
-              <Label htmlFor="">Mot de passe <Span color="#e02222">*</Span></Label>
+              <Label htmlFor="password_signup">Mot de passe <Span color="#e02222">*</Span></Label>
               <Input 
-                id="password" value={password} 
-                required
-                type="password" name="password" 
+                error={ errors.password_signup }
+                id="password_signup"
+                {...register("password_signup",{ required: true, minLength : {
+                    value: 8,
+                    message: "mot de pass doit etre supperieur a 8 caracteres"
+                  } 
+                })} 
+                type="password" 
                 placeholder="Votre address e-mail"
-                onChange={(e) => setPassword(e.target.value) }
               />
+              <ErrMsg>{ errors.password_signup?.type === 'required' && "Ce champ est obligatoire." || errors.password_signup?.message }</ErrMsg>
             </Field>
             <Field>
-              <Label htmlFor="password_conf">Confirmation de mot de passe <Span color="#e02222">*</Span></Label>
+              <Label htmlFor="password_conf_signup">Confirmation de mot de passe <Span color="#e02222">*</Span></Label>
               <Input 
-                required
-                id="password_conf" value={passwordConfirm} 
-                type="password" name="password_conf" 
+                error={ errors.password_conf_signup }
+                id="password_conf_signup" 
+                {...register("password_conf_signup",{ required: true })} 
+                type="password"
                 placeholder="Confirmation de Mot de passe"
-                onChange={(e) => setPasswordConfirm(e.target.value) }
               />
+              <ErrMsg>{ errors.password_conf_signup?.type === 'required' && "Ce champ est obligatoire." || watch("password_conf_signup") !== watch("password_signup") && "Les champs password confirmation et Mot de passe doivent être identiques" }</ErrMsg>
             </Field>
           </Raw>
-          <SubmitBox>
-            <Submit type="submit" value="INSCRIPTION" onClick={handleSubmit}/>
+          <SubmitBox> 
+            <Submit type="submit" value="INSCRIPTION" />
           </SubmitBox>
         </Form>
     </FormSignupWrapper>
-  )
-}
+  )}
 
 export default Signup

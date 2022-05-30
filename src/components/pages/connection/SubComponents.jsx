@@ -100,7 +100,7 @@ export const Input = styled.input`
 
 export const ErrMsg = styled.span`
     color: #dd2947;
-    margin-bottom: 20px;
+    width: 220px;
     font-size: 12px;
 `
 

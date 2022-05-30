@@ -3,6 +3,7 @@ import { FormLoginWrapper, Tab, Form, Heading,
   CheckBox, Submit, SubmitBox, StyledRouteLink,
   ErrMsg
 } from '../SubComponents';
+import ErreurBox from '../ErreurBox'
 
 import { Navigate } from "react-router-dom";
 
@@ -13,17 +14,20 @@ import { useForm } from "react-hook-form";
 import  instance  from '../../../../axios/axios';
 
 
-const Login = observer(({  setDisabled, setMsg }) => {
+const Login = observer(() => {
   
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [ login, setLogin ] = useState(false)
+  const [ isDisabled, setDisabled ] = useState(true)
+  const [ msg, setMsg] = useState("")
+
   const store = useUser()
 
   const onSubmit = (data) => {
     instance.post("/users/login", {
       email: data.email_login, 
       password: data.password_login, 
-      source: "casawe guichet"
+      source: "casawe Sport"
     })
     .then(result => {
       store.login(result.data.token, result.data.user) 
@@ -47,6 +51,7 @@ const Login = observer(({  setDisabled, setMsg }) => {
 
   return (
     <FormLoginWrapper>
+      <ErreurBox disabled={isDisabled} msg={msg}/>
       <Tab>
         <hr />
         <Heading>connexion</Heading>
