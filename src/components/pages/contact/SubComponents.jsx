@@ -4,6 +4,7 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     padding-top: 30px;
 `
@@ -73,26 +74,26 @@ export const Label = styled.label`
 
 export const Input = styled.input`
     padding: 10px;
-    border: 1px solid #ededed;
+    border: 1px solid ${props => props.error ? "#f8425b" : "#ededed" };
     outline: none;
     font-size: 14px;
 
     &:focus{
-        border: 1px solid #66afe9;
-        box-shadow: 1px 1px 5px #66afe9;
+        border: 1px solid ${props => props.error ? "#f8425b" : "#66afe9" };
+        box-shadow: 1px 1px 5px ${props => props.error ? "#f8425b" : "#66afe9" };
     }
 
 `
 
 export const Textarea = styled.textarea`
     padding: 10px;
-    border: 1px solid #ededed;
+    border: 1px solid ${props => props.error ? "#f8425b" : "#ededed" };
     outline: none;
     font-size: 14px;
 
     &:focus{
-        border: 1px solid #66afe9;
-        box-shadow: 1px 1px 5px #66afe9;
+        border: 1px solid ${props => props.error ? "#f8425b" : "#66afe9" };
+        box-shadow: 1px 1px 5px ${props => props.error ? "#f8425b" : "#66afe9" };
     }
 `
 

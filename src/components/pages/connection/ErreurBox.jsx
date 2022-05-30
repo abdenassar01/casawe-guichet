@@ -3,16 +3,16 @@ import { ImCross } from 'react-icons/im'
 
 import { useState } from 'react';
 
-const ErreurBox = (props) => {
+const ErreurBox = ({ disabled, state, msg }) => {
 
-  const [ disabled, setDisabled ] = useState(true)
+  const [ isdisabled, setDisabled ] = useState(disabled)
 
   return (
-    <ErreurBoxMsg disabled={disabled}>
+    <ErreurBoxMsg disabled={ isdisabled } state={ state } >
       { 
-        props.msg ? props.msg : "Ces informations d'identification ne correspondent à aucun utilisateur."
+        msg ? msg : "Ces informations d'identification ne correspondent à aucun utilisateur."
       }
-      <ImCross onClick={ () => setDisabled(!disabled)} />
+      <ImCross onClick={ () => setDisabled(true)} />
     </ErreurBoxMsg>
   )
 }

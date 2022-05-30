@@ -164,8 +164,9 @@ export const StyledRouteLink = styled(RouteLink)`
 
 export const ErreurBoxMsg = styled.div`
     padding: 10px;
+    margin-bottom: 20px;
     width: 80%;
-    background-color: #F4556D;
+    background-color: ${ props => props.state === "succes" ? "#00a537" : "#F4556D"  };
     color: #ffffff;
     display: ${props => props.disabled ? 'none' : 'flex'} ;
     justify-content: space-between;
