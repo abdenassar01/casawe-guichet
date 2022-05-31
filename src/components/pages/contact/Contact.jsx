@@ -2,26 +2,29 @@ import { Container, CentredBox, FormWrapper, Tab, Heading,
   Raw, Field, Label, Input, P, Form, Span, Textarea, ErrMsg,
   Submit, ContactInfoBox 
 } from "./SubComponents"
-import ErreurBox from '../connection/ErreurBox'
+import Alert from "../../alert/Alert"
 
-import { useForm } from "react-hook-form";
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
-import { useEffect, useState } from "react";
+import { useAlert } from "../../../models/message";
 
-import axios from "axios";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+
+import instance from "../../../axios/axios"
 
 const Contact = () => {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
-  const [ error, setError ] = useState("");
-  const [ state, setState ] = useState("");
+
+  const alert = useAlert();
 
   useEffect(() => {
     document.title = "Contacter-nous"
-  },[error])
+    alert.setMessage("");
+  },[])
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
 
     const contactMessage =  {
       email: data.email,
@@ -32,24 +35,18 @@ const Contact = () => {
       subject : data.sujet
     }
 
-    axios.post("https://api.preprod.guichet.com/contacts", contactMessage)
-    .then(result => {
-      setError(result.data.message)
-      setState("succes")
-      reset()
-    })
-    .catch(err => {
-      setError(err)
-      setState("error")
-    })
+    const response = await instance.post("/contacts", contactMessage);
+  
+    alert.setMessage(response.data.message)
+    alert.setStatus(response.data.success)
   }
 
   return (
     
     <Container>
-        <ErreurBox msg={ error } disabled={ error ? false : true } state={ state } />
         <CentredBox>
           <FormWrapper>
+            <Alert />
             <Tab>
               <hr />
               <Heading>CONTACTEZ-NOUS</Heading>
