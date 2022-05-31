@@ -3,24 +3,23 @@ import { FormLoginWrapper, Tab, Form, Heading,
   CheckBox, Submit, SubmitBox, StyledRouteLink,
   ErrMsg
 } from '../SubComponents';
-import ErreurBox from '../ErreurBox'
+import Alert from '../../../alert/Alert';
+
+import { useUser } from "../../../../models/user"
+import { useAlert } from '../../../../models/message';
 
 import { Navigate } from "react-router-dom";
-
 import { observer } from "mobx-react-lite";
-import { useUser } from "../../../../models/user"
-import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
-
 
 const Login = observer(() => {
   
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [ login, setLogin ] = useState(false)
-  const [ msg, setMsg] = useState("")
 
-  const store = useUser()
+  const store = useUser();
+  const alert = useAlert();
 
+  let response;
   const onSubmit = async (data) => {
     const userData = {
       email: data.email_login, 
@@ -28,23 +27,20 @@ const Login = observer(() => {
       source: "casawe Sport"
     }
 
-    await store.userLogin(userData)
+    response = await store.userLogin(userData)
     setLogin(store.login)
+    console.log(response.error)
+    alert.setMessage(response.error)
+    alert.setStatus(response.success)
   } 
 
-  useEffect(() => {
-    if(sessionStorage.getItem("token")){
-      setLogin(true)
-    }
-  },[login])
-
-  if(login){
+  if(store.isLogin){
     return <Navigate to="/"/>
   }
 
   return (
     <FormLoginWrapper>
-      <ErreurBox disabled={false} resetMsg={() => setMsg(undefined)} msg={msg}/>
+      <Alert />
       <Tab>
         <hr />
         <Heading>connexion</Heading>

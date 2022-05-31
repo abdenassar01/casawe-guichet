@@ -4,7 +4,7 @@ import { FaPhoneAlt, FaShoppingCart } from 'react-icons/fa';
 import { RouteLink } from '../routes/RoutesLinks';
 import Profile from './profile/Profile';
 import { useUser } from '../../models/user'
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 
 const Header = observer(() => {

@@ -15,8 +15,11 @@ import Profile from "./components/pages/profile/Profile";
 import Commandes from "./components/pages/commandes/Commandes";
 import Deconnexion from "./components/pages/deconnexion/Deconnexion";
 import Error404 from "./components/pages/error/Error404";
+import { useUser } from "./models/user";
 
 function App() { 
+
+  const user = useUser();
 
   return (
     <>
@@ -30,7 +33,7 @@ function App() {
         <Route 
           path="/panier" 
           element={ 
-            (sessionStorage.getItem("token"))  ? 
+            (user.isLogin)  ? 
               <Panier /> 
                   : 
               <Navigate to="/connexion" replace />
@@ -39,7 +42,7 @@ function App() {
         <Route 
           path="/mes-commandes" 
           element={ 
-            (sessionStorage.getItem("token"))  ? 
+            (user.isLogin)  ? 
               <Commandes /> 
                   : 
               <Navigate to="/connexion" replace />
@@ -48,7 +51,7 @@ function App() {
         <Route 
           path="/profile" 
           element={
-            (sessionStorage.getItem("token")) ? 
+            (user.isLogin) ? 
               <Profile /> 
                 : 
               <Navigate to="/connexion" replace />

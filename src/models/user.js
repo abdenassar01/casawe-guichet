@@ -4,8 +4,12 @@ import { get } from 'mobx';
 import instance from '../axios/axios';
 
 const _loginAsync = async (userData) => {
-    const result = await instance.post("/users/login", userData);
-   return result; 
+    try{
+        const result = await instance.post("/users/login", userData);
+        return result; 
+    }catch(ex){
+        return ex;
+    }  
 }
 
 
@@ -65,9 +69,13 @@ const User = types.model("user" ,{
     },
     async userLogin(userData){
         const result = await _loginAsync(userData);
-        saveToken(result.data.token);
-        self.setUser(result.data.user);
-        self.setUserToken(result.data.token)
+        if(result.status === 200){
+            saveToken(result.data.token);
+            self.setUser(result.data.user);
+            self.setUserToken(result.data.token)
+        }else{
+            return result.response.data
+        }  
     }
 
 })).views(self => ({
@@ -75,6 +83,7 @@ const User = types.model("user" ,{
        return !(self.token === "") 
     }
 }))
+
 
 let _user;
 export const useUser = () => {
@@ -89,7 +98,7 @@ export const useUser = () => {
             ville: "",
             avatar: "",
             adresse: "",
-            token: sessionStorage.getItem("token") ? sessionStorage.getItem("token") : ""
+            token: ""
         })
     }
     return _user

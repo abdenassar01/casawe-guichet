@@ -1,22 +1,26 @@
 import { ErreurBoxMsg } from './SubComponents'
 import { ImCross } from 'react-icons/im'
 
-import { useState } from 'react';
+import { useMessage } from '../../../models/user';
 
-const ErreurBox = ({resetMsg, state, msg }) => {
+const ErreurBox = ({ response }) => {
 
+  function reset(){
+    // response.error = ""
+  }
 
-  if(!msg){
+  if(!"response.error"){
     return null
   } 
 
   return (
-    <ErreurBoxMsg state={ state } >
-      { 
-        msg 
-      }
-      <ImCross onClick={ resetMsg } />
-    </ErreurBoxMsg>
+    // <ErreurBoxMsg state={ response.state } >
+    //   { 
+    //     response.error
+    //   }
+    //   <ImCross onClick={ reset } />
+    // </ErreurBoxMsg>
+    <b>hello</b>
   )
 }
 
