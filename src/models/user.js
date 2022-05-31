@@ -12,6 +12,14 @@ const _loginAsync = async (userData) => {
     }  
 }
 
+const _registerAsync = async (user) => {
+    try{
+        const result = await instance.post("/users/register", user);
+        return result;
+    }catch(ex){
+        return ex;
+    }
+}
 
 const saveToken = (token) => {
     sessionStorage.setItem("token", token);
@@ -76,6 +84,16 @@ const User = types.model("user" ,{
         }else{
             return result.response.data
         }  
+    },
+    async register(user){
+        const result = await _registerAsync(user);
+        if(result.status === 200){
+            saveToken(result.data.token);
+            self.setUser(result.data.user);
+            self.setUserToken(result.data.token)
+        }else{
+            return result.response.data
+        } 
     }
 
 })).views(self => ({

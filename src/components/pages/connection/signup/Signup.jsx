@@ -2,53 +2,53 @@ import { FormSignupWrapper, Tab, Heading, Form,
   Field, Label, Raw, Input, Span, Submit, SubmitBox, 
   P, ErrMsg
  } from '../SubComponents';
-import ErreurBox from '../ErreurBox'
+import Alert from '../../../alert/Alert';
 
+import { useUser } from '../../../../models/user'; 
+import { useAlert } from '../../../../models/message';
+import { observer } from 'mobx-react-lite';
+
+import { Navigate } from 'react-router-dom';
 import { RouteLink } from '../../../routes/RoutesLinks'
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from 'react'
-import instance from '../../../../axios/axios';
-import { useUser } from '../../../../models/user'; 
-import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react'
 
-const Signup = () => {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const [ login, setLogin ] = useState(false);
-  const [ isDisabled, setDisabled ] = useState(true)
-  const [ msg, setMsg] = useState("")
+const Signup = observer(() => {
 
+  const alert = useAlert();
   const store = useUser();
 
-  const onSubmit = (data) => {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-     instance.post("/users/register", {
-        email :  data.email_signup,
-        first_name : data.nom_signup,
-        last_name : data.prenom_signup,
-        password : data.password_signup,
-        phone : data.tel_signup,
-        source : "guichet"
-    })
-    .then(result => {
-      setMsg(result.data.message);
-      store.login(result.data.token, result.data.user) 
-      setLogin(true)
-    })
-    .catch(err => {
-      setMsg(err.response.data.error)
-      setDisabled(false)
-    })    
+  const onSubmit = async (data) => {
+
+    const user = {
+      email :  data.email_signup,
+      first_name : data.nom_signup,
+      last_name : data.prenom_signup,
+      password : data.password_signup,
+      phone : data.tel_signup,
+      source : "guichet"
+    }
+
+    const response = await store.register(user)
+    console.log(response)
+    alert.setMessage(response.error)
+    alert.setStatus(response.success) 
   }
 
-  // desplay the error messages
-  if(login){
+  useEffect(() => {
+    alert.setMessage("")
+  }, [])
+
+  if(store.isLogin){
     return <Navigate to="/"/>
   }
   else{
     return (
       <FormSignupWrapper>
-        <ErreurBox disabled={ isDisabled } msg={ msg }/>
+        <Alert />
         <Tab>
           <hr />
           <Heading>Nouveau copmte?</Heading>
@@ -151,6 +151,6 @@ const Signup = () => {
       </FormSignupWrapper>
     )
   }
- }
+ })
 
 export default Signup

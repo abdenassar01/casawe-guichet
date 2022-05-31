@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { get } from 'mobx';
+import { get } from "mobx";
 
 const Alert = types.model({
     message: types.string,
@@ -11,15 +11,12 @@ const Alert = types.model({
     setStatus(status){
         self.isSuccess = status
     },
-    ToggleSuccess(){
-        self.isSuccess = !self.isSuccess
-    },
     reset(e){
         self.message = "";
         self.isSuccess = false;
     }
 })).views(self => ({
-    get getMessage(){
+    getMessage(){
         return self.message;
     },
     get status(){
@@ -32,7 +29,7 @@ let _alert;
 export const useAlert = () => {
     if(!_alert){
         _alert = Alert.create({
-            message: "Hey",
+            message: "",
             isSuccess: false
         })
     }

@@ -8,6 +8,7 @@ import Alert from '../../../alert/Alert';
 import { useUser } from "../../../../models/user"
 import { useAlert } from '../../../../models/message';
 
+import { useEffect } from 'react';
 import { Navigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
@@ -19,7 +20,6 @@ const Login = observer(() => {
   const store = useUser();
   const alert = useAlert();
 
-  let response;
   const onSubmit = async (data) => {
     const userData = {
       email: data.email_login, 
@@ -27,12 +27,14 @@ const Login = observer(() => {
       source: "casawe Sport"
     }
 
-    response = await store.userLogin(userData)
-    setLogin(store.login)
-    console.log(response.error)
+    const response = await store.userLogin(userData)
     alert.setMessage(response.error)
     alert.setStatus(response.success)
   } 
+
+  useEffect(() => {
+    alert.setMessage("")
+  }, [])
 
   if(store.isLogin){
     return <Navigate to="/"/>
