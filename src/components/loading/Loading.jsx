@@ -4,7 +4,7 @@ import BeatLoader from "react-spinners/BeatLoader"
 const Loading = () => {
   return (
     <Wrapper>
-        <BeatLoader color={"#003C72"} loading={true} css={{}} size={50}/>
+        <BeatLoader color={"#003C72"} loading={true} size={50}/>
     </Wrapper>
   )
 }

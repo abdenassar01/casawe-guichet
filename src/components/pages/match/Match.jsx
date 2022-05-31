@@ -13,114 +13,102 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useEffect } from 'react';
 import { Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import Loading from "../../loading/Loading";
 
-const queryClient = new QueryClient()
 
 const Match = () => {
 
-  
   const matchId = useParams()
 
   useEffect(() => {
     document.title = "title"
   },[])
 
-
-  return (
-    <QueryClientProvider client={queryClient}>
-        <EventWrapper matchId={matchId}/>
-    </QueryClientProvider>
-  )
-}
-
-export default Match
-
-const EventWrapper = ({matchId}) => {
-
   const { isLoading, error, data } = useQuery('matchData', () =>
-    fetch(`https://api.preprod.guichet.com/events/${matchId.id}`)
-    .then(res =>
-        res.json()
-    )
+  fetch(`https://api.preprod.guichet.com/events/${matchId.id}`)
+  .then(res =>
+      res.json()
   )
+)
 
   if (isLoading) return <Loading />
 
   if (error) return <Navigate to="/error" replace/> 
 
-  return(
-    <Wrapper>
-          <Container>
-            <Left>
-              <Poster 
-                src={data.event.cover}
-                alt={data.event.title}
-                draggable="false" 
-              />
-              <Date>
-              <TiCalendarOutline size={30}/> <b>{data.event.expiredAt}</b>
-              </Date>
-              <Discription>
-                <TabPanel>
-                  <TabItem>
-                    <A href="#tab-description" aria-controls="home" role="tab" data-toggle="tab">
-                      Description 
-                    </A>
-                  </TabItem>
-                </TabPanel>
-                <Discription id="tab-description" >
-                    <p dangerouslySetInnerHTML={{ __html: data.event.description }}></p>
-                </Discription>
+return(
+  <Wrapper>
+        <Container>
+          <Left>
+            <Poster 
+              src={data.event.cover}
+              alt={data.event.title}
+              draggable="false" 
+            />
+            <Date>
+            <TiCalendarOutline size={30}/> <b>{data.event.expiredAt}</b>
+            </Date>
+            <Discription>
+              <TabPanel>
+                <TabItem>
+                  <A href="#tab-description" aria-controls="home" role="tab" data-toggle="tab">
+                    Description 
+                  </A>
+                </TabItem>
+              </TabPanel>
+              <Discription id="tab-description" >
+                  <p dangerouslySetInnerHTML={{ __html: data.event.description }}></p>
               </Discription>
-            </Left>
-            <Right>
-              <Purchase>
-                <BuyPanel>
-                  <H1>{data.event.title}</H1>
-                  <center>
-                    <Discription  dangerouslySetInnerHTML={{ __html: data.event.description }} />
-                  </center>
-                </BuyPanel>
-                <CheckList>
-                  { data.event.offers.map(offer => 
-                      <RadioInput>
-                        <Input type="radio" value={offer.id} name="offer" id={offer.id} disabled={ offer.status !== "enable" && !offer.soldOut }/>
-                        <Label htmlFor={offer.id}>
-                          <Category>
-                            { offer.soldOut && <AiOutlineClose /> }                            
-                            {offer.title}
-                          </Category>
-                          <Span>{offer.price}</Span>
-                        </Label>
-                     </RadioInput>
-                  ) }
-                  
-                  <Checkout>
-                    <CheckoutButton href="" >
-                        { !data.event.soldOut ? "Acheter Maintenant" : "guichet ferme" }
-                    </CheckoutButton>
-                  </Checkout>
-                  <EmptyDiv></EmptyDiv>
-                </CheckList>
-              </Purchase>
-              <InfosVendeur>
-                <WrapperBox>
-                  <Hr />
-                  <Title>INFOS VENDEUR</Title>
-                </WrapperBox>
-                <ImageLogo
-                src="https://guichet.imgix.net/providers/l72rhrgN4QVbMIDAjG6muv1mHRgCkUoOa8BJkihT.png?w=200&h=150&fit=clip&auto=format,compress&q=80" 
-                alt="" 
-                />
-                <TextInfoWrapper>
-                  <strong>CASAWI</strong>
-                  <P bold>Tel: <Span bold={false}>0522227745</Span></P>
-                </TextInfoWrapper>
-              </InfosVendeur>
-            </Right>
-          </Container>
-      </Wrapper>
-  )
+            </Discription>
+          </Left>
+          <Right>
+            <Purchase>
+              <BuyPanel>
+                <H1>{data.event.title}</H1>
+                <center>
+                  <Discription  dangerouslySetInnerHTML={{ __html: data.event.description }} />
+                </center>
+              </BuyPanel>
+              <CheckList>
+                { data.event.offers.map(offer => 
+                    <RadioInput>
+                      <Input type="radio" value={offer.id} name="offer" id={offer.id} disabled={ offer.status !== "enable" && !offer.soldOut }/>
+                      <Label htmlFor={offer.id}>
+                        <Category>
+                          { offer.soldOut && <AiOutlineClose /> }                            
+                          {offer.title}
+                        </Category>
+                        <Span>{offer.price}</Span>
+                      </Label>
+                   </RadioInput>
+                ) }
+                
+                <Checkout>
+                  <CheckoutButton href="" >
+                      { !data.event.soldOut ? "Acheter Maintenant" : "guichet ferme" }
+                  </CheckoutButton>
+                </Checkout>
+                <EmptyDiv></EmptyDiv>
+              </CheckList>
+            </Purchase>
+            <InfosVendeur>
+              <WrapperBox>
+                <Hr />
+                <Title>INFOS VENDEUR</Title>
+              </WrapperBox>
+              <ImageLogo
+              src="https://guichet.imgix.net/providers/l72rhrgN4QVbMIDAjG6muv1mHRgCkUoOa8BJkihT.png?w=200&h=150&fit=clip&auto=format,compress&q=80" 
+              alt="" 
+              />
+              <TextInfoWrapper>
+                <strong>CASAWI</strong>
+                <P bold>Tel: <Span bold={false}>0522227745</Span></P>
+              </TextInfoWrapper>
+            </InfosVendeur>
+          </Right>
+        </Container>
+    </Wrapper>
+)
 }
+
+export default Match
