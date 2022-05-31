@@ -1,33 +1,36 @@
 import { observer } from 'mobx-react-lite';
+import { useState } from 'react';
 import { ImCross } from 'react-icons/im'
 import styled from "styled-components"
-import { useAlert } from "../../models/message";
 
-const Alert = observer(() => {
+const Alert = ({ message, status, setMessage }) => {
 
-    const alert = useAlert();
 
-  if(alert.message === ""){
+  function reset(){
+    setMessage("")
+  }
+
+  if(message === ""){
       return null
   }
 
   return (
-    <AlertWrapper isSuccess={ alert.status } >
-        { alert.message }
-        {/* <ImCross onClick={ alert.reset() }/> */}
+    <AlertWrapper isSuccess={ status } >
+        { message }
+        <ImCross onClick={ reset }/>
     </AlertWrapper>
   )
-})
+}
 
 export default Alert
 
 const AlertWrapper = styled.div`
-    width: 95%;
-    padding: 10px;
-    display: flex;
-    margin-bottom: 10px;
-    color: white;
-    font-weight: bold;
-    justify-content: space-between;
-    background-color: ${props => props.isSuccess ? "#01b63d" : "#df0030" };
+  width: 95%;
+  padding: 10px;
+  display: flex;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: bold;
+  justify-content: space-between;
+  background-color: ${props => props.isSuccess ? "#01b63d" : "#df0030" };
 `

@@ -2,6 +2,7 @@ import { ProfileWrapper, ProfileContentWrapper, Tab,
     Heading, Form, Table, Raw, Column, Label, Input, Span,
     SelectColumn, Submit
 } from './SubComponents'
+
 import Loading from "../../loading/Loading"
 
 import { useEffect } from 'react'

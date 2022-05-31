@@ -5,20 +5,20 @@ import { FormSignupWrapper, Tab, Heading, Form,
 import Alert from '../../../alert/Alert';
 
 import { useUser } from '../../../../models/user'; 
-import { useAlert } from '../../../../models/message';
 import { observer } from 'mobx-react-lite';
 
 import { Navigate } from 'react-router-dom';
 import { RouteLink } from '../../../routes/RoutesLinks'
 import { useForm } from "react-hook-form";
-import { useEffect } from 'react'
-
+import { useState } from 'react'
 
 const Signup = observer(() => {
 
-  const alert = useAlert();
   const store = useUser();
 
+  const [ message, setMessage ] = useState("")
+  const [ status, setStatus ] = useState(false)
+  
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
@@ -33,14 +33,9 @@ const Signup = observer(() => {
     }
 
     const response = await store.register(user)
-    console.log(response)
-    alert.setMessage(response.error)
-    alert.setStatus(response.success) 
+    setMessage(response.error)
+    setStatus(response.success) 
   }
-
-  useEffect(() => {
-    alert.setMessage("")
-  }, [])
 
   if(store.isLogin){
     return <Navigate to="/"/>
@@ -48,7 +43,7 @@ const Signup = observer(() => {
   else{
     return (
       <FormSignupWrapper>
-        <Alert />
+        <Alert message={ message } status={status} setMessage={ setMessage }  />
         <Tab>
           <hr />
           <Heading>Nouveau copmte?</Heading>

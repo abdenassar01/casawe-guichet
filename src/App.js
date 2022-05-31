@@ -18,10 +18,17 @@ import Error404 from "./components/pages/error/Error404";
 
 import { useUser } from "./models/user";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
 const App = observer(() => { 
 
   const user = useUser();
+
+  useEffect(() => {
+    
+  },[])
+
+  //check seassion and store in state
 
   return (
     <>

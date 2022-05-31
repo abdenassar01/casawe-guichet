@@ -6,19 +6,20 @@ import { FormLoginWrapper, Tab, Form, Heading,
 import Alert from '../../../alert/Alert';
 
 import { useUser } from "../../../../models/user"
-import { useAlert } from '../../../../models/message';
 
-import { useEffect } from 'react';
 import { Navigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
+import { useState } from 'react';
 
 const Login = observer(() => {
-  
-  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const store = useUser();
-  const alert = useAlert();
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const [ alert, setAlert ] = useState("")
+  const [ status, setStatus ] = useState(false)
 
   const onSubmit = async (data) => {
     const userData = {
@@ -29,15 +30,10 @@ const Login = observer(() => {
 
     const response = await store.userLogin(userData)
     if(response){
-      alert.setMessage(response.error)
-      alert.setStatus(response.success)
+      setAlert(response.error)
+      setStatus(response.success)
     }
-
   } 
-
-  useEffect(() => {
-    alert.setMessage("")
-  }, [])
 
   if(store.isLogin){
     return <Navigate to="/"/>
@@ -45,7 +41,7 @@ const Login = observer(() => {
 
   return (
     <FormLoginWrapper>
-      <Alert />
+      <Alert message={ alert } status={ status } setMessage={ setAlert } />
       <Tab>
         <hr />
         <Heading>connexion</Heading>

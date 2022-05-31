@@ -6,10 +6,8 @@ import Alert from "../../alert/Alert"
 
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
-import { useAlert } from "../../../models/message";
-
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import instance from "../../../axios/axios"
 
@@ -17,11 +15,11 @@ const Contact = () => {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  const alert = useAlert();
+  const [ message, setMessage ] = useState("")
+  const [ status, setStatus ] = useState(false)
 
   useEffect(() => {
     document.title = "Contacter-nous"
-    alert.setMessage("");
   },[])
 
   const onSubmit = async (data) => {
@@ -37,8 +35,8 @@ const Contact = () => {
 
     const response = await instance.post("/contacts", contactMessage);
   
-    alert.setMessage(response.data.message)
-    alert.setStatus(response.data.success)
+    setMessage(response.data.message)
+    setStatus(response.data.success)
   }
 
   return (
@@ -46,7 +44,7 @@ const Contact = () => {
     <Container>
         <CentredBox>
           <FormWrapper>
-            <Alert />
+            <Alert message={ message } status={ status } setMessage={ setMessage } />
             <Tab>
               <hr />
               <Heading>CONTACTEZ-NOUS</Heading>
