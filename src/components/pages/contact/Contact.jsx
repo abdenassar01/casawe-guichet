@@ -37,6 +37,7 @@ const Contact = () => {
   
     setMessage(response.data.message)
     setStatus(response.data.success)
+    reset()
   }
 
   return (
