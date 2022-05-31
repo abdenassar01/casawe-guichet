@@ -19,7 +19,7 @@ const Panier = () => {
             </Tab>
             <PanieBox>
                 Votre panier est vide. &nbsp;
-                <StyledRouteLink to="/mes-commandes" color="#0066b2">
+                <StyledRouteLink to="/" color="#0066b2">
                     Continuer mes achats
                 </StyledRouteLink>
                 {/* Todo */} 
