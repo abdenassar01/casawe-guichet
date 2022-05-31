@@ -28,8 +28,11 @@ const Login = observer(() => {
     }
 
     const response = await store.userLogin(userData)
-    alert.setMessage(response.error)
-    alert.setStatus(response.success)
+    if(response){
+      alert.setMessage(response.error)
+      alert.setStatus(response.success)
+    }
+
   } 
 
   useEffect(() => {

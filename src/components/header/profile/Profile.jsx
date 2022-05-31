@@ -6,8 +6,9 @@ import { ProfileBox, DropDownContainer, DropDownHeader,
 import { RiArrowDropDownFill } from 'react-icons/ri';
 
 import { useState } from "react";
+import { observer } from 'mobx-react-lite';
 
-const Profile = () => {
+const Profile = observer(() => {
 
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
@@ -45,6 +46,6 @@ const Profile = () => {
       </DropDownContainer>
     </ProfileBox>
   )
-}
+})
 
 export default Profile
