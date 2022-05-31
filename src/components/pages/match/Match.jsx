@@ -13,9 +13,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useEffect } from 'react';
 import { Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query'
 import Loading from "../../loading/Loading";
-
+import { useQuery } from "react-query";
 
 const Match = () => {
 
@@ -26,11 +25,11 @@ const Match = () => {
   },[])
 
   const { isLoading, error, data } = useQuery('matchData', () =>
-  fetch(`https://api.preprod.guichet.com/events/${matchId.id}`)
-  .then(res =>
-      res.json()
+    fetch(`https://api.preprod.guichet.com/events/${matchId.id}`)
+    .then(res =>
+        res.json()
+    )
   )
-)
 
   if (isLoading) return <Loading />
 
@@ -71,7 +70,7 @@ return(
               </BuyPanel>
               <CheckList>
                 { data.event.offers.map(offer => 
-                    <RadioInput>
+                    <RadioInput key={offer.id}>
                       <Input type="radio" value={offer.id} name="offer" id={offer.id} disabled={ offer.status !== "enable" && !offer.soldOut }/>
                       <Label htmlFor={offer.id}>
                         <Category>

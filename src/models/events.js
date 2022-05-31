@@ -1,13 +1,5 @@
 import { types } from 'mobx-state-tree';
-// import instance from '../axios/axios';
-// import requests from '../axios/requests';
 
-const _fetchEvents = async () => {
-    const response = await fetch("https://api.preprod.guichet.com/events?category_id=6");
-    const data = await response.json();
-    const events = data.events;
-    return events;
-}
 
 const _fetchEventById = async (id) => {
     const response = await fetch(`https://api.preprod.guichet.com/events/${id}`);
@@ -48,18 +40,18 @@ const EventList = types.model({
     setEvents(newEvents){
         self.events = newEvents;
     },
-    async fetchEvents(){
-        const data = await _fetchEvents();
-        const newEvents = data.map(event => ({
-            id: event.id,
-            status: event.status,
-            title: event.title,
-            description: event.description,
-            price: event.price,
-            soldOut: event.soldOut,
-            cover: event.cover 
-        }))
-        self.setEvents(newEvents)
+    async FetchApi(){
+        // const data = await _fetchEvents();
+        // const newEvents = data.map(event => ({
+        //     id: event.id,
+        //     status: event.status,
+        //     title: event.title,
+        //     description: event.description,
+        //     price: event.price,
+        //     soldOut: event.soldOut,
+        //     cover: event.cover 
+        // }))
+        // self.setEvents(newEvents)
     }
 }))
 

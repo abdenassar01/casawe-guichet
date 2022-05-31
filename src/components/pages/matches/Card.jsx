@@ -20,7 +20,7 @@ const Card = ({ event }) => {
     <CardContainer>
         <RouteLink to={`/match/${event.id}`}>
             <Poster 
-                src={event.cover}
+                src={event.slide}
                 alt="match poster"
             />
         </RouteLink>

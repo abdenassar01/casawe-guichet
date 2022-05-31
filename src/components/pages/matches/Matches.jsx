@@ -4,26 +4,35 @@ import { Wrapper, Slider, CentredBox, Tab,
 
 import SliedrItem from "../home/SliderItem";
 import Card from "./Card";
-
 import {useEffect} from "react";
-
-import useEvents from '../../../models/events'
+import { useQuery } from 'react-query'
 import { observer } from "mobx-react-lite";
+import Loading from "../../loading/Loading";
+import { Navigate } from "react-router-dom";
+import instance from "../../../axios/axios";
+import requests from "../../../axios/requests";
 
 const Matches = observer(() => {
+    
+  const { isLoading, error, data } = useQuery("fetchListing", () => 
+    instance.get(requests.listingSport)
+    .then(response => response)
+    .catch(err => err)
+  )
   
-  const store = useEvents()
-
   useEffect(() => {
-    store.fetchEvents();
     document.title = "Sport - Casawe"
-  },[store])
+  },[])
+
+  if(isLoading) return <Loading />
+  
+  if(error) return <Navigate to="/error" />
 
   return (
     <Wrapper>
-      <CentredBox>
+      <CentredBox>       
         <Slider>
-        {store.events.map(event => 
+          { data.data.events.map(event => 
               <SliedrItem event={event} key={event.id} />
           )}
         </Slider>
@@ -32,7 +41,7 @@ const Matches = observer(() => {
           <H2>LES ÉVÉNEMENTS PASSÉS</H2>
         </Tab>
         <CardsWrapper>
-          {store.events.map(event => 
+          { data.data.events.map(event => 
               <Card event={event} key={event.id} />
           )}
         </CardsWrapper>
