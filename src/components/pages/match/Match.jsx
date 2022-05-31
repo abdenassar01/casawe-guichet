@@ -11,9 +11,10 @@ import { TiCalendarOutline } from 'react-icons/ti'
 import { AiOutlineClose } from 'react-icons/ai'
 
 import { useEffect } from 'react';
-
+import { Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import Loading from "../../loading/Loading";
 
 const queryClient = new QueryClient()
 
@@ -38,15 +39,16 @@ export default Match
 
 const EventWrapper = ({matchId}) => {
 
-  const { isLoading, error, data } = useQuery('repoData', () =>
-    fetch(`https://api.preprod.guichet.com/events/${matchId.id}`).then(res =>
+  const { isLoading, error, data } = useQuery('matchData', () =>
+    fetch(`https://api.preprod.guichet.com/events/${matchId.id}`)
+    .then(res =>
         res.json()
     )
   )
 
-  if (isLoading) return '<h1>data is still Loading...😉</h1>';
+  if (isLoading) return <Loading />
 
-  if (error) return '👨🏻‍💻 An error has occurred: ' + error.message
+  if (error) return <Navigate to="/error" replace/> 
 
   return(
     <Wrapper>
