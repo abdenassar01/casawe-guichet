@@ -1,19 +1,26 @@
 import { ErreurBoxMsg } from './SubComponents'
 import { ImCross } from 'react-icons/im'
 
-import { useState } from 'react';
+import { useMessage } from '../../../models/user';
 
-const ErreurBox = (props) => {
+const ErreurBox = ({ response }) => {
 
-  const [ disabled, setDisabled ] = useState(true)
+  function reset(){
+    // response.error = ""
+  }
+
+  if(!"response.error"){
+    return null
+  } 
 
   return (
-    <ErreurBoxMsg disabled={disabled}>
-      { 
-        props.msg ? props.msg : "Ces informations d'identification ne correspondent à aucun utilisateur."
-      }
-      <ImCross onClick={ () => setDisabled(!disabled)} />
-    </ErreurBoxMsg>
+    // <ErreurBoxMsg state={ response.state } >
+    //   { 
+    //     response.error
+    //   }
+    //   <ImCross onClick={ reset } />
+    // </ErreurBoxMsg>
+    <b>hello</b>
   )
 }
 
