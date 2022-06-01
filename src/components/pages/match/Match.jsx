@@ -16,7 +16,7 @@ import { Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { useQuery } from "react-query";
 
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Match = () => {
 

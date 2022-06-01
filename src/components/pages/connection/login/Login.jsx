@@ -53,7 +53,7 @@ const Login = observer(() => {
             <Input 
               {...register("email_login", {required: true, 
                 pattern: {
-                  value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                   message: "email Inccorect"
                   }})}
               error={  errors.email_login }
@@ -61,7 +61,7 @@ const Login = observer(() => {
               type="text"
               placeholder="Votre address e-mail"
             />
-            <ErrMsg>{ errors.email_login?.type === 'required' && "Ce champ est obligatoire." || errors.email_login?.message }</ErrMsg>
+            <ErrMsg>{ ((errors.email_login?.type === 'required') && "Ce champ est obligatoire.") || (errors.email_login?.message) }</ErrMsg>
           </Field>
           <Field>
             <Label htmlFor="password_login">Password <Span color="#e02222">*</Span></Label>

@@ -3,7 +3,7 @@ import { Wrapper, CentredBox } from './SubComponents'
 import Login from './login/Login'
 import Signup from './signup/Signup'
 
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 
 const Connection = () => {
 

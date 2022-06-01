@@ -2,7 +2,7 @@ import { PageWrapper, CommandesWrapper, Tab,
     Heading, Paragraph, Section
 } from "./SubComponents"
 
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 
 const Commandes = () => {
 

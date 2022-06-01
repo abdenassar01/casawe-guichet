@@ -6,7 +6,7 @@ import Alert from "../../alert/Alert"
 
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -79,7 +79,7 @@ const Contact = () => {
                   <Input type="text" error={  errors.email } placeholder="Votre adresse e-mail"  {...register("email", {
                      required: true, 
                      pattern: {
-                       value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                       value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                        message: "email Inccorect"
                        }})} />
                   <ErrMsg>{ ((errors.email?.type === 'required') && "Ce champ est obligatoire." )|| ( errors.email?.message ) }</ErrMsg>

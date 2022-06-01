@@ -1,5 +1,3 @@
-import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
 import { ImCross } from 'react-icons/im'
 import styled from "styled-components"
 

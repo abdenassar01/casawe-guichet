@@ -8,7 +8,7 @@ const Deconnexion = () => {
 
     useEffect(() =>{
       root.logout()
-    }, [])
+    }, [root])
 
   return (
     <Navigate to="/" />

@@ -11,7 +11,7 @@ import { Navigate } from "react-router-dom";
 import instance from "../../../axios/axios";
 import requests from "../../../axios/requests";
 
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Matches = observer(() => {
     

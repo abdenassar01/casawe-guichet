@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import GlobalStyle from './components/global/GlobalStyles';
 
@@ -29,10 +29,12 @@ const App = observer(() => {
 
   useEffect(() => {
     setAuthentificated(sessionStorage.getItem("isAuthentificated"))
+    
     if(isAuthentificated){
       root.setToken(sessionStorage.getItem("token"))
     }
-  },[isAuthentificated])
+    
+  },[isAuthentificated, root])
 
   return (
     <>

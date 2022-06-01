@@ -14,7 +14,7 @@ import instance from '../../../axios/axios'
 import { countries } from '../../../assets/countries'
 import { Navigate } from 'react-router-dom'
 
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 
 const Profile = () => {
 
@@ -126,7 +126,7 @@ const Profile = () => {
                                     {...register("email", {
                                         required: true, 
                                         pattern: {
-                                          value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                          value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                                           message: "email Inccorect"
                                           }})}
                                      defaultValue={data.data.user.email} />

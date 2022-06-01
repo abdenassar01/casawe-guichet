@@ -12,7 +12,7 @@ import { useQuery } from 'react-query'
 import Loading from "../../loading/Loading";
 import { Navigate } from "react-router-dom";
 
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 
 const Home = observer(() => {
 

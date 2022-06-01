@@ -2,7 +2,7 @@ import { PanierWrapper, Tab, Heading,
     ContentBox, PanieBox, StyledRouteLink 
 } from "./SubComponents"
 
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 
 const Panier = () => {
 
