@@ -4,7 +4,8 @@ import { FormSignupWrapper, Tab, Heading, Form,
  } from '../SubComponents';
 import Alert from '../../../alert/Alert';
 
-import { useUser } from '../../../../models/user'; 
+import { useUserStore } from '../../../../models/userStore';
+
 import { observer } from 'mobx-react-lite';
 
 import { Navigate } from 'react-router-dom';
@@ -14,7 +15,7 @@ import { useState } from 'react'
 
 const Signup = observer(() => {
 
-  const store = useUser();
+  const root = useUserStore();
 
   const [ message, setMessage ] = useState("")
   const [ status, setStatus ] = useState(false)
@@ -32,12 +33,12 @@ const Signup = observer(() => {
       source : "guichet"
     }
 
-    const response = await store.register(user)
+    const response = await root.register(user)
     setMessage(response.error)
     setStatus(response.success) 
   }
 
-  if(store.isLogin){
+  if(root.isAuthentificated){
     return <Navigate to="/"/>
   }
   else{

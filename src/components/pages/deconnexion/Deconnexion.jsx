@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
-import { useUser } from '../../../models/user'
+import { useUserStore } from '../../../models/userStore'
 
 const Deconnexion = () => {
     
-  const store = useUser();
+  const root = useUserStore();
 
     useEffect(() =>{
-        store.logout()
+      root.logout()
     }, [])
 
   return (

@@ -16,26 +16,23 @@ import Commandes from "./components/pages/commandes/Commandes";
 import Deconnexion from "./components/pages/deconnexion/Deconnexion";
 import Error404 from "./components/pages/error/Error404";
 
-import { useUser } from "./models/user";
-import { useUtils } from "./models/utilityStore";
+import { useUserStore } from "./models/userStore";
 
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PrivateRoute from "./components/private_rout/PrivateRoute";
-
 
 const App = observer(() => { 
 
-  const user = useUser();
-  // const utils = useUtils();
+  const [ isAuthentificated, setAuthentificated ] = useState(false)
+  const root = useUserStore();
 
   useEffect(() => {
-    if(sessionStorage.getItem("isAuthentificated")){
-      user.setUserToken(sessionStorage.getItem("token"))
+    setAuthentificated(sessionStorage.getItem("isAuthentificated"))
+    if(isAuthentificated){
+      root.setToken(sessionStorage.getItem("token"))
     }
-  },[])
-
-  //check seassion and store in state in useEffect
+  },[isAuthentificated])
 
   return (
     <>
@@ -44,8 +41,8 @@ const App = observer(() => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connexion" element={<Connection />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/connexion" element={ <Connection />} />
+        <Route path="/contact" element={ <Contact />} />
         <Route 
           path="/panier" 
           element={ <PrivateRoute Element={ <Panier /> } /> } 

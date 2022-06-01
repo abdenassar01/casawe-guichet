@@ -1,19 +1,17 @@
 import { Container, HeaderWrapper, P, Nav, ConectionLink } from './SubComponents';
 import { FaPhoneAlt, FaShoppingCart } from 'react-icons/fa';
 
-import { RouteLink } from '../routes/RoutesLinks';
 import Profile from './profile/Profile';
-import { useUser } from '../../models/user'
-import { useEffect } from 'react';
+
+import { RouteLink } from '../routes/RoutesLinks';
+
 import { observer } from 'mobx-react-lite';
+
+import { useUserStore } from '../../models/userStore';
 
 const Header = observer(() => {
 
-    const user = useUser();
-
-    useEffect(() => {
-       
-    }, [ user ])
+    const user = useUserStore();
 
   return (
       <Container>
@@ -29,7 +27,7 @@ const Header = observer(() => {
                     &nbsp;{0} Mon panier
                 </RouteLink>
                 {
-                    ( user.isLogin ) ? <Profile /> : 
+                    ( user.isAuthentificated ) ? <Profile /> : 
                     <ConectionLink to="/connexion">
                         <b>Connexion / Inscription</b>
                     </ConectionLink>

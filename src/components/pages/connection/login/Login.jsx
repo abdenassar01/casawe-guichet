@@ -5,7 +5,7 @@ import { FormLoginWrapper, Tab, Form, Heading,
 } from '../SubComponents';
 import Alert from '../../../alert/Alert';
 
-import { useUser } from "../../../../models/user"
+import { useUserStore } from '../../../../models/userStore';
 
 import { Navigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
@@ -14,7 +14,7 @@ import { useState } from 'react';
 
 const Login = observer(() => {
 
-  const store = useUser();
+  const root = useUserStore();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -28,14 +28,15 @@ const Login = observer(() => {
       source: "casawe Sport"
     }
 
-    const response = await store.userLogin(userData)
+    const response = await root.userLogin(userData)
     if(response){
       setAlert(response.error)
       setStatus(response.success)
     }
+
   } 
 
-  if(store.isLogin){
+  if(root.isAuthentificated){
     return <Navigate to="/"/>
   }
 
