@@ -1,7 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import { useState } from "react";
-
 import GlobalStyle from './components/global/GlobalStyles';
 
 import Home from "./components/pages/home/Home";
@@ -16,61 +14,61 @@ import Panier from "./components/pages/panier/Panier";
 import Profile from "./components/pages/profile/Profile";
 import Commandes from "./components/pages/commandes/Commandes";
 import Deconnexion from "./components/pages/deconnexion/Deconnexion";
-function App() {
+import Error404 from "./components/pages/error/Error404";
 
-  const [loggin, setLoggin] = useState(false);
- 
+import { useUserStore } from "./models/userStore";
+
+import { observer } from "mobx-react-lite";
+import { useEffect, useState } from "react";
+import PrivateRoute from "./components/private_rout/PrivateRoute";
+
+const App = observer(() => { 
+
+  const [ isAuthentificated, setAuthentificated ] = useState(false)
+  const root = useUserStore();
+
+  useEffect(() => {
+    setAuthentificated(sessionStorage.getItem("isAuthentificated"))
+    if(isAuthentificated){
+      root.setToken(sessionStorage.getItem("token"))
+    }
+  },[isAuthentificated])
 
   return (
     <>
       <GlobalStyle />
-      <Header loggin={loggin}/>
+      <Header />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connexion" element={<Connection loggin={loggin} setLoggin={setLoggin} />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/connexion" element={ <Connection />} />
+        <Route path="/contact" element={ <Contact />} />
         <Route 
           path="/panier" 
-          element={ 
-            loggin ? 
-              <Panier setLoggin={setLoggin}/> 
-                  : 
-              <Navigate to="/connexion" replace />
-            } 
+          element={ <PrivateRoute Element={ <Panier /> } /> } 
         />
         <Route 
           path="/mes-commandes" 
           element={ 
-            loggin ? 
-              <Commandes /> 
-                  : 
-              <Navigate to="/connexion" replace />
-            } 
+            <PrivateRoute Element={ <Commandes /> } /> } 
         />
         <Route 
           path="/profile" 
-          element={
-            loggin ? 
-              <Profile setLoggin={setLoggin}/> 
-                : 
-              <Navigate to="/connexion" replace />
-            } 
+          element={ <PrivateRoute Element={ <Profile /> } /> }
         />
         <Route 
-          path="/deconnection" 
-          element={ <Deconnexion setLoggin={setLoggin} /> } 
+          path="/deconnexion" 
+          element={ <Deconnexion /> } 
         />
         <Route path="/billetterie/sport" element={<Matches />} />
         <Route path="/match">
           <Route path=":id" element={<Match />} />
         </Route>  
-        <Route path="/*" element={<Navigate to="/" replace />} />
+        <Route path="/*" element={<Error404 />} />
       </Routes>
       <Footer />
     </>
-   
   );
-}
+})
 
 export default App;

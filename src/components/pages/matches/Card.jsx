@@ -6,7 +6,7 @@ import {CardContainer, Poster, Title,
 import { RouteLink } from "../../routes/RoutesLinks";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-const Card = (props) => {
+const Card = ({ event }) => {
 
     function truncateString(str, num) {
         if (str.length > num) {
@@ -18,15 +18,15 @@ const Card = (props) => {
 
   return (
     <CardContainer>
-        <RouteLink to={`/match/${props.id}`}>
+        <RouteLink to={`/match/${event.id}`}>
             <Poster 
-                src="https://guichet.imgix.net/medias/fxVJtWkKu2BiT3pLSpzukKW47Elw1mYKFk2CGQ1l.jpeg?w=480&h=240&fit=clip&auto=format,compress&q=80" 
+                src={event.slide}
                 alt="match poster"
             />
         </RouteLink>
         <Title>
-            <RouteLink to={`/match/${props.id}`} color="#272630" size="18px">
-                WAC vs OCK 
+            <RouteLink to={`/match/${event.id}`} color="#272630" size="18px">
+                {truncateString(event.title, 50)}
             </RouteLink>
             <Text>
                 <FaMapMarkerAlt />
@@ -34,17 +34,15 @@ const Card = (props) => {
             </Text>
         </Title>
             <Price>
-                <b>700 DH</b>
+                <b>{event.price} DH</b>
             </Price>
-            <MatchDiscription>
-                {truncateString("Le Wydad Athletic Club reçoit le Atlético Petróleos de Luanda pour le Match retour de la Demi Finale de la Ligue des Champions de la CAF 2021-2022, le Vendredi 13 Mai 2022 à 20h00 au Complexe sportif Mohammed V", 90)}
-            </MatchDiscription>
+            <MatchDiscription dangerouslySetInnerHTML={{ __html: truncateString(event.description, 250) }} />
         <Checkout>
             <ListItem>
                  {/* //TODO: */}
             </ListItem>
             <ListItem>
-                <StyledRouteLink to={`/match/${props.id}`} disabled={props.disabled}>{props.disabled ? "Guichet Fermer" : "Paye Ticket"}</StyledRouteLink>
+                <StyledRouteLink to={`/match/${event.id}`} disabled={event.soldOut}>{event.soldOut ? "Guichet Fermer" : "Paye Ticket"}</StyledRouteLink>
             </ListItem>
         </Checkout>
   </CardContainer>

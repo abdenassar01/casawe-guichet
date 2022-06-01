@@ -1,10 +1,18 @@
 import { Container, HeaderWrapper, P, Nav, ConectionLink } from './SubComponents';
 import { FaPhoneAlt, FaShoppingCart } from 'react-icons/fa';
 
-import { RouteLink } from '../routes/RoutesLinks';
 import Profile from './profile/Profile';
 
-const Header = ( { loggin } ) => {
+import { RouteLink } from '../routes/RoutesLinks';
+
+import { observer } from 'mobx-react-lite';
+
+import { useUserStore } from '../../models/userStore';
+
+const Header = observer(() => {
+
+    const user = useUserStore();
+
   return (
       <Container>
         <HeaderWrapper>
@@ -19,15 +27,15 @@ const Header = ( { loggin } ) => {
                     &nbsp;{0} Mon panier
                 </RouteLink>
                 {
-                    loggin ? <Profile /> : 
+                    ( user.isAuthentificated ) ? <Profile /> : 
                     <ConectionLink to="/connexion">
-                         <b>Connexion / Inscription</b>
+                        <b>Connexion / Inscription</b>
                     </ConectionLink>
                 }             
             </Nav>
         </HeaderWrapper>
       </Container>  
   )
-}
+})
 
 export default Header

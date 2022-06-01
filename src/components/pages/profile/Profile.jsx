@@ -3,87 +3,121 @@ import { ProfileWrapper, ProfileContentWrapper, Tab,
     SelectColumn, Submit
 } from './SubComponents'
 
-import { useState, useEffect } from 'react'
+import Loading from "../../loading/Loading"
+import Alert from "../../alert/Alert"
 
+import { useEffect, useState } from 'react'
+import { useForm } from "react-hook-form";
 import Select from 'react-select'
+import { useQuery } from 'react-query'
+import instance from '../../../axios/axios'
+import { countries } from '../../../assets/countries'
+import { Navigate } from 'react-router-dom'
 
-const options = [
-  { value: 'MA', label: 'MAROC' },
-  { value: 'AL', label: 'ALGERIA' },
-  { value: 'FR', label: 'FRANCE' },
-  { value: 'UK', label: 'UNITED KINGDOM' }
-]
+const Profile = () => {
 
-const Profile = (props) => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const [ nom, setNom ] = useState("")
-    const [ prenom, setPrenom ] = useState("")
-    const [ ville, setVille ] = useState("")
-    const [ telephone, setTelephone ] = useState("")
-    const [ adresse, setAdresse ] = useState("")
-    const [ paye, setPaye ] = useState("")
+    const [ message, setMessage ] = useState("")
+    const [ status, setStatus ] = useState(false)
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        alert('form submitted with info  \nNom: ' + nom 
-            + ' \nPrenom: ' + prenom 
-            + ' \nVille: ' + ville 
-            + ' \nTelephone: ' + telephone 
-            + ' \nAdresse: ' + adresse 
-            + ' \nPaye: ' + paye )
+    const { isLoading, error, data } = useQuery("fetchCurrentUser", () => (
+        instance.get("/users/me", {
+            headers: {
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
+            }
+        })).then((response) => response)
+    ) 
+
+
+    const onSubmit = async (data) => {
+        const payload = {
+            email: data.email,
+            first_name: data.prenom,
+            last_name: data.nom,
+            phone: data.tel
+        }
+
+        try{
+            const result = await instance.post("/users/update", payload, {
+                headers: {
+                    'Authorization': "Bearer " + sessionStorage.getItem("token")
+                }
+            })
+            setMessage(result.data.message)
+            setStatus(result.data.success)
+        }catch(ex){
+            setMessage(ex.response.data.error)
+            setStatus(ex.response.data.success)
+        }        
     }
 
     useEffect(() => {
-        document.title = "Mon compte - Profil"
+        document.title = "Mon compte - Profil"    
     }, [])
-  return (
+
+    if(isLoading) return <Loading />
+
+    if(error) return <Navigate to="/error" />          
+
+    return (
     <ProfileWrapper>
         <ProfileContentWrapper>
             <Tab>
                 <hr />
                 <Heading>MES INFORMATIONS PERSONNELLES</Heading>
             </Tab>
-            <Form>
+            <Alert message={ message } setMessage={ setMessage } status={ status } />
+            <Form onSubmit={ handleSubmit(onSubmit) }>
                 <Table>
-                    <Raw>
-                        <Column>
-                            <Label htmlFor="nom">Nom<Span color="red">*</Span></Label>
-                            <Input type="text" id='nom' value={nom} onChange={(e) => {setNom(e.target.value)}}/>
-                        </Column>
-                         <Column>
-                            <Label htmlFor="prenom">Prénom<Span color="red">*</Span></Label>
-                            <Input type="text" id="prenom" value={prenom} onChange={(e) => {setPrenom(e.target.value)}}/>
-                        </Column>
-                    </Raw>
-                    <Raw>
-                        <SelectColumn>
-                            <Label htmlFor="paye">Paye<Span color="red">*</Span></Label>
-                            <Select
-                                options={options} id="paye"
-                                placeholder="Sélectionner..."
-                                value={paye.value}
-                                onChange={(newValue, actionMeta) => {
-                                    setPaye(newValue.value)
-                                }}
-                            />
-                        </SelectColumn>
-                        <Column>
-                            <Label htmlFor="ville">Ville<Span color="red">*</Span></Label>
-                            <Input type="text" id="ville" value={ville} onChange={(e) => {setVille(e.target.value)}}/>
-                        </Column>
-                    </Raw>
-                    <br />
-                    <Raw>
-                        <Column>
-                            <Label htmlFor="ville">Téléphone<Span color="red">*</Span></Label>
-                            <Input type="text" id="ville" value={telephone} onChange={(e) => {setTelephone(e.target.value)}}/>
-                        </Column>
-                        <Column>
-                            <Label htmlFor="adresse">Adresse<Span color="red">*</Span></Label>
-                            <Input type="text" id="adresse" value={adresse} onChange={(e) => {setAdresse(e.target.value)}}/>
-                        </Column>
-                    </Raw>
-                    <Submit type="submit" value="Mettre à jour" onClick={handleSubmit}/>
+                    <tbody>
+                        <Raw>
+                            <Column>
+                                <Label htmlFor="nom">Nom<Span color="red">*</Span></Label>
+                                <Input type="text" id='nom' {...register("nom", { required: true })} defaultValue={data.data.user.lastName} />
+                            </Column>
+                            <Column>
+                                <Label htmlFor="prenom">Prénom<Span color="red">*</Span></Label>
+                                <Input type="text" id="prenom" {...register("prenom", { required: true })} defaultValue={data.data.user.firstName} />
+                            </Column>
+                        </Raw> 
+                        <Raw>
+                            <SelectColumn>
+                                <Label htmlFor="paye">Paye<Span color="red">*</Span></Label>
+                                <Select
+                                    options={ countries } id="paye"
+                                    {...register("paye")}
+                                    placeholder="Sélectionner..."
+                                />
+                            </SelectColumn>
+                            <Column>
+                                <Label htmlFor="ville">Ville<Span color="red">*</Span></Label>
+                                <Input type="text" id="ville" {...register("ville", { required: true })} />
+                            </Column>
+                        </Raw>
+                        <Raw>
+                            <Column>
+                            <br />
+                                <Label htmlFor="tel">Téléphone<Span color="red">*</Span></Label>
+                                <Input type="text" id="tel" {...register("tel", {required: true})} defaultValue={data.data.user.phone}/>
+                            </Column>
+                            <Column>
+                                <Label htmlFor="adresse">Adresse<Span color="red">*</Span></Label>
+                                <Input type="text" id="adresse" {...register("adresse", {required: true})} />
+                            </Column>
+                        </Raw>
+                        <Raw>
+                            <Column>
+                                <Label htmlFor="email">E-mail<Span color="red">*</Span></Label>
+                                <Input type="text" id='email' {...register("email", { required: true })} defaultValue={data.data.user.email} />
+                            </Column>
+                        </Raw>
+                        <Raw>
+                            <Column>
+                                <Submit type="submit" value="Mettre à jour" />      
+                            </Column>
+                        </Raw>
+                    </tbody>    
                 </Table>
             </Form>
         </ProfileContentWrapper>
