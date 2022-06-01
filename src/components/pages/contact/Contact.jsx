@@ -76,11 +76,11 @@ const Contact = () => {
                        value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                        message: "email Inccorect"
                        }})} />
-                  <ErrMsg>{ errors.email?.type === 'required' && "Ce champ est obligatoire." || errors.email?.message }</ErrMsg>
+                  <ErrMsg>{ ((errors.email?.type === 'required') && "Ce champ est obligatoire." )|| ( errors.email?.message ) }</ErrMsg>
                 </Field> 
                 <Field>
                   <Label>Téléphone </Label>
-                  <Input type="text" placeholder="Votre telephone"  {...register("tele")} />
+                  <Input type="text"  placeholder="Votre telephone"  {...register("tele")} />
                 </Field>
               </Raw>
               <Field width="92%">

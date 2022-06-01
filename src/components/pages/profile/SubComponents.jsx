@@ -91,16 +91,22 @@ export const Span = styled.span`
     color: ${props => props.color ? props.color : 'black'};
 `
 
-export const Input = styled.input`
+export const ErrMsg = styled.span`
+    color: #dd2947;
     margin-bottom: 20px;
+    font-size: 12px;
+`
+
+export const Input = styled.input`
+    margin-bottom: 5px;
     padding: 10px;
-    border: 1px solid #ededed;
+    border: 1px solid ${props => props.error ? "#c2021b" : "#ededed" } ;
     outline: none;
     font-size: 14px;
 
     &:focus{
-        border: 1px solid #66afe9;
-        box-shadow: 1px 1px 5px #66afe9;
+        border: 1px solid ${props => props.error ? "#c2021b" : "#66afe9" } ;
+        box-shadow: 1px 1px 5px ${props => props.error ? "#c2021b" : "#66afe9" } ;
     }
 `
 
@@ -108,6 +114,7 @@ export const Submit = styled.input`
     background-color: #2aafd2;
     padding: 10px 14px;
     border: none;
+    width: 50%;
     border-radius: 2px;
     font-family: Roboto,'Helvetica Neue, Helvetica, Arial',sans-serif;
     font-size: 14px;

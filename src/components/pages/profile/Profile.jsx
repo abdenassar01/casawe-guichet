@@ -1,6 +1,6 @@
 import { ProfileWrapper, ProfileContentWrapper, Tab,
     Heading, Form, Table, Raw, Column, Label, Input, Span,
-    SelectColumn, Submit
+    SelectColumn, Submit, ErrMsg
 } from './SubComponents'
 
 import Loading from "../../loading/Loading"
@@ -74,11 +74,13 @@ const Profile = () => {
                         <Raw>
                             <Column>
                                 <Label htmlFor="nom">Nom<Span color="red">*</Span></Label>
-                                <Input type="text" id='nom' {...register("nom", { required: true })} defaultValue={data.data.user.lastName} />
+                                <Input type="text" error={ errors.nom } id='nom' {...register("nom", { required: true })} defaultValue={data.data.user.lastName} />
+                                <ErrMsg>{ errors.nom?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </Column>
                             <Column>
                                 <Label htmlFor="prenom">Prénom<Span color="red">*</Span></Label>
-                                <Input type="text" id="prenom" {...register("prenom", { required: true })} defaultValue={data.data.user.firstName} />
+                                <Input type="text" error={ errors.prenom } id="prenom" {...register("prenom", { required: true })} defaultValue={data.data.user.firstName} />
+                                <ErrMsg>{ errors.prenom?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </Column>
                         </Raw> 
                         <Raw>
@@ -89,27 +91,41 @@ const Profile = () => {
                                     {...register("paye")}
                                     placeholder="Sélectionner..."
                                 />
+                                <ErrMsg>{ errors.paye?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </SelectColumn>
                             <Column>
                                 <Label htmlFor="ville">Ville<Span color="red">*</Span></Label>
-                                <Input type="text" id="ville" {...register("ville", { required: true })} />
+                                <Input type="text" error={ errors.ville } id="ville" 
+                                    {...register("ville", { required: true })} 
+                                />
+                                <ErrMsg>{ errors.ville?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </Column>
                         </Raw>
                         <Raw>
                             <Column>
                             <br />
                                 <Label htmlFor="tel">Téléphone<Span color="red">*</Span></Label>
-                                <Input type="text" id="tel" {...register("tel", {required: true})} defaultValue={data.data.user.phone}/>
+                                <Input type="text" error={ errors.tel } id="tel" {...register("tel", {required: true})} defaultValue={data.data.user.phone}/>
+                                <ErrMsg>{ errors.tel?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </Column>
                             <Column>
                                 <Label htmlFor="adresse">Adresse<Span color="red">*</Span></Label>
-                                <Input type="text" id="adresse" {...register("adresse", {required: true})} />
+                                <Input type="text" error={ errors.adresse } id="adresse" {...register("adresse", {required: true})} />
+                                <ErrMsg>{ errors.adresse?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </Column>
                         </Raw>
                         <Raw>
                             <Column>
                                 <Label htmlFor="email">E-mail<Span color="red">*</Span></Label>
-                                <Input type="text" id='email' {...register("email", { required: true })} defaultValue={data.data.user.email} />
+                                <Input error={ errors.email } type="text" id='email'
+                                    {...register("email", {
+                                        required: true, 
+                                        pattern: {
+                                          value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                          message: "email Inccorect"
+                                          }})}
+                                     defaultValue={data.data.user.email} />
+                                <ErrMsg>{ ((errors.email?.type === 'required') && "Ce champ est obligatoire." )|| ( errors.email?.message ) }</ErrMsg>
                             </Column>
                         </Raw>
                         <Raw>
