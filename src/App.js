@@ -19,6 +19,7 @@ import Error404 from "./components/pages/error/Error404";
 import { useUser } from "./models/user";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
+import PrivateRoute from "./components/private_rout/PrivateRoute";
 
 const App = observer(() => { 
 
@@ -28,7 +29,7 @@ const App = observer(() => {
     
   },[])
 
-  //check seassion and store in state
+  //check seassion and store in state in useEffect
 
   return (
     <>
@@ -41,30 +42,16 @@ const App = observer(() => {
         <Route path="/contact" element={<Contact />} />
         <Route 
           path="/panier" 
-          element={ 
-            (user.isLogin)  ? 
-              <Panier /> 
-                  : 
-              <Navigate to="/connexion" replace />
-            } 
+          element={ <PrivateRoute Element={ <Panier /> } /> } 
         />
         <Route 
           path="/mes-commandes" 
           element={ 
-            (user.isLogin)  ? 
-              <Commandes /> 
-                  : 
-              <Navigate to="/connexion" replace />
-            } 
+            <PrivateRoute Element={ <Commandes /> } /> } 
         />
         <Route 
           path="/profile" 
-          element={
-            (user.isLogin) ? 
-              <Profile /> 
-                : 
-              <Navigate to="/connexion" replace />
-            } 
+          element={ <PrivateRoute Element={ <Profile /> } /> }
         />
         <Route 
           path="/deconnexion" 
