@@ -91,14 +91,14 @@ const Signup = observer(() => {
                   id="email_signup"
                   {...register("email_signup",{ required: true, 
                     pattern: {
-                      value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                      value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                       message: "email Inccorect"
                       }})} 
                   type="text"
                   error={ errors.email_signup }
                   placeholder="Votre address e-mail"
                 />            
-                <ErrMsg>{ errors.email_signup?.type === 'required' && "Ce champ est obligatoire." || errors.email_signup?.message }</ErrMsg>
+                <ErrMsg>{ ((errors.email_signup?.type === 'required') && "Ce champ est obligatoire.") || (errors.email_signup?.message) }</ErrMsg>
               </Field>
               <Field>
                 <Label htmlFor="tel_signup">Téléphone <Span color="#e02222">*</Span></Label>
@@ -126,7 +126,12 @@ const Signup = observer(() => {
                   type="password" 
                   placeholder="Votre Mot de pass"
                 />
-                <ErrMsg>{ errors.password_signup?.type === 'required' && "Ce champ est obligatoire." || errors.password_signup?.message }</ErrMsg>
+                <ErrMsg>{ 
+                    ((errors.password_signup?.type === 'required') && "Ce champ est obligatoire.") 
+                      || 
+                     ( errors.password_signup?.message )
+                      }
+                </ErrMsg>
               </Field>
               <Field>
                 <Label htmlFor="password_conf_signup">Confirmation de mot de passe <Span color="#e02222">*</Span></Label>
@@ -137,7 +142,11 @@ const Signup = observer(() => {
                   type="password"
                   placeholder="Confirmation de Mot de passe"
                 />
-                <ErrMsg>{ errors.password_conf_signup?.type === 'required' && "Ce champ est obligatoire." || watch("password_conf_signup") !== watch("password_signup") && "Les champs password confirmation et Mot de passe doivent être identiques" }</ErrMsg>
+                <ErrMsg>{ 
+                            (( errors.password_conf_signup?.type === 'required' ) && "Ce champ est obligatoire.") 
+                              || 
+                            ((watch("password_conf_signup") !== watch("password_signup")) && "Les champs password confirmation et Mot de passe doivent être identiques" )
+                        }</ErrMsg>
               </Field>
             </Raw>
             <SubmitBox> 
