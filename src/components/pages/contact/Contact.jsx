@@ -6,8 +6,10 @@ import Alert from "../../alert/Alert"
 
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
+import { Helmet } from "react-helmet";
+
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import instance from "../../../axios/axios"
 
@@ -17,10 +19,6 @@ const Contact = () => {
 
   const [ message, setMessage ] = useState("")
   const [ status, setStatus ] = useState(false)
-
-  useEffect(() => {
-    document.title = "Contacter-nous"
-  },[])
 
   const onSubmit = async (data) => {
 
@@ -43,6 +41,14 @@ const Contact = () => {
   return (
     
     <Container>
+      <Helmet>
+        <title>Contactez-nous</title>
+        <meta property="og:title" content="Contactez-nous" />
+        <meta name="twitter:title" content="Contactez-nous" />
+        <meta name="keywords" content="Casawe, ticket, billetterie, concerts, casablanca, rabat, marrakech, agadir, tanger, spectacles, festivals, sport, theatre, humour, maroc" />
+        <meta name="description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
+        <meta property="og:description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
+      </Helmet>
         <CentredBox>
           <FormWrapper>
             <Alert message={ message } status={ status } setMessage={ setMessage } />

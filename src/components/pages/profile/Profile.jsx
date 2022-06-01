@@ -6,13 +6,15 @@ import { ProfileWrapper, ProfileContentWrapper, Tab,
 import Loading from "../../loading/Loading"
 import Alert from "../../alert/Alert"
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from "react-hook-form";
 import Select from 'react-select'
 import { useQuery } from 'react-query'
 import instance from '../../../axios/axios'
 import { countries } from '../../../assets/countries'
 import { Navigate } from 'react-router-dom'
+
+import { Helmet } from "react-helmet"
 
 const Profile = () => {
 
@@ -28,7 +30,6 @@ const Profile = () => {
             }
         })).then((response) => response)
     ) 
-
 
     const onSubmit = async (data) => {
         const payload = {
@@ -52,16 +53,20 @@ const Profile = () => {
         }        
     }
 
-    useEffect(() => {
-        document.title = "Mon compte - Profil"    
-    }, [])
-
     if(isLoading) return <Loading />
 
     if(error) return <Navigate to="/error" />          
 
     return (
     <ProfileWrapper>
+        <Helmet>
+            <title>Mon compte - Profil</title>
+            <meta property="og:title" content="Mon compte - Profil" />
+            <meta name="twitter:title" content="Mon compte - Profil" />
+            <meta name="keywords" content="Casawe, ticket, billetterie, concerts, casablanca, rabat, marrakech, agadir, tanger, spectacles, festivals, sport, theatre, humour, maroc" />
+            <meta name="description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
+            <meta property="og:description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
+        </Helmet>
         <ProfileContentWrapper>
             <Tab>
                 <hr />
