@@ -1,9 +1,12 @@
+import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 import { useUser } from "../../models/user";
+import { useUtils } from "../../models/utilityStore";
 
-const PrivateRoute = ({ Element }) => {
+const PrivateRoute = observer(({ Element }) => {
 
     const user = useUser();
+    // const store = useUtils();
 
     if(!user.isLogin){
         return <Navigate to="/connexion" replace/>
@@ -13,6 +16,6 @@ const PrivateRoute = ({ Element }) => {
         { Element }
     </>
   )
-}
+})
 
 export default PrivateRoute

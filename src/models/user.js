@@ -1,6 +1,5 @@
 import { types } from 'mobx-state-tree';
 
-import { get } from 'mobx';
 import instance from '../axios/axios';
 
 const _loginAsync = async (userData) => {
@@ -33,7 +32,6 @@ const User = types.model("user" ,{
     name: types.optional(types.string, ""),
     lastName: types.optional(types.string, ""),
     email: types.string,
-    password: types.string,
     phone: types.optional(types.string, ""),
     paye: types.optional(types.string, ""),
     ville: types.optional(types.string, ""),
@@ -41,12 +39,6 @@ const User = types.model("user" ,{
     adresse: types.optional(types.string, "") ,
     token: types.optional(types.string, "")
 }).actions(self => ({
-    // updateUser(newUser){
-    //     self.name = newUser.name,
-    //     self.lastName = newUser.lastName,
-    //     self.phone = newUser.phone,
-    //     self.password = newUser.password
-    // },
     setUser(data){
         self.name = data.firstName;
         self.lastName = data.lastName
@@ -81,6 +73,7 @@ const User = types.model("user" ,{
             saveToken(result.data.token);
             self.setUser(result.data.user);
             self.setUserToken(result.data.token)
+            sessionStorage.setItem("isAuthentificated", true)
         }else{
             return result.response.data
         }  

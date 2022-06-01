@@ -7,13 +7,14 @@ import { Wrapper, Container, Left,
   TextInfoWrapper, P
 } from "./SubComponents"
 
+import Loading from "../../loading/Loading";
+
 import { TiCalendarOutline } from 'react-icons/ti'
 import { AiOutlineClose } from 'react-icons/ai'
 
 import { useEffect } from 'react';
 import { Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
-import Loading from "../../loading/Loading";
 import { useQuery } from "react-query";
 
 const Match = () => {
