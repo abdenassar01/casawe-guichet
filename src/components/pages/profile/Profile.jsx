@@ -16,8 +16,9 @@ import { Navigate } from 'react-router-dom'
 import { useUserStore } from '../../../models/userStore';
 
 import { Helmet } from "react-helmet-async"
+import { observer } from 'mobx-react-lite';
 
-const Profile = () => {
+const Profile = observer(() => {
 
     const user = useUserStore()
 
@@ -89,12 +90,12 @@ const Profile = () => {
                         <Raw>
                             <Column>
                                 <Label htmlFor="nom">Nom<Span color="red">*</Span></Label>
-                                <Input type="text" error={ errors.nom } id='nom' {...register("nom", { required: true })} defaultValue={data.data.user.lastName} />
+                                <Input type="text" error={ errors.nom } id='nom' {...register("nom", { required: true })} defaultValue={data?.data.user.lastName} />
                                 <ErrMsg>{ errors.nom?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </Column>
                             <Column>
                                 <Label htmlFor="prenom">Prénom<Span color="red">*</Span></Label>
-                                <Input type="text" error={ errors.prenom } id="prenom" {...register("prenom", { required: true })} defaultValue={data.data.user.firstName} />
+                                <Input type="text" error={ errors.prenom } id="prenom" {...register("prenom", { required: true })} defaultValue={data?.data.user.firstName} />
                                 <ErrMsg>{ errors.prenom?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </Column>
                         </Raw> 
@@ -120,7 +121,7 @@ const Profile = () => {
                             <Column>
                             <br />
                                 <Label htmlFor="tel">Téléphone<Span color="red">*</Span></Label>
-                                <Input type="text" error={ errors.tel } id="tel" {...register("tel", {required: true})} defaultValue={data.data.user.phone}/>
+                                <Input type="text" error={ errors.tel } id="tel" {...register("tel", {required: true})} defaultValue={data?.data.user.phone}/>
                                 <ErrMsg>{ errors.tel?.type === 'required' && "Ce champ est obligatoire." }</ErrMsg>
                             </Column>
                             <Column>
@@ -139,7 +140,7 @@ const Profile = () => {
                                           value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                                           message: "email Inccorect"
                                           }})}
-                                     defaultValue={data.data.user.email} />
+                                     defaultValue={data?.data.user.email} />
                                 <ErrMsg>{ ((errors.email?.type === 'required') && "Ce champ est obligatoire." )|| ( errors.email?.message ) }</ErrMsg>
                             </Column>
                         </Raw>
@@ -154,6 +155,6 @@ const Profile = () => {
         </ProfileContentWrapper>
     </ProfileWrapper>
   )
-}
+})
 
 export default Profile

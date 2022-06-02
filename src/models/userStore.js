@@ -20,8 +20,8 @@ const _registerAsync = async (user) => {
     }
 }
 
-const isUserAuthorized = async (token) => {
-    const result = await instance.get("/users/me", {
+const isUserAuthorized = (token) => {
+    instance.get("/users/me", {
         headers: {
             "Authorization": "Bearer " + token
         }
@@ -50,7 +50,7 @@ const User = types.model("User", {
 }).actions(self => ({
     setUser(data){
         self.name = data.firstName;
-        self.lastName = data.lastName
+        self.lastName = data.lastName;
         self.email = data.email;
         self.phone = data.phone;
     },
@@ -122,6 +122,9 @@ const UserStore = types.model("userStore", {
     },
     get userToken(){
         return self.token;
+    },
+    get userInfo(){
+        return self.user
     } 
 }))
 

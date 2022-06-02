@@ -1,10 +1,29 @@
 import { PageWrapper, CommandesWrapper, Tab, 
     Heading, Paragraph, Section
-} from "./SubComponents"
+} from "./SubComponents";
+import Loading from "../../loading/Loading";
 
-import { Helmet } from "react-helmet-async"
+import instance from "../../../axios/axios";
+import { useQuery } from "react-query";
+
+import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import Card from "./card/Card";
 
 const Commandes = () => {
+
+  const { isLoading, error, data } = useQuery('matchData', async () =>{
+    const result = await instance.get("/orders", {
+      headers: {
+        "Authorization": "Bearer " + sessionStorage.getItem("token")
+      }
+    })
+    return result;
+  })
+
+  if (isLoading) return <Loading />
+
+  if (error) return <Navigate to="/error" replace/> 
 
   return (
     <PageWrapper>
@@ -23,7 +42,13 @@ const Commandes = () => {
           </Tab>
           {/* Todo */}
           <Section>
-              <Paragraph>Aucune commande n'est disponible actuellement.</Paragraph>
+            { 
+              data?.data.orders.length > 0 
+                                    ? 
+              <Card orders={ data.data.orders } /> 
+                                  : 
+              <Paragraph>Aucune commande n'est disponible actuellement.</Paragraph> 
+            }
           </Section>
       </CommandesWrapper>
     </PageWrapper>

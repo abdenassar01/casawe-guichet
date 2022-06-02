@@ -8,7 +8,7 @@ import { useUserStore } from '../../../../models/userStore';
 
 import { observer } from 'mobx-react-lite';
 
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 import { RouteLink } from '../../../routes/RoutesLinks'
 import { useForm } from "react-hook-form";
 import { useState } from 'react'
@@ -38,10 +38,11 @@ const Signup = observer(() => {
     setStatus(response.success) 
   }
 
-  if(root.isAuthentificated){
-    return <Navigate to="/"/>
-  }
-  else{
+  // if(root.isAuthentificated){
+  //   return <Navigate to="/"/>
+  // }
+  // else{
+    
     return (
       <FormSignupWrapper>
         <Alert message={ message } status={status} setMessage={ setMessage }  />
@@ -156,6 +157,6 @@ const Signup = observer(() => {
       </FormSignupWrapper>
     )
   }
- })
+)
 
 export default Signup

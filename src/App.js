@@ -13,6 +13,7 @@ import Contact from "./components/pages/contact/Contact";
 import Panier from "./components/pages/panier/Panier";
 import Profile from "./components/pages/profile/Profile";
 import Commandes from "./components/pages/commandes/Commandes";
+import CommandeDetail from "./components/pages/commandes/detail/CommandeDetail";
 import Deconnexion from "./components/pages/deconnexion/Deconnexion";
 import Error404 from "./components/pages/error/Error404";
 
@@ -20,7 +21,7 @@ import { useUserStore } from "./models/userStore";
 
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import PrivateRoute from "./components/private_rout/PrivateRoute";
+import PrivateRoute from "./components/private_root/PrivateRoute";
 
 const App = observer(() => { 
 
@@ -43,17 +44,25 @@ const App = observer(() => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connexion" element={ <Connection />} />
+        <Route path="/connexion" element={ <Connection /> } />
         <Route path="/contact" element={ <Contact />} />
         <Route 
           path="/panier" 
           element={ <PrivateRoute Element={ <Panier /> } /> } 
         />
-        <Route 
-          path="/mes-commandes" 
-          element={ 
-            <PrivateRoute Element={ <Commandes /> } /> } 
-        />
+        <Route path="/mes-commandes" >
+          <Route 
+            path="" 
+            element={ 
+              <PrivateRoute Element={ <Commandes /> } /> } 
+          />
+          <Route 
+            path=":id" 
+            element={ 
+              <PrivateRoute Element={ <CommandeDetail /> } /> } 
+          />
+        </Route>
+       
         <Route 
           path="/profile" 
           element={ <PrivateRoute Element={ <Profile /> } /> }
