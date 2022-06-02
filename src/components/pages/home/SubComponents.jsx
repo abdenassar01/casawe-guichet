@@ -163,7 +163,12 @@ export const HelperText = styled.p`
 
 export const AlertArea = styled.div`
     font-size: 18px;
+    font-size: 1.3rem;
     padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 `
 
 export const ShareOnSocialMedia = styled.div`

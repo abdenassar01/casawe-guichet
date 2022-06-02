@@ -22,19 +22,26 @@ import { useUserStore } from "./models/userStore";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import PrivateRoute from "./components/private_root/PrivateRoute";
+import instance from "./axios/axios";
 
 const App = observer(() => { 
 
   const [ isAuthentificated, setAuthentificated ] = useState(false)
   const root = useUserStore();
+ 
+    // instance.get("/users/me", {
+    //   headers: {
+    //     "Authorization": "Bearer " + sessionStorage.getItem("token")
+    //   }
+    // }).then(response => { 
+    //   response.status === 200 ? setAuthentificated(true) : setAuthentificated(false); 
+    // }) 
 
   useEffect(() => {
     setAuthentificated(sessionStorage.getItem("isAuthentificated"))
-    
     if( isAuthentificated ){
       root.setIsAuthorized(true)
     }
-    
   },[ isAuthentificated, root ])
 
   return (
@@ -50,19 +57,15 @@ const App = observer(() => {
           path="/panier" 
           element={ <PrivateRoute Element={ <Panier /> } /> } 
         />
-        <Route path="/mes-commandes" >
-          <Route 
-            path="" 
-            element={ 
-              <PrivateRoute Element={ <Commandes /> } /> } 
-          />
-          <Route 
-            path=":id" 
-            element={ 
-              <PrivateRoute Element={ <CommandeDetail /> } /> } 
-          />
-        </Route>
-       
+        <Route path="/mes-commandes" element={ 
+              <PrivateRoute Element={ <Commandes /> } 
+               /> }
+        />
+        <Route 
+          path="/mes-commandes/:id" 
+          element={ 
+            <PrivateRoute Element={ <CommandeDetail /> } /> } 
+        />       
         <Route 
           path="/profile" 
           element={ <PrivateRoute Element={ <Profile /> } /> }

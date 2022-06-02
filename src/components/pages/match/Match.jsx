@@ -5,7 +5,7 @@ import { Wrapper, Container, Left,
   Category, Checkout, CheckoutButton, EmptyDiv,
   InfosVendeur, Title, Hr, ImageLogo, WrapperBox, 
   TextInfoWrapper, P
-} from "./SubComponents"
+} from "./SubComponents";
 
 import Loading from "../../loading/Loading";
 
@@ -15,30 +15,28 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { useQuery } from "react-query";
-
+import instance  from "../../../axios/axios"
 import { Helmet } from "react-helmet-async";
 
 const Match = () => {
 
   const matchId = useParams()
 
-  const { isLoading, error, data } = useQuery('matchData', () =>
-    fetch(`https://api.preprod.guichet.com/events/${matchId.id}`)
-    .then(res =>
-        res.json()
-    )
-  )
+  const { isLoading, error, data } = useQuery('matchData', async () => {
+    const result = await instance.get(`/events/${matchId.id}`)
+    return result
+  })
 
   if (isLoading) return <Loading />
 
   if (error) return <Navigate to="/error" replace/> 
 
-return(
+  return(
   <Wrapper>
     <Helmet>
-        <title>{data.event.title} - Casawi</title>
-        <meta property="og:title" content={data.event.title + " - Casawi" } />
-        <meta name="twitter:title" content={data.event.title + " - Casawi" } />
+        <title>{data?.data.event.title} - Casawi</title>
+        <meta property="og:title" content={data?.data.event.title + " - Casawi" } />
+        <meta name="twitter:title" content={data?.data.event.title + " - Casawi" } />
         <meta name="keywords" content="Casawe, ticket, billetterie, concerts, casablanca, rabat, marrakech, agadir, tanger, spectacles, festivals, sport, theatre, humour, maroc" />
         <meta name="description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
         <meta property="og:description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
@@ -46,12 +44,12 @@ return(
       <Container>
         <Left>
           <Poster 
-            src={data.event.cover}
-            alt={data.event.title}
+            src={data?.data.event.cover}
+            alt={data?.data.event.title}
             draggable="false" 
           />
           <Date>
-          <TiCalendarOutline size={30}/> <b>{data.event.expiredAt}</b>
+          <TiCalendarOutline size={30}/> <b>{data?.data.event.expiredAt}</b>
           </Date>
           <Discription>
             <TabPanel>
@@ -62,20 +60,20 @@ return(
               </TabItem>
             </TabPanel>
             <Discription id="tab-description" >
-                <p dangerouslySetInnerHTML={{ __html: data.event.description }}></p>
+                <p dangerouslySetInnerHTML={{ __html: data?.data.event.description }}></p>
             </Discription>
           </Discription>
         </Left>
         <Right>
           <Purchase>
             <BuyPanel>
-              <H1>{data.event.title}</H1>
+              <H1>{data?.data.event.title}</H1>
               <center>
-                <Discription  dangerouslySetInnerHTML={{ __html: data.event.description }} />
+                <Discription  dangerouslySetInnerHTML={{ __html: data?.data.event.description }} />
               </center>
             </BuyPanel>
             <CheckList>
-              { data.event.offers.map(offer => 
+              { data?.data.event.offers.map(offer => 
                   <RadioInput key={offer.id}>
                     <Input type="radio" value={offer.id} name="offer" id={offer.id} disabled={ offer.status !== "enable" && !offer.soldOut }/>
                     <Label htmlFor={offer.id}>
@@ -90,7 +88,7 @@ return(
               
               <Checkout>
                 <CheckoutButton href="" >
-                    { !data.event.soldOut ? "Acheter Maintenant" : "guichet ferme" }
+                    { !data?.data.event.soldOut ? "Acheter Maintenant" : "guichet ferme" }
                 </CheckoutButton>
               </Checkout>
               <EmptyDiv></EmptyDiv>

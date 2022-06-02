@@ -25,7 +25,6 @@ const CommandeDetail = () => {
 
   if(error) return <Navigate to="/error" replace /> 
 
-
   return (
     <DetailPage>
       <ContentWrapper>

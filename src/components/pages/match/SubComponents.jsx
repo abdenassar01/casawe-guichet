@@ -104,7 +104,7 @@ export const RadioInput = styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 15px 0;
     height: 30px;
     position: relative;
 `
