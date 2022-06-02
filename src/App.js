@@ -16,6 +16,7 @@ import Commandes from "./components/pages/commandes/Commandes";
 import CommandeDetail from "./components/pages/commandes/detail/CommandeDetail";
 import Deconnexion from "./components/pages/deconnexion/Deconnexion";
 import Error404 from "./components/pages/error/Error404";
+import InitialisePassword from "./components/pages/reinitialiserMotDePass/InitialisePassword";
 
 import { useUserStore } from "./models/userStore";
 
@@ -73,6 +74,10 @@ const App = observer(() => {
         <Route 
           path="/deconnexion" 
           element={ <Deconnexion /> } 
+        />
+        <Route 
+          path="/mot-passe-oublie" 
+          element={ <InitialisePassword /> } 
         />
         <Route path="/billetterie/sport" element={<Matches />} />
         <Route path="/match">

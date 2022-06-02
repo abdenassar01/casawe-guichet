@@ -7,7 +7,6 @@ import Alert from '../../../alert/Alert';
 
 import { useUserStore } from '../../../../models/userStore';
 
-// import { Navigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
@@ -81,7 +80,7 @@ const Login = observer(() => {
           </CheckBoxWrapper>
           <SubmitBox>
             <Submit type="submit" value="CONNEXION" onClick={handleSubmit}/>
-            <StyledRouteLink to="mot-passe-oublie" color="#000">
+            <StyledRouteLink to="/mot-passe-oublie" color="#000">
               Mot de Passe Oublie?
             </StyledRouteLink>
           </SubmitBox>
