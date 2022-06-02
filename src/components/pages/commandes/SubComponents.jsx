@@ -50,8 +50,17 @@ export const CardWrapper  = styled.div`
     
 `
 
+export const TableWrapper = styled.div`
+    padding-top: 50px;
+    width: 100%;
+`
+
 export const Table = styled.table`
     border-spacing: 0px;
+    width: 100%;
+    border: ${ props => props.border && props.border };
+    border-collapse: collapse;
+
 `
 
 export const Raw = styled.tr`
@@ -60,6 +69,8 @@ export const Raw = styled.tr`
 
 export const Column = styled.td`
     padding : 10px 20px;
+    border: ${ props => props.border && props.border };
+    border-collapse: collapse;
 `
 
 export const Header = styled.tr`
@@ -69,18 +80,18 @@ export const Header = styled.tr`
 
 export const SeeDetails = styled.a`
     padding: 10px 20px;
-    background-color: #114beb;
+    background-color: #0166B2;
     text-align: center;
     font-size:  12px;
     white-space: nowrap;
     font-weight: bold;
     color: white;
-    border-radius: 2px;
+    border-radius: 3px;
     text-decoration: none;
     transition: all .3s ease;
 
     &:hover{
-        background-color: #4977f3;
+        background-color: #003C72;
     }
 `
 
