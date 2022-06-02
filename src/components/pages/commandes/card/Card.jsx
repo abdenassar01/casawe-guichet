@@ -24,7 +24,7 @@ const Card = ({ orders }) => {
                             <Column>{ order.paymentMethod }</Column>
                             <Column>{  order.totalPaid }</Column>
                             <Column>
-                                <SeeDetails href={`/mes-commandes/${order.id}`}>Voir détails</SeeDetails>
+                                <SeeDetails to={`/mes-commandes/${order.id}`}>Voir détails</SeeDetails>
                             </Column>
                         </Raw>
                     ))

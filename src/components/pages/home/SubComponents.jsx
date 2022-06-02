@@ -35,10 +35,10 @@ export const SliderItemWrapper = styled.div`
     flex-wrap: wrap;
     width: 100%;
     flex:0 0 auto;
-    animation: slideshow 5s ease infinite;
+    /* animation: slideshow 5s ease infinite;
     animation-delay: 10s;
 
-    /* @keyframes slideshow {
+    @keyframes slideshow {
         from { 
             transform: translateX(0); 
         }

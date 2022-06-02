@@ -22,7 +22,7 @@ import { useUserStore } from "./models/userStore";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import PrivateRoute from "./components/private_root/PrivateRoute";
-import instance from "./axios/axios";
+// import instance from "./axios/axios";
 
 const App = observer(() => { 
 

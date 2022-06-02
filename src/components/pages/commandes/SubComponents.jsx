@@ -78,7 +78,7 @@ export const Header = styled.tr`
     font-weight: bold;
 `
 
-export const SeeDetails = styled.a`
+export const SeeDetails = styled(RouteLink)`
     padding: 10px 20px;
     background-color: #0166B2;
     text-align: center;
