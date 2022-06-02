@@ -13,23 +13,33 @@ import { useQuery } from 'react-query'
 import instance from '../../../axios/axios'
 import { countries } from '../../../assets/countries'
 import { Navigate } from 'react-router-dom'
+import { useUserStore } from '../../../models/userStore';
 
 import { Helmet } from "react-helmet-async"
 
 const Profile = () => {
+
+    const user = useUserStore()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const [ message, setMessage ] = useState("")
     const [ status, setStatus ] = useState(false)
 
+
     const { isLoading, error, data } = useQuery("fetchCurrentUser", () => (
         instance.get("/users/me", {
             headers: {
                 'Authorization': "Bearer " + sessionStorage.getItem("token")
             }
-        })).then((response) => response)
-    ) 
+        }))
+        .then((response) => {
+           return response
+        })
+        .catch(error => {
+            user.setIsAuthorized(false)
+        })
+    )
 
     const onSubmit = async (data) => {
         const payload = {
@@ -42,7 +52,7 @@ const Profile = () => {
         try{
             const result = await instance.post("/users/update", payload, {
                 headers: {
-                    'Authorization': "Bearer " + sessionStorage.getItem("token")
+                    "Authorization": "Bearer " + sessionStorage.getItem("token")
                 }
             })
             setMessage(result.data.message)

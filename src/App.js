@@ -30,11 +30,11 @@ const App = observer(() => {
   useEffect(() => {
     setAuthentificated(sessionStorage.getItem("isAuthentificated"))
     
-    if(isAuthentificated){
-      root.setToken(sessionStorage.getItem("token"))
+    if( isAuthentificated ){
+      root.setIsAuthorized(true)
     }
     
-  },[isAuthentificated, root])
+  },[ isAuthentificated, root ])
 
   return (
     <>

@@ -7,11 +7,10 @@ const PrivateRoute = observer(({ Element }) => {
 
     const user = useUserStore();
 
-    console.log("Auth: " + user.isAuthentificated)
-    console.log("Autor: " + user.isAuthorized())
-    // if( !user.isAuthentificated || !user.isAuthorized() ){
-    //     return <Navigate to="/connexion" replace/>
-    // }
+    if( !user.isAuthentificated ){
+        return <Navigate to="/connexion" replace/>
+    }
+
   return (
     <>
         { Element }

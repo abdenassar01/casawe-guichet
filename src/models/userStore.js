@@ -20,6 +20,16 @@ const _registerAsync = async (user) => {
     }
 }
 
+const isUserAuthorized = async (token) => {
+    const result = await instance.get("/users/me", {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    })
+    .then( response => (response.status === 200 ) ? true : false )
+    .catch(err => false)
+}
+
 function removeSessionToken(){
     sessionStorage.removeItem("token")
 }
@@ -60,7 +70,8 @@ const User = types.model("User", {
 
 const UserStore = types.model("userStore", {
     user: types.maybe(User),
-    token: types.optional(types.string, "")
+    token: types.optional(types.string, ""),
+    isAuthorized: false
 }).actions(self => ({
     setToken(newToken){
         self.token = newToken
@@ -71,13 +82,17 @@ const UserStore = types.model("userStore", {
     setUser(newUser){
         self.user = newUser
     },
+    setIsAuthorized(status){
+        self.isAuthorized = status
+    },
     async userLogin(userData){
         const result = await _loginAsync(userData);
         if(result.status === 200){
             saveToken(result.data.token);
             self.setUser(result.data.user);
-            self.setToken(result.data.token)
-            sessionStorage.setItem("isAuthentificated", true)
+            self.setToken(result.data.token);
+            self.setIsAuthorized(true);
+            sessionStorage.setItem("isAuthentificated", true);
         }else{
             return result.response.data
         }  
@@ -87,8 +102,9 @@ const UserStore = types.model("userStore", {
         if(result.status === 200){
             saveToken(result.data.token);
             self.setUser(result.data.user);
-            self.setToken(result.data.token)
-            sessionStorage.setItem("isAuthentificated", true)
+            self.setToken(result.data.token);
+            self.setIsAuthorized(true);
+            sessionStorage.setItem("isAuthentificated", true);
         }else{
             sessionStorage.setItem("isAuthentificated", false)
             return result.response.data;
@@ -97,19 +113,24 @@ const UserStore = types.model("userStore", {
     logout(){
         self.removeToken();
         removeSessionToken();
+        self.setIsAuthorized(false);
         sessionStorage.removeItem("isAuthentificated");
     }
 })).views(self => ({
     get isAuthentificated(){
-        return self.token ? true : false
-    }
+        return self.isAuthorized;
+    },
+    get userToken(){
+        return self.token;
+    } 
 }))
 
 let _rootStore;
 export const useUserStore = () => {
     if(!_rootStore){
         _rootStore = UserStore.create({
-            token: ""
+            token: "",
+            isAuthorized: false
         });
     }
     return _rootStore;
