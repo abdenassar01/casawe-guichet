@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding-top: 20px;
-
 `
 
 export const CentredBox = styled.div`
@@ -125,6 +124,7 @@ export const Checkout = styled.ul`
 `
 
 export const ListItem = styled.div`
+    padding: 0px 10px;
 `
 
 export const StyledRouteLink = styled(RouteLink)`
@@ -132,7 +132,7 @@ export const StyledRouteLink = styled(RouteLink)`
    padding: 5px 10px; 
    font-size: 15px;
    margin-right: 10px;
-
+   
    border-radius: 3px;
 
    &:hover{

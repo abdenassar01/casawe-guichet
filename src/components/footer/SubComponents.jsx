@@ -75,8 +75,8 @@ export const Input = styled.input`
     border-radius: 2px;
     
     &:focus{
-        border: 1px solid #0166B2;
-        box-shadow: 1px 1px 20px #0166B2;
+        border: 1px solid ${props => !props.error ? "rgb(255, 0, 55)" : "#0166B2" };
+        box-shadow: 1px 1px 20px  ${props => !props.error ? "rgb(255, 0, 55)" : "#0166B2" };
     }
 
     @media screen and (max-width: 768px){
@@ -111,6 +111,7 @@ export const CasaweProfile = styled.section`
         width: 70%;
     }
 `
+
 export const Image = styled.img`
     width: 120%;
     padding-bottom: 20px;
@@ -143,4 +144,9 @@ export const Sponsors = styled.div`
 
 export const SponsorsImage = styled.img`
    height: 45px;
+`
+
+export const Span = styled.span`
+    color: rgb(255, 0, 55);
+    font-size: 13px;
 `

@@ -43,6 +43,7 @@ export const Date = styled.div`
 
 export const Discription = styled.div`
     padding: 20px 5px;
+    padding-left: 20px;
     background-color: white;
     color: #626467;
     font-size: 15px;
@@ -104,7 +105,7 @@ export const RadioInput = styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 15px 0;
     height: 30px;
     position: relative;
 `

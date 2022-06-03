@@ -7,11 +7,15 @@ import { RiArrowDropDownFill } from 'react-icons/ri';
 
 import { useState } from "react";
 import { observer } from 'mobx-react-lite';
+import { useUserStore } from '../../../models/userStore';
 
 const Profile = observer(() => {
 
   const [isOpen, setIsOpen] = useState(false);
+
   const toggling = () => setIsOpen(!isOpen);
+
+  const root = useUserStore();
 
   return (
     <ProfileBox>
@@ -23,7 +27,9 @@ const Profile = observer(() => {
                 alt="profile image" 
                 />
                 <User>
-                  abdenassar amimi 
+                  { 
+                    (root.isAuthentificated) &&  root.user?.getFullName()
+                  } 
                   <RiArrowDropDownFill size="15px"/>
                 </User>
             </ProfilePanel>

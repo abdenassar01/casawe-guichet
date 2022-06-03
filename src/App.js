@@ -13,26 +13,42 @@ import Contact from "./components/pages/contact/Contact";
 import Panier from "./components/pages/panier/Panier";
 import Profile from "./components/pages/profile/Profile";
 import Commandes from "./components/pages/commandes/Commandes";
+import CommandeDetail from "./components/pages/commandes/detail/CommandeDetail";
 import Deconnexion from "./components/pages/deconnexion/Deconnexion";
 import Error404 from "./components/pages/error/Error404";
+import InitialisePassword from "./components/pages/reinitialiserMotDePass/InitialisePassword";
 
 import { useUserStore } from "./models/userStore";
 
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import PrivateRoute from "./components/private_rout/PrivateRoute";
+import PrivateRoute from "./components/private_root/PrivateRoute";
+import instance from "./axios/axios";
 
 const App = observer(() => { 
 
-  const [ isAuthentificated, setAuthentificated ] = useState(false)
+  const [ isAuthentificated, setAuthentificated ] = useState(false);
   const root = useUserStore();
 
   useEffect(() => {
+    
     setAuthentificated(sessionStorage.getItem("isAuthentificated"))
-    if(isAuthentificated){
-      root.setToken(sessionStorage.getItem("token"))
-    }
-  },[isAuthentificated])
+
+    instance.get("/users/me", {
+      headers: {
+        "Authorization": "Bearer " + sessionStorage.getItem("token")
+      }
+    }).then(response => { 
+      root.setUser(response?.data.user)
+      root.setIsAuthorized(true)
+    }).catch(error => {
+      setAuthentificated(false)
+    }) 
+
+    if( isAuthentificated ){
+      root.setIsAuthorized(true)
+    }  
+  },[ root ])
 
   return (
     <>
@@ -41,17 +57,23 @@ const App = observer(() => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connexion" element={ <Connection />} />
+        <Route path="/connexion" element={ 
+          !root.isAuthentificated ? <Connection /> : <Navigate to="/" /> 
+          } />
         <Route path="/contact" element={ <Contact />} />
         <Route 
           path="/panier" 
           element={ <PrivateRoute Element={ <Panier /> } /> } 
         />
-        <Route 
-          path="/mes-commandes" 
-          element={ 
-            <PrivateRoute Element={ <Commandes /> } /> } 
+        <Route path="/mes-commandes" element={ 
+              <PrivateRoute Element={ <Commandes /> } 
+               /> }
         />
+        <Route 
+          path="/mes-commandes/:id" 
+          element={ 
+            <PrivateRoute Element={ <CommandeDetail /> } /> } 
+        />       
         <Route 
           path="/profile" 
           element={ <PrivateRoute Element={ <Profile /> } /> }
@@ -59,6 +81,10 @@ const App = observer(() => {
         <Route 
           path="/deconnexion" 
           element={ <Deconnexion /> } 
+        />
+        <Route 
+          path="/mot-passe-oublie" 
+          element={ <InitialisePassword /> } 
         />
         <Route path="/billetterie/sport" element={<Matches />} />
         <Route path="/match">

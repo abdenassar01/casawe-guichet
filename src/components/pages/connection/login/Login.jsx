@@ -7,7 +7,6 @@ import Alert from '../../../alert/Alert';
 
 import { useUserStore } from '../../../../models/userStore';
 
-import { Navigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
@@ -36,9 +35,6 @@ const Login = observer(() => {
 
   } 
 
-  if(root.isAuthentificated){
-    return <Navigate to="/"/>
-  }
 
   return (
     <FormLoginWrapper>
@@ -53,7 +49,7 @@ const Login = observer(() => {
             <Input 
               {...register("email_login", {required: true, 
                 pattern: {
-                  value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                   message: "email Inccorect"
                   }})}
               error={  errors.email_login }
@@ -61,7 +57,7 @@ const Login = observer(() => {
               type="text"
               placeholder="Votre address e-mail"
             />
-            <ErrMsg>{ errors.email_login?.type === 'required' && "Ce champ est obligatoire." || errors.email_login?.message }</ErrMsg>
+            <ErrMsg>{ ((errors.email_login?.type === 'required') && "Ce champ est obligatoire.") || (errors.email_login?.message) }</ErrMsg>
           </Field>
           <Field>
             <Label htmlFor="password_login">Password <Span color="#e02222">*</Span></Label>
@@ -84,7 +80,7 @@ const Login = observer(() => {
           </CheckBoxWrapper>
           <SubmitBox>
             <Submit type="submit" value="CONNEXION" onClick={handleSubmit}/>
-            <StyledRouteLink to="mot-passe-oublie" color="#000">
+            <StyledRouteLink to="/mot-passe-oublie" color="#000">
               Mot de Passe Oublie?
             </StyledRouteLink>
           </SubmitBox>

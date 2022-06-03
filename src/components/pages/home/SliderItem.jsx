@@ -8,7 +8,7 @@ import {
     HelperText, SocialMedia, Icon, AlertArea
    } from "./SubComponents"
 
-import { MdLocationOn } from 'react-icons/md'
+import { MdLocationOn, MdOutlineAccessTime } from 'react-icons/md'
 import { BsEmojiSmile } from 'react-icons/bs'
 import { TiSocialTwitter, 
         TiSocialLinkedin, 
@@ -16,7 +16,6 @@ import { TiSocialTwitter,
         TiSocialPinterest, 
         TiSocialFacebook 
       } from 'react-icons/ti'
-
 import { RouteLink } from '../../routes/RoutesLinks'
       
 
@@ -30,7 +29,6 @@ const SliderItem = ({ event }) => {
       }
     }
     
-
   return (
     <SliderItemWrapper>
         <ImageWrapper>
@@ -65,8 +63,7 @@ const SliderItem = ({ event }) => {
                     </BuyNow>
                 </PriceContent>
                 <AlertArea>
-                    {/* Todo add expiredAt to model in event store  */}
-                    {/* {event.expiredAt} */}
+                 <MdOutlineAccessTime color='black'/> {  event.expiredAt }
                 </AlertArea>
                 <ShareOnSocialMedia>
                     <P><BsEmojiSmile size={12}/> Offre Special</P>

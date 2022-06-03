@@ -39,6 +39,7 @@ const Card = ({ event }) => {
             <MatchDiscription dangerouslySetInnerHTML={{ __html: truncateString(event.description, 250) }} />
         <Checkout>
             <ListItem>
+                {event.expiredAt}
                  {/* //TODO: */}
             </ListItem>
             <ListItem>
