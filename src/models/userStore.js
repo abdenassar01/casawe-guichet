@@ -11,6 +11,7 @@ const _loginAsync = async (userData) => {
     }  
 }
 
+
 const _registerAsync = async (user) => {
     try{
         const result = await instance.post("/users/register", user);

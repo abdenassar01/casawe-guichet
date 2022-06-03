@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import GlobalStyle from './components/global/GlobalStyles';
 
@@ -28,7 +28,6 @@ import instance from "./axios/axios";
 const App = observer(() => { 
 
   const [ isAuthentificated, setAuthentificated ] = useState(false);
-  const [ User, setUser ] = useState({});
   const root = useUserStore();
 
   useEffect(() => {
@@ -59,7 +58,9 @@ const App = observer(() => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connexion" element={ <Connection /> } />
+        <Route path="/connexion" element={ 
+          !root.isAuthentificated ? <Connection /> : <Navigate to="/" /> 
+          } />
         <Route path="/contact" element={ <Contact />} />
         <Route 
           path="/panier" 

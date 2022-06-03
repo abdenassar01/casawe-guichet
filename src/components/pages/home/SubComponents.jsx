@@ -35,6 +35,8 @@ export const SliderItemWrapper = styled.div`
     flex-wrap: wrap;
     width: 100%;
     flex:0 0 auto;
+    height: 520px;  
+
     /* animation: slideshow 5s ease infinite;
     animation-delay: 10s;
 
@@ -74,7 +76,7 @@ export const Image = styled.img`
 export const Panel = styled.div`
     background-color: white;
     width: 33%;
-    gap: 30px;
+    gap: 20px;
     animation: slide-right 1s ease-in forwards;
 
     @media (max-width: 768px) {
@@ -109,7 +111,7 @@ export const LinkWrapper = styled.div`
 
 export const H5 = styled.h5`
     font-size: 14px;
-    color: ${props => props.color && props.color }
+    color: ${props => props.color && props.color };
 `
 
 export const H3 = styled.h3`

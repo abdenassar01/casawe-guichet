@@ -29,8 +29,8 @@ const InitialisePassword = () => {
         setMessage( response?.data.message );
         setStatus( response?.data.success );
       }catch(ex){
-        setMessage( "Aucun utilisateur n'a été trouvé avec cette adresse email." )
-        setStatus( false )
+        setMessage( ex?.response.data.error )
+        setStatus( ex?.response.data.success )
       }
   }
 
