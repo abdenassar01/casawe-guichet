@@ -39,7 +39,7 @@ function saveToken(token){
 }
 
 const User = types.model("User", {
-    name: types.optional(types.string, ""),
+    firstName: types.optional(types.string, ""),
     lastName: types.optional(types.string, ""),
     email: types.string,
     phone: types.optional(types.string, ""),
@@ -49,7 +49,7 @@ const User = types.model("User", {
     adresse: types.optional(types.string, "")
 }).actions(self => ({
     setUser(data){
-        self.name = data.firstName;
+        self.firstName = data.firstName;
         self.lastName = data.lastName;
         self.email = data.email;
         self.phone = data.phone;
@@ -65,6 +65,9 @@ const User = types.model("User", {
     },
     addPaye(newPaye){
         self.paye = newPaye
+    },
+    getFullName(){
+        return self.firstName + " " + self.lastName
     }
 }))
 
@@ -85,12 +88,15 @@ const UserStore = types.model("userStore", {
     setIsAuthorized(status){
         self.isAuthorized = status
     },
+    getUserFullName(){
+        return self.user.getFullName()
+    },
     async userLogin(userData){
         const result = await _loginAsync(userData);
         if(result.status === 200){
-            saveToken(result.data.token);
-            self.setUser(result.data.user);
-            self.setToken(result.data.token);
+            saveToken( result.data.token );
+            self.setUser( result.data.user );
+            self.setToken( result.data.token );
             self.setIsAuthorized(true);
             sessionStorage.setItem("isAuthentificated", true);
         }else{
@@ -125,7 +131,7 @@ const UserStore = types.model("userStore", {
     },
     get userInfo(){
         return self.user
-    } 
+    }  
 }))
 
 let _rootStore;

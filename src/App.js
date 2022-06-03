@@ -23,27 +23,34 @@ import { useUserStore } from "./models/userStore";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import PrivateRoute from "./components/private_root/PrivateRoute";
-// import instance from "./axios/axios";
+import instance from "./axios/axios";
 
 const App = observer(() => { 
 
-  const [ isAuthentificated, setAuthentificated ] = useState(false)
+  const [ isAuthentificated, setAuthentificated ] = useState(false);
+  const [ User, setUser ] = useState({});
   const root = useUserStore();
- 
-    // instance.get("/users/me", {
-    //   headers: {
-    //     "Authorization": "Bearer " + sessionStorage.getItem("token")
-    //   }
-    // }).then(response => { 
-    //   response.status === 200 ? setAuthentificated(true) : setAuthentificated(false); 
-    // }) 
 
   useEffect(() => {
+    
     setAuthentificated(sessionStorage.getItem("isAuthentificated"))
+
+    instance.get("/users/me", {
+      headers: {
+        "Authorization": "Bearer " + sessionStorage.getItem("token")
+      }
+    }).then(response => { 
+      root.setUser(response?.data.user)
+      root.setIsAuthorized(true)
+    }).catch(error => {
+      setAuthentificated(false)
+    }) 
+
     if( isAuthentificated ){
       root.setIsAuthorized(true)
     }
-  },[ isAuthentificated, root ])
+    
+  },[ root ])
 
   return (
     <>

@@ -169,6 +169,7 @@ export const AlertArea = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin: 10px 0;
 `
 
 export const ShareOnSocialMedia = styled.div`

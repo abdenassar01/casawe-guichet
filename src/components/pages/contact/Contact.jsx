@@ -80,7 +80,7 @@ const Contact = () => {
                      required: true, 
                      pattern: {
                        value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                       message: "email Inccorect"
+                       message: "Veuillez fournir une adresse électronique valide."
                        }})} />
                   <ErrMsg>{ ((errors.email?.type === 'required') && "Ce champ est obligatoire." )|| ( errors.email?.message ) }</ErrMsg>
                 </Field> 
