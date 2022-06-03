@@ -34,9 +34,9 @@ const Match = () => {
   return(
   <Wrapper>
     <Helmet>
-        <title>{data?.data.event.title} - Casawi</title>
-        <meta property="og:title" content={data?.data.event.title + " - Casawi" } />
-        <meta name="twitter:title" content={data?.data.event.title + " - Casawi" } />
+        <title>{ data?.data.event.title } - Casawi</title>
+        <meta property="og:title" content={ data?.data.event.title + " - Casawi" } />
+        <meta name="twitter:title" content={ data?.data.event.title + " - Casawi" } />
         <meta name="keywords" content="Casawe, ticket, billetterie, concerts, casablanca, rabat, marrakech, agadir, tanger, spectacles, festivals, sport, theatre, humour, maroc" />
         <meta name="description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
         <meta property="og:description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
@@ -49,7 +49,7 @@ const Match = () => {
             draggable="false" 
           />
           <Date>
-          <TiCalendarOutline size={30}/> <b>{data?.data.event.expiredAt}</b>
+          <TiCalendarOutline size={30}/> <b>{ data?.data.event.expiredAt }</b>
           </Date>
           <Discription>
             <TabPanel>
@@ -84,8 +84,7 @@ const Match = () => {
                       <Span>{offer.price}</Span>
                     </Label>
                   </RadioInput>
-              ) }
-              
+              ) }   
               <Checkout>
                 <CheckoutButton href="" >
                     { !data?.data.event.soldOut ? "Acheter Maintenant" : "guichet ferme" }

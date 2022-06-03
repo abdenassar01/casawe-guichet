@@ -35,7 +35,7 @@ export const SliderItemWrapper = styled.div`
     flex-wrap: wrap;
     width: 100%;
     flex:0 0 auto;
-    height: 520px;  
+    height: fit-content;  
 
     /* animation: slideshow 5s ease infinite;
     animation-delay: 10s;
@@ -128,7 +128,7 @@ export const P = styled.p`
     color: ${props => props.color? props.color : "#b3b3b3"};
 `
 
-export const DealContent = styled.div`/* was ul */
+export const DealContent = styled.div`
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -137,13 +137,13 @@ export const DealContent = styled.div`/* was ul */
     margin-top: 10px;
 `
 
-export const PriceContent = styled.div` /* was li */
+export const PriceContent = styled.div` 
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
 `
 
-export const BuyNow = styled.div` /* was li */
+export const BuyNow = styled.div`
     padding: 4px 12px;
     height: fit-content;
     font-weight: normal;
@@ -217,7 +217,7 @@ export const Raw = styled.ul`
     flex-wrap: wrap;
 `
 
-export const RawItem = styled.div` /* was li */
+export const RawItem = styled.div`
     display: flex;
     gap: 6%;
     padding: 10px 0; 

@@ -11,7 +11,6 @@ const _loginAsync = async (userData) => {
     }  
 }
 
-
 const _registerAsync = async (user) => {
     try{
         const result = await instance.post("/users/register", user);
@@ -19,16 +18,6 @@ const _registerAsync = async (user) => {
     }catch(ex){
         return ex;
     }
-}
-
-const isUserAuthorized = (token) => {
-    instance.get("/users/me", {
-        headers: {
-            "Authorization": "Bearer " + token
-        }
-    })
-    .then( response => (response.status === 200 ) ? true : false )
-    .catch(err => false)
 }
 
 function removeSessionToken(){

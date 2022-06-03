@@ -33,7 +33,7 @@ const Profile = observer(() => {
             email: (root.isAuthentificated) &&  root.user?.email,
             tel: (root.isAuthentificated) &&  root.user?.phone
           })
-    }, [])
+    })
 
     const onSubmit = async (data) => {
         const payload = {
