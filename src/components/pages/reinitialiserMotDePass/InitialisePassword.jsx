@@ -3,23 +3,41 @@ import { PageWrapper, ContentPanel, Tab, Heading, P,
   StyledRouteLink, ErrorMessage
  } from "./SubComponents";
 
+import Alert from "../../alert/Alert";
+
 import { useForm } from "react-hook-form";
+
+import instance from "../../../axios/axios";
+import { useState } from "react";
 
 const InitialisePassword = () => {
  
   const { register, handleSubmit, formState: { errors } } = useForm(); 
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const [ message, setMessage ] = useState("");
+  const [ status, setStatus ] = useState("");
 
-    // end point => /users/recover
-    // headers => Authentification
-    // payload => { email: "abdenassaramimi@gmail.com" }
+  const onSubmit = async (data) => {
+
+    const payload = {
+      email: data.email_login
+    }
+
+    let response;
+      try{
+        response = await instance.post("/users/recover", payload);
+        setMessage( response?.data.message );
+        setStatus( response?.data.success );
+      }catch(ex){
+        setMessage( "Aucun utilisateur n'a été trouvé avec cette adresse email." )
+        setStatus( false )
+      }
   }
 
   return (
     <PageWrapper>
       <ContentPanel>
+        <Alert message={ message } status={ status } setMessage={ setMessage } />
           <Tab>
             <hr />
             <Heading>
@@ -47,7 +65,7 @@ const InitialisePassword = () => {
             </Field>
             <SubmitBox>
             <Submit type="submit" value="Envoyer le lien de réinitialisation" />
-            <StyledRouteLink to="/connection" color="#000">
+            <StyledRouteLink to="/connexion" color="#000">
               Connexion
             </StyledRouteLink>
           </SubmitBox>

@@ -1,11 +1,43 @@
+import { useForm } from 'react-hook-form'
 import { FooterWrapper, Newsletter, Text, 
   Mail, Form, H3, P, 
   Input, Submit, CasaweProfile, Image,
   About, Copyright, CopyrightText, 
-  Sponsors, SponsorsImage
+  Sponsors, SponsorsImage, Span
 } from './SubComponents'
 
+import Alert from "../alert/Alert"
+
+import instance from "../../axios/axios"
+
+import { useState } from 'react';
+
 const Footer = () => {
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+
+  const [ message, setMessage ] = useState("");
+  const [ status, setStatus ] = useState(false);
+
+
+  const onSubmit = (data) => {
+
+    const payload = {
+      email: data.email
+    }
+    
+    instance.post("/newsletters/subscription", payload)
+    .then(response => {
+      setMessage(response?.data.message);
+      setStatus(response?.data.success)
+    })
+    .catch(errors => {
+      setMessage( errors?.response.data.error );
+      setStatus( errors?.response.data.success )
+    })
+  }
+
   return (
     <FooterWrapper>
         <Newsletter>
@@ -13,11 +45,19 @@ const Footer = () => {
             <H3>Inscrivez-vous à la newsletter</H3>
             <P>Vous soyez alertés en amont des meilleurs plans, spectacles, concerts, festivals, etc... </P>
           </Text>
-            <Form method="post">
+            <Form onSubmit={ handleSubmit(onSubmit) }>
+              <Alert message={ message } setMessage={ setMessage } status={ status } />
               <Mail>
-                <Input type="email" placeholder="Address email"/>
+                <Input type="email" placeholder="Address email" 
+                  {...register("email", {
+                     required: true, 
+                     pattern: {
+                       value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                       message: "Veuillez fournir une adresse électronique valide."
+                       }})}/>
                 <Submit type="submit" value="S'INSCRIRE"/>
               </Mail>
+              <Span>{ (( errors.email?.type === 'required' ) && "Ce champ est obligatoire." ) || ( errors.email?.message ) }</Span>
             </Form>
         </Newsletter>
         <About>
