@@ -47,8 +47,7 @@ const App = observer(() => {
 
     if( isAuthentificated ){
       root.setIsAuthorized(true)
-    }
-    
+    }  
   },[ root ])
 
   return (

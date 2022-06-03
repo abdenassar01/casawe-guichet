@@ -43,6 +43,7 @@ export const Date = styled.div`
 
 export const Discription = styled.div`
     padding: 20px 5px;
+    padding-left: 20px;
     background-color: white;
     color: #626467;
     font-size: 15px;

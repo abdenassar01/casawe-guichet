@@ -5,25 +5,17 @@ import { ProfileBox, DropDownContainer, DropDownHeader,
 
 import { RiArrowDropDownFill } from 'react-icons/ri';
 
-import instance from "../../../axios/axios";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { observer } from 'mobx-react-lite';
 import { useUserStore } from '../../../models/userStore';
 
 const Profile = observer(() => {
 
   const [isOpen, setIsOpen] = useState(false);
-  // const [ user, setUser ] = useState({});
 
   const toggling = () => setIsOpen(!isOpen);
 
-
-const root = useUserStore();
-
-  useEffect(() => {
-    //
-  },[])
+  const root = useUserStore();
 
   return (
     <ProfileBox>

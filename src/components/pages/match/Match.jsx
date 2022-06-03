@@ -79,9 +79,9 @@ const Match = () => {
                     <Label htmlFor={offer.id}>
                       <Category>
                         { offer.soldOut && <AiOutlineClose /> }                            
-                        {offer.title}
+                        { offer.title }
                       </Category>
-                      <Span>{offer.price}</Span>
+                      <Span>{ offer.price }</Span>
                     </Label>
                   </RadioInput>
               ) }   
