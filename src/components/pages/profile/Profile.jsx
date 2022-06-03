@@ -3,6 +3,7 @@ import { ProfileWrapper, ProfileContentWrapper, Tab,
     SelectColumn, Submit, ErrMsg
 } from './SubComponents'
 
+import SelectCountry from './select/SelectCountry';
 import Alert from "../../alert/Alert"
 
 import { useState, useEffect } from 'react'
@@ -19,7 +20,7 @@ const Profile = observer(() => {
 
     const root = useUserStore()
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset, control } = useForm();
 
     const [ message, setMessage ] = useState("")
     const [ status, setStatus ] = useState(false)
@@ -28,20 +29,22 @@ const Profile = observer(() => {
 
     useEffect(() => {
         reset({
-            nom: (root.isAuthentificated) &&  root.user?.lastName,
-            prenom: (root.isAuthentificated) &&  root.user?.firstName,
-            email: (root.isAuthentificated) &&  root.user?.email,
-            tel: (root.isAuthentificated) &&  root.user?.phone
+            nom: ( root.isAuthentificated ) &&  root.user?.lastName,
+            prenom: ( root.isAuthentificated ) &&  root.user?.firstName,
+            email: ( root.isAuthentificated ) &&  root.user?.email,
+            tel: ( root.isAuthentificated ) &&  root.user?.phone,            
           })
-    })
+    }, [ root.user ])
 
     const onSubmit = async (data) => {
         const payload = {
             email: data.email,
             first_name: data.prenom,
             last_name: data.nom,
-            phone: data.tel
+            phone: data.tel,
         }
+
+        //find endpoint to update adresse and country
 
         try{
             const result = await instance.post("/users/update", payload, {
@@ -89,15 +92,10 @@ const Profile = observer(() => {
                             </Column>
                         </Raw> 
                         <Raw>
-                            <SelectColumn>
+                            <SelectColumn >
                                 <Label htmlFor="paye">Paye<Span color="red">*</Span></Label>
-                                <Select
-                                    tabSelectsValue
-                                    options={ countries } id="paye"
-                                    value={ countries.filter( country => country.label === paye ) } onChange={ (newValue, actionMeta) => { setPaye(newValue.label) } }
-                                    placeholder="Sélectionner..."
-                                />
-                                <ErrMsg>{ paye === "" && "Ce Champ est Obligatoire." }</ErrMsg>
+                                <SelectCountry  control={ control } name="country" rules={ {required: true} } />
+                                <ErrMsg>{ errors.country?.type === "required" && "Ce Champ est Obligatoire." }</ErrMsg>
                             </SelectColumn>
                             <Column>
                                 <Label htmlFor="ville">Ville<Span color="red">*</Span></Label>
