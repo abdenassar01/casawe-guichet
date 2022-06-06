@@ -4,7 +4,7 @@ import GlobalStyle from './components/global/GlobalStyles';
 
 import Home from "./components/pages/home/Home";
 import Header from "./components/header/Header";
-import Navbar from "./components/navbar/Navbar"
+import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Match from "./components/pages/match/Match";
 import Connection from "./components/pages/connection/Connection";
@@ -19,6 +19,7 @@ import Error404 from "./components/pages/error/Error404";
 import InitialisePassword from "./components/pages/reinitialiserMotDePass/InitialisePassword";
 
 import { useUserStore } from "./models/userStore";
+import { useCart } from "./models/cart";
 
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
@@ -28,7 +29,9 @@ import instance from "./axios/axios";
 const App = observer(() => { 
 
   const [ isAuthentificated, setAuthentificated ] = useState(false);
+  
   const root = useUserStore();
+  const cart = useCart();
 
   useEffect(() => {
     
@@ -46,7 +49,8 @@ const App = observer(() => {
     }) 
 
     if( isAuthentificated ){
-      root.setIsAuthorized(true)
+      root.setIsAuthorized(true);
+      cart?.fetch();
     }  
   },[ root ])
 

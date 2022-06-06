@@ -9,9 +9,12 @@ import { observer } from 'mobx-react-lite';
 
 import { useUserStore } from '../../models/userStore';
 
+import { useCart } from "../../models/cart"
+
 const Header = observer(() => {
 
     const user = useUserStore();
+    const cart = useCart();
 
   return (
       <Container>
@@ -24,7 +27,8 @@ const Header = observer(() => {
                 </RouteLink>
                 <RouteLink to="/panier">
                     <FaShoppingCart size={13} />
-                    &nbsp;{0} Mon panier
+                    &nbsp;
+                    { user.isAuthentificated ? cart?.count : 0 } Mon panier
                 </RouteLink>
                 {
                     ( user.isAuthentificated ) ? <Profile /> : 

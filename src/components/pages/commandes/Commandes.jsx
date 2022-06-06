@@ -43,9 +43,9 @@ const Commandes = () => {
           {/* Todo */}
           <Section>
             { 
-              data?.data.orders.length > 0 
+              data?.data.orders?.length > 0 
                                     ? 
-              <Card orders={ data.data.orders } /> 
+              <Card orders={ data?.data.orders } /> 
                                   : 
               <Paragraph>Aucune commande n'est disponible actuellement.</Paragraph> 
             }
