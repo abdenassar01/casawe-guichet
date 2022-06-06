@@ -1,14 +1,16 @@
 import { types } from "mobx-state-tree";
 import instance from "../axios/axios";
 
+// TODO: cart always return new cart because it needs a coockie 
+
 const _fetchCartAsync = async () => {
     try{
         const result = await instance.get("/cart", {
             headers: {
-                "Authorization": "Bearer " + sessionStorage.getItem("token")
-            }
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
+            },
+            withCredentials: true
         })
-        // console.log(result.data.cart)
         return result.data.cart;
     } catch (ex){
         console.log("Error accured " + ex )
@@ -20,8 +22,9 @@ const _addToCartAsync = async (payload) => {
 
         const result = await instance.post("/cart/add", payload, {
             headers: {
-                "Authorization": "Bearer " + sessionStorage.getItem("token")
-            }
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
+            },
+            withCredentials: true
         })
         return result.data
     }catch(ex){
@@ -62,7 +65,7 @@ const Item = types.model("item", {
 }).actions(self => ({
     setItem(data){
         self.itemId = data.itemId;
-        self.product.setProduct(data.product);  //call product action
+        self.product.setProduct(data.product); 
         self.quantity = data.quantity;
         self.total = data.total;
     }
@@ -112,6 +115,7 @@ const Cart = types.model("cart", {
     async fetch(){
         const cart = await _fetchCartAsync();
         self.setCart(cart);
+        return cart;
     },
     async addToCart(payload){
         const result = await _addToCartAsync(payload);
@@ -119,6 +123,11 @@ const Cart = types.model("cart", {
 
         // console.log(result)
         return(result);
+    }
+}))
+.views(self => ({
+    get getItems(){
+        return self.items
     }
 }))
 
