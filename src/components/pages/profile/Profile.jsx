@@ -8,9 +8,7 @@ import Alert from "../../alert/Alert"
 
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
-import Select from 'react-select'
 import instance from '../../../axios/axios'
-import { countries } from '../../../assets/countries'
 import { useUserStore } from '../../../models/userStore';
 
 import { Helmet } from "react-helmet-async"
@@ -25,8 +23,6 @@ const Profile = observer(() => {
     const [ message, setMessage ] = useState("")
     const [ status, setStatus ] = useState(false)
     
-    const [ paye, setPaye ] = useState("")
-
     useEffect(() => {
         reset({
             nom: ( root.isAuthentificated ) &&  root.user?.lastName,

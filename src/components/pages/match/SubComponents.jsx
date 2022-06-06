@@ -79,10 +79,6 @@ export const Purchase = styled.div`
     width: 100%;
     padding-top: 40px;
     background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 `
 
 export const H1 = styled.h1`
@@ -96,6 +92,14 @@ export const BuyPanel = styled.div`
     width: 90%;
 `
 
+export const Form = styled.form`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`
+
 export const CheckList = styled.div`
     width: 80%;
     padding-bottom: 20px;
@@ -105,7 +109,7 @@ export const RadioInput = styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 15px 0;
+    margin: 20px 0;
     height: 30px;
     position: relative;
 `
@@ -149,6 +153,11 @@ export const P = styled.p`
     margin: 20px 0px;
 `
 
+export const ErrorMessage = styled.p`
+    font-size: 12px;
+    color: #ff0a3f;
+`
+
 export const Category = styled.div`
     display: flex;
     align-items: center;
@@ -162,17 +171,18 @@ export const Checkout = styled.div`
     justify-content: center;
 `
 
-export const CheckoutButton = styled.a`
+export const CheckoutButton = styled.input`
     text-decoration: none;
     background-color: #037ccc;
+    border: none;
     text-transform: uppercase;
     letter-spacing: 2px;
     border-radius: 3px;
     font-weight: 300;
     color: #ffffff;
-    width: 95%;
+    width: 100%;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px 0px;
 
     &:hover{
         background-color: #071D39;

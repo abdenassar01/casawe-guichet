@@ -4,8 +4,10 @@ import { Wrapper, Container, Left,
   CheckList, RadioInput, Input, Label, Span, 
   Category, Checkout, CheckoutButton, EmptyDiv,
   InfosVendeur, Title, Hr, ImageLogo, WrapperBox, 
-  TextInfoWrapper, P
+  TextInfoWrapper, P, Form, ErrorMessage
 } from "./SubComponents";
+
+import Alert from "../../alert/Alert";
 
 import Loading from "../../loading/Loading";
 
@@ -17,10 +19,31 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from "react-query";
 import instance  from "../../../axios/axios"
 import { Helmet } from "react-helmet-async";
+import { useCart } from "../../../models/cart";
+
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const Match = () => {
 
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const [ message, setMessage ] = useState("");
+  const [ status, setStatus ] = useState(false);
+
   const matchId = useParams()
+
+  const cart = useCart();
+
+  const onSubmit = async (data) => {
+    const payload = {
+      offer_id : data.offer,
+      quantity : 1
+    }
+    const result = await cart.addToCart(payload)
+    setStatus(result?.success)
+    setMessage(result?.message)
+  }
 
   const { isLoading, error, data } = useQuery('matchData', async () => {
     const result = await instance.get(`/events/${matchId.id}`)
@@ -34,9 +57,9 @@ const Match = () => {
   return(
   <Wrapper>
     <Helmet>
-        <title>{ data?.data.event.title } - Casawi</title>
-        <meta property="og:title" content={ data?.data.event.title + " - Casawi" } />
-        <meta name="twitter:title" content={ data?.data.event.title + " - Casawi" } />
+        <title>{ data?.data.event?.title } - Casawi</title>
+        <meta property="og:title" content={ data?.data.event?.title + " - Casawi" } />
+        <meta name="twitter:title" content={ data?.data.event?.title + " - Casawi" } />
         <meta name="keywords" content="Casawe, ticket, billetterie, concerts, casablanca, rabat, marrakech, agadir, tanger, spectacles, festivals, sport, theatre, humour, maroc" />
         <meta name="description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
         <meta property="og:description" content="Casawe: Tickets &amp; Billetterie concerts, spectacles, cinéma, festivals, sport et théâtre au Maroc" />
@@ -65,6 +88,7 @@ const Match = () => {
           </Discription>
         </Left>
         <Right>
+          <Alert message={ message } setMessage={ setMessage } status={ setStatus }/>
           <Purchase>
             <BuyPanel>
               <H1>{data?.data.event.title}</H1>
@@ -72,26 +96,28 @@ const Match = () => {
                 <Discription  dangerouslySetInnerHTML={{ __html: data?.data.event.description }} />
               </center>
             </BuyPanel>
-            <CheckList>
-              { data?.data.event.offers.map(offer => 
-                  <RadioInput key={offer.id}>
-                    <Input type="radio" value={offer.id} name="offer" id={offer.id} disabled={ offer.status !== "enable" && !offer.soldOut }/>
-                    <Label htmlFor={offer.id}>
-                      <Category>
-                        { offer.soldOut && <AiOutlineClose /> }                            
-                        { offer.title }
-                      </Category>
-                      <Span>{ offer.price }</Span>
-                    </Label>
-                  </RadioInput>
-              ) }   
-              <Checkout>
-                <CheckoutButton href="" >
-                    { !data?.data.event.soldOut ? "Acheter Maintenant" : "guichet ferme" }
-                </CheckoutButton>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <CheckList>
+                { data?.data.event.offers.map(offer => 
+                    <RadioInput key={offer.id}>
+                      <Input type="radio" {...register("offer", { required: true })} value={ offer.id } name="offer" id={ offer.id } disabled={ offer.status !== "enable" && !offer.soldOut }/>
+                      <Label htmlFor={offer.id}>
+                        <Category>
+                          { offer.soldOut && <AiOutlineClose /> }                            
+                          { offer.title }
+                        </Category>
+                        <Span>{ offer.price }</Span>
+                      </Label>
+                    </RadioInput>
+                ) }   
+                <Checkout>
+                <CheckoutButton type="submit" value={ !data?.data.event.soldOut ? "Ajouter Panier" : "guichet ferme" } />
               </Checkout>
-              <EmptyDiv></EmptyDiv>
+              <EmptyDiv>
+                <ErrorMessage> { (errors.offer?.type === 'required') &&  "Tu doit choisi une offre" }</ErrorMessage>
+              </EmptyDiv>
             </CheckList>
+            </Form> 
           </Purchase>
           <InfosVendeur>
             <WrapperBox>

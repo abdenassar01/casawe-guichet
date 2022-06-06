@@ -1,7 +1,6 @@
 import { Controller } from "react-hook-form";
 import Select from 'react-select'
 import { countries } from "../../../../assets/countries";
-import { ErrMsg } from "../SubComponents";
 
 const SelectCountry = ({ control, name, rules }) => {
 
