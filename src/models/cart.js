@@ -110,14 +110,8 @@ const Cart = types.model("cart", {
         self.totalDiscountString = newCart.totalDiscountString;
     },
     async fetch(){
-        const payload = {
-            offer_id : 3016,
-            quantity : 1
-        }
         const cart = await _fetchCartAsync();
-
         self.setCart(cart);
-        console.log("Count: " + self.count)
     },
     async addToCart(payload){
         const result = await _addToCartAsync(payload);
