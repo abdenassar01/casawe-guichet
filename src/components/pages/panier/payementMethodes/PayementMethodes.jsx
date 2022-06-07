@@ -1,6 +1,6 @@
 import { Form, Radio, Field, Label, Span, 
   PayementWrapper, Text, Title, Description 
-} from "./SubComponents"
+} from "../SubComponents"
 
 const PayementMethodes = ({ payemetMethod, setPayementMethod, items }) => {
 

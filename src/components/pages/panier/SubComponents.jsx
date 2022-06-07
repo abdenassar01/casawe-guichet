@@ -43,11 +43,18 @@ export const PanieBox = styled.div`
     font-size: 15px;
     letter-spacing: .01rem;
     line-height: 1.5em;
-    width: 100%;
+    width: 94%;
+    border-radius: 3px;
 
     @media ( max-width: 760px ) {
         width: 90%;
     }
+`
+
+export const Wrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 `
 
 export const StyledRouteLink = styled(RouteLink)`
@@ -152,9 +159,11 @@ export const BoldTotal = styled.span`
 `
 
 export const PayementWrapper = styled.div`
-    padding: 20px;
+    padding: 10px ;
     margin-top: 20px;
+    width: 100%;
     background-color: white;
+    border-radius: 3px;
 `
 
 export const Text = styled.p`
@@ -191,6 +200,7 @@ export const Description = styled.div`
     margin-top: 7px;
     font-weight: 300;
     line-height: 19px;
+    display: none;
 `
 
 export const Radio = styled.input`
@@ -199,7 +209,11 @@ export const Radio = styled.input`
     cursor: pointer;
 
     &:checked + ${Label} {
-        font-weight: bold;
+        font-weight: ${props => !props.regular && "bold" };
+
+        ${Description}{
+            display: block;
+        }
     }
 `
 
@@ -209,3 +223,69 @@ export const Span = styled.span`
     margin-bottom: 1rem;
 `
 
+export const Left = styled.div`
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+
+`
+
+export const Right = styled.div`
+    width: 37%;
+    margin-top: 50px;
+`
+
+export const CodePromotionnelWrapper = styled.div`
+    padding: 20px;
+    border-radius: 3px;
+    background-color: white;
+    font-size: 21px;
+    margin-bottom: 24px;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start; 
+`
+
+export const InputField = styled.div`
+    /* padding: 10px; */
+    padding: 30px 0;
+` 
+
+export const PromoBox = styled.input`
+    padding: 10px;
+    border: 2px solid #B8B8B8;
+    border-radius: 5px 0 0 5px;
+    font-size: 14px;
+    font-weight: bold;
+
+    &:focus{
+        outline: none;
+    }
+`
+
+export const OkButton = styled.button`
+    background-color: #b8b8b8;
+    border: 2px solid #b8b8b8;
+    border-radius: 0 5px 5px 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    font-size: 14px;
+    width: 100px;
+    font-weight: 400;
+    padding: 10px 0;
+`
+
+export const TotalWrapper = styled.div`
+    padding: 20px;
+    background-color: white;
+`
+
+export const RegularText = styled.p`
+    padding: 10px 0;
+`
+
+export const Content = styled.div`
+    padding-top: 50px;
+`

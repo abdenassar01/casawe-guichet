@@ -1,17 +1,19 @@
 import { PanierWrapper, Tab, Heading,
     ContentBox, PanieBox, StyledRouteLink,
-    Items
+    Items, Left, Right, Wrapper
 } from "./SubComponents";
 
 import Alert from "../../alert/Alert";
-import PayementMethodes from "./PayementMethodes"
-import Item from "./Item";
+import PayementMethodes from "./payementMethodes/PayementMethodes"
+import Item from "./item/Item";
+import CodePromotionnel from "./promoCode/CodePromotionnel"
 
 import { Helmet } from "react-helmet-async";
 
 import { useCart } from "../../../models/cart";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import Total from "./total/Total";
 
 
 const Panier = observer(() => {
@@ -52,37 +54,43 @@ const Panier = observer(() => {
                 <hr />
                 <Heading>Mon Panier</Heading>
             </Tab>
-           
-            <PanieBox>
-            <Alert message={ message } setMessage={ setMessage } status={ status }/>
+           <Wrapper>
+                <Left>
+                    <PanieBox>
+                        <Alert message={ message } setMessage={ setMessage } status={ status }/>
+                        {
+                            cart?.count > 0 ? 
+                        ( 
+                        <Items>
+                            {
+                                items.map(item => (
+                                    <Item key={item?.itemId} item={item} setAlert={ setMessage } setStatus={ setStatus } />
+                                ))
+                            }  
+                            </Items> 
+                        )
+                        : <div>
+                            Votre panier est vide. &nbsp;
+                            <StyledRouteLink to="/mes-commandes" color="#0066b2">
+                                Continuer mes achats
+                            </StyledRouteLink>
+                        </div>  
+                        }
 
-            {
-                cart?.count > 0 ? 
-            ( 
-               <Items>
-                   {
-                        items.map(item => (
-                            <Item key={item?.itemId} item={item} setAlert={ setMessage } setStatus={ setStatus } />
-                        ))
-                   }  
-                </Items> 
-            )
-            : <div>
-                Votre panier est vide. &nbsp;
-                <StyledRouteLink to="/mes-commandes" color="#0066b2">
-                    Continuer mes achats
-                </StyledRouteLink>
-            </div>  
-            }
-
-            </PanieBox>
-            { cart?.count > 0 && 
-                <PayementMethodes 
-                    setPayementMethod={ setPayementMethod } 
-                    payemetMethod={ payemetMethod }   
-                    items={ cart?.paymentMethods } 
-                />  
-            }
+                    </PanieBox>
+                    { cart?.count > 0 && 
+                        <PayementMethodes 
+                            setPayementMethod={ setPayementMethod } 
+                            payemetMethod={ payemetMethod }   
+                            items={ cart?.paymentMethods } 
+                        />  
+                    }
+                </Left>
+                <Right>
+                 <CodePromotionnel />
+                 <Total />
+                </Right>
+           </Wrapper>
         </ContentBox>
     </PanierWrapper>
   )

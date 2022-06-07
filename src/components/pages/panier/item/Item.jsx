@@ -2,9 +2,9 @@ import {  ItemImage, ItemContent, Icon,
     OffreName, Title, Pricing, Quantity, 
     Input, PricesWrapper, Price, BoldTotal,
     ItemWrapper
-} from "./SubComponents";
+} from "../SubComponents";
 
-import { useCart } from "../../../models/cart";
+import { useCart } from "../../../../models/cart";
 
 import { RiCloseFill } from "react-icons/ri";
 import { observer } from "mobx-react-lite";
