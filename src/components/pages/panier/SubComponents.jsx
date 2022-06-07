@@ -110,6 +110,7 @@ export const Title = styled.h3`
     font-size: 23px;
     color: black;
     font-weight: 500;
+    font-size: 28px;
 `
 
 export const Pricing = styled.div`
@@ -148,4 +149,72 @@ export const Price = styled.p`
 
 export const BoldTotal = styled.span`
     font-weight: bold;
+`
+
+export const PayementWrapper = styled.div`
+    padding: 20px;
+    margin-top: 20px;
+    background-color: white;
+`
+
+export const Text = styled.p`
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 3px 0 0;
+`
+
+export const CheckBox = styled.span`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #57a8dc;
+    border-radius: 3px;
+
+    &::after{
+        content: "";
+        position: absolute;
+        width: 56%;
+        height: 56%;
+        background: #57a8dc;
+        border-radius: 2px;
+        left: 4px;
+        top: 4px;
+        transform: scale(0);
+        opacity: 0;
+        transition: all .1s ease-in-out;
+    }
+`
+
+export const Form = styled.form`
+
+`
+
+export const Field = styled.div`
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+`
+
+export const Label = styled.label`
+    position: relative;
+`
+
+export const Radio = styled.input`
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+`
+
+export const Span = styled.span`
+    margin-left: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 1rem;
+    font-weight: 500;
 `

@@ -4,7 +4,7 @@ import { PanierWrapper, Tab, Heading,
 } from "./SubComponents";
 
 import Alert from "../../alert/Alert";
-
+import PayementMethodes from "./PayementMethodes"
 import Item from "./Item";
 
 import { Helmet } from "react-helmet-async";
@@ -21,6 +21,7 @@ const Panier = observer(() => {
     const [ message, setMessage ] = useState("")
     const [ status, setStatus ] = useState(false)
     const [ items, setItems ] = useState([]);
+    const [ payemetMethod, setPayementMethod ] = useState(0);
 
 
     useEffect(() => {
@@ -34,7 +35,7 @@ const Panier = observer(() => {
             }
         }
         // fetchCart();
-    },[cart])
+    },[ cart ])
 
   return (
     <PanierWrapper>
@@ -75,6 +76,7 @@ const Panier = observer(() => {
             }
 
             </PanieBox>
+            <PayementMethodes setPayementMethod={ setPayementMethod } payemetMethod={ payemetMethod } />
         </ContentBox>
     </PanierWrapper>
   )
