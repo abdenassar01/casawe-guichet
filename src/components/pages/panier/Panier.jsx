@@ -1,6 +1,6 @@
 import { PanierWrapper, Tab, Heading,
     ContentBox, PanieBox, StyledRouteLink,
-    Items, Left, Right, Wrapper
+    Items, Left, Right, Wrapper, EmptyCart
 } from "./SubComponents";
 
 import Alert from "../../alert/Alert";
@@ -36,7 +36,7 @@ const Panier = observer(() => {
                 setStatus(res?.data?.success)
             }
         }
-        // fetchCart();
+        fetchCart();
     },[ cart ])
 
   return (
@@ -54,43 +54,51 @@ const Panier = observer(() => {
                 <hr />
                 <Heading>Mon Panier</Heading>
             </Tab>
-           <Wrapper>
-                <Left>
-                    <PanieBox>
-                        <Alert message={ message } setMessage={ setMessage } status={ status }/>
-                        {
-                            cart?.count > 0 ? 
-                        ( 
-                        <Items>
-                            {
-                                items.map(item => (
-                                    <Item key={item?.itemId} item={item} setAlert={ setMessage } setStatus={ setStatus } />
-                                ))
-                            }  
+            {
+                cart?.count > 0 ? (
+                <Wrapper>
+                    <Left>
+                        <PanieBox>
+                        <div>
+                    Votre panier est vide. &nbsp;
+                    <StyledRouteLink to="/mes-commandes" color="#0066b2">
+                        Continuer mes achats
+                    </StyledRouteLink>
+                </div>   
+                            <Alert message={ message } setMessage={ setMessage } status={ status }/>
+                            
+                            <Items>
+                                {
+                                    items.map(item => (
+                                        <Item key={item?.itemId} item={item} setAlert={ setMessage } setStatus={ setStatus } />
+                                    ))
+                                }  
                             </Items> 
-                        )
-                        : <div>
-                            Votre panier est vide. &nbsp;
-                            <StyledRouteLink to="/mes-commandes" color="#0066b2">
-                                Continuer mes achats
-                            </StyledRouteLink>
-                        </div>  
+                        </PanieBox>
+                        { cart?.count > 0 && 
+                            <PayementMethodes 
+                                setPayementMethod={ setPayementMethod } 
+                                payemetMethod={ payemetMethod }   
+                                items={ cart?.paymentMethods } 
+                            />  
                         }
-
-                    </PanieBox>
-                    { cart?.count > 0 && 
-                        <PayementMethodes 
-                            setPayementMethod={ setPayementMethod } 
-                            payemetMethod={ payemetMethod }   
-                            items={ cart?.paymentMethods } 
-                        />  
-                    }
-                </Left>
-                <Right>
-                 <CodePromotionnel />
-                 <Total />
-                </Right>
-           </Wrapper>
+                    </Left>
+                    <Right>
+                        <CodePromotionnel />
+                        <Total />
+                    </Right>
+                </Wrapper>
+                )
+                :
+                (
+                    <EmptyCart>
+                        Votre panier est vide. &nbsp;
+                        <StyledRouteLink to="/mes-commandes" color="#0066b2">
+                            Continuer mes achats
+                        </StyledRouteLink>
+                    </EmptyCart>   
+                )
+            } 
         </ContentBox>
     </PanierWrapper>
   )

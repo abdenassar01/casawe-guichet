@@ -224,15 +224,24 @@ export const Span = styled.span`
 `
 
 export const Left = styled.div`
-    width: 60%;
+    min-width: 60%;
     display: flex;
     flex-direction: column;
 
+
+    @media (max-width: 760px) {
+        width: 90%;
+    }
 `
 
 export const Right = styled.div`
+    min-width: 35%;
     width: 37%;
     margin-top: 50px;
+
+    @media (max-width: 760px) {
+        width: 90%;
+    }
 `
 
 export const CodePromotionnelWrapper = styled.div`
@@ -242,15 +251,24 @@ export const CodePromotionnelWrapper = styled.div`
     font-size: 21px;
     margin-bottom: 24px;
     display: flex;
-    display: flex;
     flex-direction: column;
     gap: 20px;
     justify-content: flex-start; 
+
+
+    @media (max-width: 760px) {
+        width: 100%;
+    }
 `
 
 export const InputField = styled.div`
     /* padding: 10px; */
     padding: 30px 0;
+
+    @media (max-width: 760px) {
+        display: flex;
+        align-items: center ;
+    }
 ` 
 
 export const PromoBox = styled.input`
@@ -283,9 +301,27 @@ export const TotalWrapper = styled.div`
 `
 
 export const RegularText = styled.p`
-    padding: 10px 0;
+    padding: 20px 0;
 `
 
 export const Content = styled.div`
     padding-top: 50px;
+`
+
+export const Checkout = styled.button`
+    padding: 10px 0;
+    margin: 20px 0;
+    color: #ffffff;
+    background-color: #071D39;
+    border: none;
+    border-radius: 2px;
+    font-size: 1rem;
+    width: 100%;
+`
+
+export const EmptyCart = styled.div`
+    margin-top: 50px;
+    padding: 50px 20px;
+    background-color: white;
+    border-radius: 2px;
 `

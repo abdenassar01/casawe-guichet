@@ -1,4 +1,6 @@
-import { TotalWrapper, Tab, Heading, Radio, RegularText, Label, Field , Content } from "../SubComponents";
+import { TotalWrapper, Tab, Heading, Radio, RegularText, 
+    Label, Field , Content, Checkout 
+} from "../SubComponents";
 
 const Total = () => {
   return (
@@ -9,11 +11,13 @@ const Total = () => {
         </Tab>
         <Content>
             <RegularText>
-                Total des articles 3490MAD
+                Total des articles 3490 MAD
             </RegularText> 
-            {/* <RegularText>
-                Frais de livraison 0MAD
-            </RegularText> */}
+            {
+                /* <RegularText>
+                    Frais de livraison 0MAD
+                </RegularText> */
+            }
             <hr />
             <RegularText>
                 Total a paye
@@ -30,11 +34,11 @@ const Total = () => {
                 } }
                 /> 
                 <Label htmlFor="liecence" >
-                    J'ai lu <a target="_blank" href="https://www.guichet.com/mentions-legales">les conditions générales de vente</a> et j'y adhère sans réserve.
+                    J'ai lu <a target="_blank" rel="noreferrer" href="https://www.guichet.com/mentions-legales">les conditions générales de vente</a> et j'y adhère sans réserve.
                 </Label>
             </Field>
+            <Checkout>Passer ma commande</Checkout>
         </Content>
-
     </TotalWrapper>
   )
 }
