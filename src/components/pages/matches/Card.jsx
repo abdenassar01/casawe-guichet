@@ -33,14 +33,13 @@ const Card = ({ event }) => {
                 Casablanca
             </Text>
         </Title>
-            <Price>
-                <b>{event.price} DH</b>
-            </Price>
-            <MatchDiscription dangerouslySetInnerHTML={{ __html: truncateString(event.description, 250) }} />
+        <Price>
+            <b>{event.price} DH</b>
+        </Price>
+        <MatchDiscription dangerouslySetInnerHTML={{ __html: truncateString(event.description, 250) }} />
         <Checkout>
             <ListItem>
                 {event.expiredAt}
-                 {/* //TODO: */}
             </ListItem>
             <ListItem>
                 <StyledRouteLink to={`/match/${event.id}`} disabled={event.soldOut}>{event.soldOut ? "Guichet Fermer" : "Paye Ticket"}</StyledRouteLink>
