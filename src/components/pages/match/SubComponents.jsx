@@ -46,6 +46,7 @@ export const Discription = styled.div`
     padding-left: 20px;
     background-color: white;
     color: #626467;
+    /* overflow-x: scroll; */
     font-size: 15px;
 `
 

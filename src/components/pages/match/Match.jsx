@@ -47,7 +47,6 @@ const Match = () => {
 
   const { isLoading, error, data } = useQuery('matchData', async () => {
     const result = await instance.get(`/events/${matchId.id}`)
-    console.log(result)
     return result
   })
 

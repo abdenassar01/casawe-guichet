@@ -24,6 +24,7 @@ const Panier = observer(() => {
 
 
     useEffect(() => {
+        setItems( cart?.getItems )
         const fetchCart = async () => {
             const res = await cart.fetch() 
             setItems( cart?.getItems )
@@ -32,8 +33,7 @@ const Panier = observer(() => {
                 setStatus(res?.data?.success)
             }
         }
-        fetchCart();
-        
+        // fetchCart();
     },[cart])
 
   return (
@@ -61,7 +61,7 @@ const Panier = observer(() => {
                <Items>
                    {
                        items.map(item => (
-                                <Item key={item?.itemId} item={item} />
+                                <Item key={item?.itemId} item={item} setAlert={ setMessage } setStatus={ setStatus } />
                        ))
                    }  
                 </Items> 
@@ -73,7 +73,7 @@ const Panier = observer(() => {
                 </StyledRouteLink>
             </div>  
             }
-                   
+
             </PanieBox>
         </ContentBox>
     </PanierWrapper>

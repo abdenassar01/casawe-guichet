@@ -19,15 +19,15 @@ const _fetchCartAsync = async () => {
 
 const _deleteItemAsync = async (itemId) => {
     try{
-        const result = await instance.get(`/cart/delete/${ itemId }`, {
+        const result = await instance.delete(`/cart/delete/${ itemId }`, {
             headers: {
                 "Authorization": "Bearer " + sessionStorage.getItem("token")
             },
             withCredentials: true
         })
-        return result.data.cart;
+        return result;
     } catch (ex){
-        console.log("Error accured " + ex )
+        console.log(ex)
     }
 }
 
@@ -144,7 +144,6 @@ const Cart = types.model("cart", {
     totalShipping : types.optional(types.number, 0),
     totalDiscount : types.optional(types.number, 0),
     total : types.optional(types.number, 0),
-    // discount : types.maybe(types.number),
     items : types.optional(types.array(Item), []), 
     hasPlan : false,
     paymentMethods : types.optional(types.array(PayementMethod), []),
@@ -157,7 +156,6 @@ const Cart = types.model("cart", {
         self.totalShipping = newCart.totalShipping;
         self.totalDiscount = newCart.totalDiscount;
         self.total = newCart.total;
-        // self.discount = newCart.discount;
         self.items = newCart.items;
         self.hasPlan = newCart.hasPlan;
         self.paymentMethods = newCart.carriers;
@@ -179,6 +177,11 @@ const Cart = types.model("cart", {
         const response = await _updateCartAsync(itemId, payload);
         self.setCart(response?.cart);
         return response
+    },
+    async deleteItem(itemId){
+        const response = await _deleteItemAsync(itemId);
+        self.setCart(response?.data.cart)
+        return response;
     }
 }))
 .views(self => ({

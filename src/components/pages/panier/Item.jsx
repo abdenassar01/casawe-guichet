@@ -10,7 +10,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 
-const Item = observer(({ item }) => {
+const Item = observer(({ item, setAlert, setStatus }) => {
 
     const cart = useCart();
 
@@ -31,8 +31,17 @@ const Item = observer(({ item }) => {
         }  
     } 
 
-    const removeItem = () => {
-
+    const removeItem = async () => {
+        try{
+            const response = await cart.deleteItem( item?.itemId );
+            // console.log(response)
+            setAlert(response?.data.message);
+            setStatus(response?.data.success);
+        }catch(ex){
+            // console.log(ex)
+            setAlert(ex?.data.error);
+            setStatus(ex?.data.success);
+        }
     }
 
   return (
