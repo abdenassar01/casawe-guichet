@@ -59,6 +59,7 @@ export const CardsWrapper = styled.div`
 
 export const CardContainer = styled.div`
     /* flex: 2 1 30%; */
+    position: relative;
     border-radius: 3px;
     width: 30%;
     box-shadow: 0 2px 3px -1px rgb(151 171 187 / 70%);
@@ -111,6 +112,7 @@ export const MatchDiscription = styled.div`
     font-size: 15px;
     font-family: Roboto,sans-serif;
     line-height: 1.5em;
+    margin-bottom: 50px;
 `
 
 export const Checkout = styled.ul`
@@ -121,6 +123,8 @@ export const Checkout = styled.ul`
     object-fit: contain;
     width: 100%;
     border-top: 1px solid #ededed;
+    position: absolute;
+    bottom: 0;
 `
 
 export const ListItem = styled.div`

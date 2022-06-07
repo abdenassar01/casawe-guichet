@@ -11,9 +11,36 @@ const _fetchCartAsync = async () => {
             },
             withCredentials: true
         })
-        return result.data.cart;
+        return result;
     } catch (ex){
-        console.log("Error accured " + ex )
+        return ex.response;
+    }
+}
+
+const _deleteItemAsync = async (itemId) => {
+    try{
+        const result = await instance.delete(`/cart/delete/${ itemId }`, {
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("token")
+            },
+            withCredentials: true
+        })
+        return result;
+    } catch (ex){
+        console.log(ex)
+    }
+}
+
+const _updateCartAsync = async (itemId, payload) => {
+    try{
+        const result = await instance.post(`/cart/update/${itemId}`, payload, {
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("token")
+            }
+        })
+        return result;
+    }catch(ex){
+        return ex.response;
     }
 }
 
@@ -29,6 +56,7 @@ const _addToCartAsync = async (payload) => {
         return result.data
     }catch(ex){
         console.log("unable to add " + ex)
+        return ex.response;
     }
 }
 
@@ -55,6 +83,20 @@ const Product = types.model("product", {
         self.price = newProduct.price;
         self.isPlan = newProduct.isPlan;
     }
+})).views(self => ({
+    get getProduct(){
+        return {
+            id : self.id,
+            eventId : self.eventId,
+            type : self.type,
+            title : self.title,
+            offerName : self.offerName,
+            image : self.image,
+            imageSlide :  self.imageSlide,
+            price : self.price,
+            isPlan : self.isPlan
+        }
+    }
 }))
 
 const Item = types.model("item", {
@@ -69,13 +111,22 @@ const Item = types.model("item", {
         self.quantity = data.quantity;
         self.total = data.total;
     }
+})).views(self => ({
+    get getItem(){
+        return {
+            itemId: self.itemId,
+            quantity: self.quantity,
+            total: self.total,
+            product: self.product.getProduct
+        }
+    }
 }))
 
 const PayementMethod = types.model("payement_method", {
     id : types.optional(types.number, 0),
     title : types.optional(types.string, ""),
     description : types.optional(types.string, ""),
-    logo : types.maybe(types.string),
+    logo : types.maybeNull(types.string),
     module: types.optional(types.string, "")
 }).actions(self => ({
     setPayementMethod(newPayementMethod){
@@ -85,6 +136,16 @@ const PayementMethod = types.model("payement_method", {
         self.logo = newPayementMethod.logo;
         self.module = newPayementMethod.module;
     }
+})).views(self => ({
+    get getMethod(){
+        return {
+            id : self.id,
+            title : self.title,
+            description : self.description,
+            logo : self.logo,
+            module : self.module
+        }
+    }
 }))
 
 const Cart = types.model("cart", {
@@ -93,7 +154,6 @@ const Cart = types.model("cart", {
     totalShipping : types.optional(types.number, 0),
     totalDiscount : types.optional(types.number, 0),
     total : types.optional(types.number, 0),
-    // discount : types.maybe(types.number),
     items : types.optional(types.array(Item), []), 
     hasPlan : false,
     paymentMethods : types.optional(types.array(PayementMethod), []),
@@ -106,28 +166,42 @@ const Cart = types.model("cart", {
         self.totalShipping = newCart.totalShipping;
         self.totalDiscount = newCart.totalDiscount;
         self.total = newCart.total;
-        // self.discount = newCart.discount;
         self.items = newCart.items;
         self.hasPlan = newCart.hasPlan;
-        self.paymentMethods = newCart.carriers;
+        self.paymentMethods = newCart.paymentMethods;
         self.totalDiscountString = newCart.totalDiscountString;
     },
     async fetch(){
-        const cart = await _fetchCartAsync();
-        self.setCart(cart);
-        return cart;
+        const result = await _fetchCartAsync();
+        if(result.data.cart){
+            self.setCart(result.data.cart);
+        }
+        return result;
     },
     async addToCart(payload){
-        const result = await _addToCartAsync(payload);
-        self.setCart(result?.cart);
-
-        // console.log(result)
-        return(result);
+        const response = await _addToCartAsync(payload);
+        self.setCart(response?.cart);
+        return response;
+    },
+    async updateQuantity(itemId, payload){
+        const response = await _updateCartAsync(itemId, payload);
+        if(response.status === 200 ) {
+            self.setCart(response?.cart);
+        }
+        return response
+    },
+    async deleteItem(itemId){
+        const response = await _deleteItemAsync(itemId);
+        self.setCart(response?.data.cart)
+        return response;
     }
 }))
 .views(self => ({
     get getItems(){
-        return self.items
+        return self.items.map(item => item.getItem )
+    },
+    get getPayementMethods(){
+        return self.paymentMethods.map(item => item.getMethod )
     }
 }))
 

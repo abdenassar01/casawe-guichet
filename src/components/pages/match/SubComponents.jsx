@@ -46,6 +46,7 @@ export const Discription = styled.div`
     padding-left: 20px;
     background-color: white;
     color: #626467;
+    /* overflow-x: scroll; */
     font-size: 15px;
 `
 
@@ -119,7 +120,7 @@ export const Label = styled.label`
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-    background-color: #f70;
+    background-color: ${props => props.disabled ? "#f3b681" : "#f70" };
     color: white;
     border-radius: 3px;
     pointer-events: none;
@@ -133,14 +134,10 @@ export const Input = styled.input`
     margin: 0px;
     padding: 0px;
     opacity: 0;
-    position: absolute;
+    position: absolute;    
 
     &:checked + ${Label}{
         background-color: #2DAAE1;
-    }
-
-    &:disabled + ${Label}{
-        background-color: #FFD6B3;
     }
 `
 

@@ -9,14 +9,13 @@ import { observer } from "mobx-react-lite";
 import Loading from "../../loading/Loading";
 import { Navigate } from "react-router-dom";
 import instance from "../../../axios/axios";
-import requests from "../../../axios/requests";
 
 import { Helmet } from "react-helmet-async";
 
 const Matches = observer(() => {
     
   const { isLoading, error, data } = useQuery("fetchListing", () => 
-    instance.get(requests.listingSport)
+    instance.get("/events?category_id=6&page=1&status=expired")
     .then(response => response)
     .catch(err => err)
   )

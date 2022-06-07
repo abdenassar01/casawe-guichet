@@ -88,7 +88,6 @@ const Match = () => {
           </Discription>
         </Left>
         <Right>
-          <Alert message={ message } setMessage={ setMessage } status={ setStatus }/>
           <Purchase>
             <BuyPanel>
               <H1>{data?.data.event.title}</H1>
@@ -98,10 +97,11 @@ const Match = () => {
             </BuyPanel>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <CheckList>
+              <Alert message={ message } setMessage={ setMessage } status={ status }/>
                 { data?.data.event.offers.map(offer => 
-                    <RadioInput key={offer.id}>
-                      <Input type="radio" {...register("offer", { required: true })} value={ offer.id } name="offer" id={ offer.id } disabled={ offer.status !== "enable" && !offer.soldOut }/>
-                      <Label htmlFor={offer.id}>
+                    <RadioInput key={offer.id} >
+                      <Input type="radio"  {...register("offer", { required: true })}  value={ offer.id } name="offer" id={ offer.id } disabled={ offer.soldOut }/>
+                      <Label htmlFor={offer.id} disabled={ offer.soldOut }>
                         <Category>
                           { offer.soldOut && <AiOutlineClose /> }                            
                           { offer.title }
@@ -111,7 +111,7 @@ const Match = () => {
                     </RadioInput>
                 ) }   
                 <Checkout>
-                <CheckoutButton type="submit" value={ !data?.data.event.soldOut ? "Ajouter Panier" : "guichet ferme" } />
+                <CheckoutButton type="submit" value={ !data?.data.event.soldOut ? "Ajouter Panier" : "guichet ferme" }  disabled={ data?.data.event.soldOut } />
               </Checkout>
               <EmptyDiv>
                 <ErrorMessage> { (errors.offer?.type === 'required') &&  "Tu doit choisi une offre" }</ErrorMessage>

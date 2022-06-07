@@ -43,11 +43,18 @@ export const PanieBox = styled.div`
     font-size: 15px;
     letter-spacing: .01rem;
     line-height: 1.5em;
-    width: 100%;
+    width: 94%;
+    border-radius: 3px;
 
     @media ( max-width: 760px ) {
         width: 90%;
     }
+`
+
+export const Wrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 `
 
 export const StyledRouteLink = styled(RouteLink)`
@@ -62,7 +69,7 @@ export const Items = styled.div`
 
 `
 
-export const Item = styled.div`
+export const ItemWrapper = styled.div`
     display: flex;
     justify-content: flex-start;
     gap: 20px; 
@@ -110,6 +117,7 @@ export const Title = styled.h3`
     font-size: 23px;
     color: black;
     font-weight: 500;
+    font-size: 28px;
 `
 
 export const Pricing = styled.div`
@@ -148,4 +156,172 @@ export const Price = styled.p`
 
 export const BoldTotal = styled.span`
     font-weight: bold;
+`
+
+export const PayementWrapper = styled.div`
+    padding: 10px ;
+    margin-top: 20px;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+`
+
+export const Text = styled.p`
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 3px 0 0;
+`
+
+export const Form = styled.form`
+
+`
+
+export const Field = styled.div`
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+`
+
+export const Label = styled.label`
+    position: relative;
+`
+
+export const Description = styled.div`
+    font-size: 13px;
+    background-color: #f5f5f5;
+    padding: 12px 38px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 19px;
+    max-width: 72%;
+    margin-bottom: 14px;
+    margin-top: 7px;
+    font-weight: 300;
+    line-height: 19px;
+    display: none;
+`
+
+export const Radio = styled.input`
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    &:checked + ${Label} {
+        font-weight: ${props => !props.regular && "bold" };
+
+        ${Description}{
+            display: block;
+        }
+    }
+`
+
+export const Span = styled.span`
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+`
+
+export const Left = styled.div`
+    min-width: 60%;
+    display: flex;
+    flex-direction: column;
+
+
+    @media (max-width: 760px) {
+        width: 90%;
+    }
+`
+
+export const Right = styled.div`
+    min-width: 35%;
+    width: 37%;
+    margin-top: 50px;
+
+    @media (max-width: 760px) {
+        width: 90%;
+    }
+`
+
+export const CodePromotionnelWrapper = styled.div`
+    padding: 20px;
+    border-radius: 3px;
+    background-color: white;
+    font-size: 21px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start; 
+
+
+    @media (max-width: 760px) {
+        width: 100%;
+    }
+`
+
+export const InputField = styled.div`
+    /* padding: 10px; */
+    padding: 30px 0;
+
+    @media (max-width: 760px) {
+        display: flex;
+        align-items: center ;
+    }
+` 
+
+export const PromoBox = styled.input`
+    padding: 10px;
+    border: 2px solid #B8B8B8;
+    border-radius: 5px 0 0 5px;
+    font-size: 14px;
+    font-weight: bold;
+
+    &:focus{
+        outline: none;
+    }
+`
+
+export const OkButton = styled.button`
+    background-color: #b8b8b8;
+    border: 2px solid #b8b8b8;
+    border-radius: 0 5px 5px 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    font-size: 14px;
+    width: 100px;
+    font-weight: 400;
+    padding: 10px 0;
+`
+
+export const TotalWrapper = styled.div`
+    padding: 20px;
+    background-color: white;
+`
+
+export const RegularText = styled.p`
+    padding: 20px 0;
+`
+
+export const Content = styled.div`
+    padding-top: 50px;
+`
+
+export const Checkout = styled.button`
+    padding: 10px 0;
+    margin: 20px 0;
+    color: #ffffff;
+    background-color: #071D39;
+    border: none;
+    border-radius: 2px;
+    font-size: 1rem;
+    width: 100%;
+`
+
+export const EmptyCart = styled.div`
+    margin-top: 50px;
+    padding: 50px 20px;
+    background-color: white;
+    border-radius: 2px;
 `
