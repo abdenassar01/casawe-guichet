@@ -175,7 +175,9 @@ const Cart = types.model("cart", {
     },
     async updateQuantity(itemId, payload){
         const response = await _updateCartAsync(itemId, payload);
-        self.setCart(response?.cart);
+        if(response.status === 200 ) {
+            self.setCart(response?.cart);
+        }
         return response
     },
     async deleteItem(itemId){

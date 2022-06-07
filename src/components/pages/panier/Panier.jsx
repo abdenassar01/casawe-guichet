@@ -60,9 +60,9 @@ const Panier = observer(() => {
             ( 
                <Items>
                    {
-                       items.map(item => (
-                                <Item key={item?.itemId} item={item} setAlert={ setMessage } setStatus={ setStatus } />
-                       ))
+                        items.map(item => (
+                            <Item key={item?.itemId} item={item} setAlert={ setMessage } setStatus={ setStatus } />
+                        ))
                    }  
                 </Items> 
             )

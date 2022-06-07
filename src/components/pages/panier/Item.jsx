@@ -28,17 +28,23 @@ const Item = observer(({ item, setAlert, setStatus }) => {
             }
     
             const response = await cart.updateQuantity(item.itemId, payload)
+            if(response.status !== 200){
+                setAlert(response?.data.error)
+                setStatus(response?.data.success)
+            }else{
+                setAlert(response?.data.message)
+                setStatus(response?.data.success)
+                cart.fetch();
+            } 
         }  
     } 
 
     const removeItem = async () => {
         try{
             const response = await cart.deleteItem( item?.itemId );
-            // console.log(response)
             setAlert(response?.data.message);
             setStatus(response?.data.success);
         }catch(ex){
-            // console.log(ex)
             setAlert(ex?.data.error);
             setStatus(ex?.data.success);
         }
