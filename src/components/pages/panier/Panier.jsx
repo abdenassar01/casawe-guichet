@@ -21,7 +21,7 @@ const Panier = observer(() => {
     const [ message, setMessage ] = useState("")
     const [ status, setStatus ] = useState(false)
     const [ items, setItems ] = useState([]);
-    const [ payemetMethod, setPayementMethod ] = useState(0);
+    const [ payemetMethod, setPayementMethod ] = useState(6);
 
 
     useEffect(() => {
@@ -76,7 +76,13 @@ const Panier = observer(() => {
             }
 
             </PanieBox>
-            <PayementMethodes setPayementMethod={ setPayementMethod } payemetMethod={ payemetMethod } />
+            { cart?.count > 0 && 
+                <PayementMethodes 
+                    setPayementMethod={ setPayementMethod } 
+                    payemetMethod={ payemetMethod }   
+                    items={ cart?.paymentMethods } 
+                />  
+            }
         </ContentBox>
     </PanierWrapper>
   )

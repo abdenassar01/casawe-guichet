@@ -126,7 +126,7 @@ const PayementMethod = types.model("payement_method", {
     id : types.optional(types.number, 0),
     title : types.optional(types.string, ""),
     description : types.optional(types.string, ""),
-    logo : types.maybe(types.string),
+    logo : types.maybeNull(types.string),
     module: types.optional(types.string, "")
 }).actions(self => ({
     setPayementMethod(newPayementMethod){
@@ -135,6 +135,16 @@ const PayementMethod = types.model("payement_method", {
         self.description = newPayementMethod.description;
         self.logo = newPayementMethod.logo;
         self.module = newPayementMethod.module;
+    }
+})).views(self => ({
+    get getMethod(){
+        return {
+            id : self.id,
+            title : self.title,
+            description : self.description,
+            logo : self.logo,
+            module : self.module
+        }
     }
 }))
 
@@ -158,7 +168,7 @@ const Cart = types.model("cart", {
         self.total = newCart.total;
         self.items = newCart.items;
         self.hasPlan = newCart.hasPlan;
-        self.paymentMethods = newCart.carriers;
+        self.paymentMethods = newCart.paymentMethods;
         self.totalDiscountString = newCart.totalDiscountString;
     },
     async fetch(){
@@ -189,6 +199,9 @@ const Cart = types.model("cart", {
 .views(self => ({
     get getItems(){
         return self.items.map(item => item.getItem )
+    },
+    get getPayementMethods(){
+        return self.paymentMethods.map(item => item.getMethod )
     }
 }))
 

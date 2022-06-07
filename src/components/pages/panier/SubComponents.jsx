@@ -164,31 +164,6 @@ export const Text = styled.p`
     margin: 3px 0 0;
 `
 
-export const CheckBox = styled.span`
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    height: 20px;
-    width: 20px;
-    border: 1px solid #57a8dc;
-    border-radius: 3px;
-
-    &::after{
-        content: "";
-        position: absolute;
-        width: 56%;
-        height: 56%;
-        background: #57a8dc;
-        border-radius: 2px;
-        left: 4px;
-        top: 4px;
-        transform: scale(0);
-        opacity: 0;
-        transition: all .1s ease-in-out;
-    }
-`
-
 export const Form = styled.form`
 
 `
@@ -203,18 +178,34 @@ export const Label = styled.label`
     position: relative;
 `
 
+export const Description = styled.div`
+    font-size: 13px;
+    background-color: #f5f5f5;
+    padding: 12px 38px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 19px;
+    max-width: 72%;
+    margin-bottom: 14px;
+    margin-top: 7px;
+    font-weight: 300;
+    line-height: 19px;
+`
+
 export const Radio = styled.input`
-    position: absolute;
-    opacity: 0;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
-    height: 0;
-    width: 0;
+
+    &:checked + ${Label} {
+        font-weight: bold;
+    }
 `
 
 export const Span = styled.span`
-    margin-left: 30px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1rem;
     margin-bottom: 1rem;
-    font-weight: 500;
 `
+

@@ -1,50 +1,33 @@
-import { useForm } from "react-hook-form"
 import { Form, Radio, Field, Label, Span, 
-  PayementWrapper, Text, Title, CheckBox 
+  PayementWrapper, Text, Title, Description 
 } from "./SubComponents"
 
-const PayementMethodes = ({ payemetMethod, setPayementMethod }) => {
-
-  const { register, handleSubmit, formState: { errors } } = useForm();
+const PayementMethodes = ({ payemetMethod, setPayementMethod, items }) => {
 
   return (
     <PayementWrapper>
       <Title>Mode de paiement</Title>
       <Text>Sélectionez votre moyen de paiement</Text>
       <hr />
-      <Form>
-        <Field>
-          <Radio 
-            type="radio" id="id6" value={`id`}
-            {...register("payement_method")}
-          /> 
-          <Label htmlFor="id6">
-            <Span>Carte bancaire marocaine et internationale</Span> 
-            <CheckBox /> 
-          </Label>
-        </Field>
-        <Field>
-          <Radio 
-            type="radio" id="id7"
-            value={`id`}
-            {...register("payement_method")} 
-          /> 
-          <Label htmlFor="id7">
-            <Span>Carte bancaire marocaine et internationale</Span>
-            <CheckBox /> 
-          </Label>
-        </Field>
-        <Field>
-          <Radio 
-            type="radio" id="id8" 
-            value={`id`}
-            {...register("payement_method")} 
-          /> 
-          <Label htmlFor="id8">
-            <Span>Carte bancaire marocaine et internationale</Span>
-            <CheckBox /> 
-          </Label>
-        </Field>
+      <Form >
+        {
+          items.map(method => (
+            <Field key={ method?.id }>
+              <Radio 
+                type="radio" id={ method?.id }
+                value={ method?.id } 
+                name="payement_method"
+                onChange={ (e) => {
+                  setPayementMethod(e.target.value)
+                } }
+              /> 
+              <Label htmlFor={ method?.id }>
+                <Span> { method?.title } </Span> 
+                <Description dangerouslySetInnerHTML={{ __html: method?.description }}/>
+              </Label>
+            </Field>
+          ))
+        }
       </Form>
     </PayementWrapper>
   )
