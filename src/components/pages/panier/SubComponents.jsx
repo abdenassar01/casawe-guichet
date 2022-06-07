@@ -62,7 +62,7 @@ export const Items = styled.div`
 
 `
 
-export const Item = styled.div`
+export const ItemWrapper = styled.div`
     display: flex;
     justify-content: flex-start;
     gap: 20px; 

@@ -11,9 +11,36 @@ const _fetchCartAsync = async () => {
             },
             withCredentials: true
         })
+        return result;
+    } catch (ex){
+        return ex.response;
+    }
+}
+
+const _deleteItemAsync = async (itemId) => {
+    try{
+        const result = await instance.get(`/cart/delete/${ itemId }`, {
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("token")
+            },
+            withCredentials: true
+        })
         return result.data.cart;
     } catch (ex){
         console.log("Error accured " + ex )
+    }
+}
+
+const _updateCartAsync = async (itemId, payload) => {
+    try{
+        const result = await instance.post(`/cart/update/${itemId}`, payload, {
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("token")
+            }
+        })
+        return result;
+    }catch(ex){
+        return ex.response;
     }
 }
 
@@ -29,6 +56,7 @@ const _addToCartAsync = async (payload) => {
         return result.data
     }catch(ex){
         console.log("unable to add " + ex)
+        return ex.response;
     }
 }
 
@@ -55,6 +83,20 @@ const Product = types.model("product", {
         self.price = newProduct.price;
         self.isPlan = newProduct.isPlan;
     }
+})).views(self => ({
+    get getProduct(){
+        return {
+            id : self.id,
+            eventId : self.eventId,
+            type : self.type,
+            title : self.title,
+            offerName : self.offerName,
+            image : self.image,
+            imageSlide :  self.imageSlide,
+            price : self.price,
+            isPlan : self.isPlan
+        }
+    }
 }))
 
 const Item = types.model("item", {
@@ -68,6 +110,15 @@ const Item = types.model("item", {
         self.product.setProduct(data.product); 
         self.quantity = data.quantity;
         self.total = data.total;
+    }
+})).views(self => ({
+    get getItem(){
+        return {
+            itemId: self.itemId,
+            quantity: self.quantity,
+            total: self.total,
+            product: self.product.getProduct
+        }
     }
 }))
 
@@ -113,21 +164,26 @@ const Cart = types.model("cart", {
         self.totalDiscountString = newCart.totalDiscountString;
     },
     async fetch(){
-        const cart = await _fetchCartAsync();
-        self.setCart(cart);
-        return cart;
+        const result = await _fetchCartAsync();
+        if(result.data.cart){
+            self.setCart(result.data.cart);
+        }
+        return result;
     },
     async addToCart(payload){
-        const result = await _addToCartAsync(payload);
-        self.setCart(result?.cart);
-
-        // console.log(result)
-        return(result);
+        const response = await _addToCartAsync(payload);
+        self.setCart(response?.cart);
+        return response;
+    },
+    async updateQuantity(itemId, payload){
+        const response = await _updateCartAsync(itemId, payload);
+        self.setCart(response?.cart);
+        return response
     }
 }))
 .views(self => ({
     get getItems(){
-        return self.items
+        return self.items.map(item => item.getItem )
     }
 }))
 

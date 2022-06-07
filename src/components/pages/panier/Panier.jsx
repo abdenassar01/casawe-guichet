@@ -1,25 +1,39 @@
-import { PanierWrapper, Tab, Heading, Icon,
+import { PanierWrapper, Tab, Heading,
     ContentBox, PanieBox, StyledRouteLink,
-    Items, Item,  ItemImage, ItemContent,
-    OffreName, Title, Pricing, Quantity, 
-    Input, PricesWrapper, Price, BoldTotal
+    Items
 } from "./SubComponents";
+
+import Alert from "../../alert/Alert";
+
+import Item from "./Item";
 
 import { Helmet } from "react-helmet-async";
 
 import { useCart } from "../../../models/cart";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import { RiCloseFill } from "react-icons/ri";
 
 const Panier = observer(() => {
 
     const cart = useCart();
 
+    const [ message, setMessage ] = useState("")
+    const [ status, setStatus ] = useState(false)
+    const [ items, setItems ] = useState([]);
+
+
     useEffect(() => {
-        cart.fetch()
-        console.log( cart?.items )
+        const fetchCart = async () => {
+            const res = await cart.fetch() 
+            setItems( cart?.getItems )
+            if(res.status !== 200){
+                setMessage(res?.data?.error)
+                setStatus(res?.data?.success)
+            }
+        }
+        fetchCart();
+        
     },[cart])
 
   return (
@@ -39,31 +53,19 @@ const Panier = observer(() => {
             </Tab>
            
             <PanieBox>
+            <Alert message={ message } setMessage={ setMessage } status={ status }/>
+
             {
                 cart?.count > 0 ? 
-               ( <Items>
-                <Item>
-                    <Icon>
-                        <RiCloseFill size={25}/>
-                    </Icon>
-                    <ItemImage img="https://gcdn.imgix.net/events/green-challenge-tghazout-bay.png?w=900&h=600&fit=clip&auto=format,compress&q=80"/>
-                    <ItemContent>
-                        <Title>Green Challenge Tghazout Bay</Title>
-                        <OffreName>Offre: Obstacle race pass</OffreName>
-                        <Pricing>
-                            <Quantity>
-                                Quantité
-                                <Input type="number" defaultValue={1} />
-                            </Quantity>
-                            <PricesWrapper>
-                                <Price>PPC: 300MAD</Price>
-                                <Price>Sous-total: <BoldTotal>300MAD</BoldTotal></Price>
-                            </PricesWrapper>
-                        </Pricing>
-                    </ItemContent>
-                </Item>
-               
-            </Items> )
+            ( 
+               <Items>
+                   {
+                       items.map(item => (
+                                <Item key={item?.itemId} item={item} />
+                       ))
+                   }  
+                </Items> 
+            )
             : <div>
                 Votre panier est vide. &nbsp;
                 <StyledRouteLink to="/mes-commandes" color="#0066b2">
@@ -71,8 +73,7 @@ const Panier = observer(() => {
                 </StyledRouteLink>
             </div>  
             }
-                
-                
+                   
             </PanieBox>
         </ContentBox>
     </PanierWrapper>

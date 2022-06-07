@@ -88,7 +88,6 @@ const Match = () => {
           </Discription>
         </Left>
         <Right>
-          <Alert message={ message } setMessage={ setMessage } status={ setStatus }/>
           <Purchase>
             <BuyPanel>
               <H1>{data?.data.event.title}</H1>
@@ -98,6 +97,7 @@ const Match = () => {
             </BuyPanel>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <CheckList>
+              <Alert message={ message } setMessage={ setMessage } status={ status }/>
                 { data?.data.event.offers.map(offer => 
                     <RadioInput key={offer.id}>
                       <Input type="radio" {...register("offer", { required: true })} value={ offer.id } name="offer" id={ offer.id } disabled={ offer.status !== "enable" && !offer.soldOut }/>
