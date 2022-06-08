@@ -1,8 +1,12 @@
+import { useState } from "react"
 import { CodePromotionnelWrapper, InputField, OkButton, 
   PromoBox, Tab, Heading 
 } from "../SubComponents"
 
-const CodePromotionnel = ({ code, setCode }) => {
+const CodePromotionnel = ({ setCode }) => {
+
+  const [ promo, setPromo ] = useState("")
+
   return (
     <CodePromotionnelWrapper>
         <Tab>
@@ -10,8 +14,11 @@ const CodePromotionnel = ({ code, setCode }) => {
           <Heading>Code promotionnel</Heading>
         </Tab>
         <InputField>
-          <PromoBox type="text" placeholder="Saisisser votre code" value={ code } onChange={ e => setCode(e.target.value) }/>
-          <OkButton>Ok</OkButton>
+          <PromoBox 
+            type="text" placeholder="Saisisser votre code" 
+            value={ promo } onChange={ e => setPromo(e.target.value) }
+          />
+          <OkButton onClick={ setCode(promo) }>Ok</OkButton>
         </InputField>
     </CodePromotionnelWrapper>
   )

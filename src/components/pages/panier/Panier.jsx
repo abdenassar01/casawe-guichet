@@ -29,11 +29,13 @@ const Panier = observer(() => {
     const [ validation, setValidation ] = useState("");
 
     useEffect(() => {
+        
         if(!licence){
             setValidation("Ce Champ est Obligatoire")
         }else{
             setValidation("")
         }
+
         setItems( cart?.getItems )
         const fetchCart = async () => {
             const res = await cart.fetch() 
@@ -43,7 +45,7 @@ const Panier = observer(() => {
                 setStatus(res?.data?.success)
             }
         }
-        // fetchCart();
+        fetchCart();
     },[ cart, licence ])
 
     const checkout = () => {
