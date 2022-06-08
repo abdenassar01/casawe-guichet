@@ -24,9 +24,16 @@ const Panier = observer(() => {
     const [ status, setStatus ] = useState(false)
     const [ items, setItems ] = useState([]);
     const [ payemetMethod, setPayementMethod ] = useState(6);
-
+    const [ promocode, setPromoCode ] = useState();
+    const [ licence, setLicence ] = useState(false);
+    const [ validation, setValidation ] = useState("");
 
     useEffect(() => {
+        if(!licence){
+            setValidation("Ce Champ est Obligatoire")
+        }else{
+            setValidation("")
+        }
         setItems( cart?.getItems )
         const fetchCart = async () => {
             const res = await cart.fetch() 
@@ -36,8 +43,18 @@ const Panier = observer(() => {
                 setStatus(res?.data?.success)
             }
         }
-        fetchCart();
-    },[ cart ])
+        // fetchCart();
+    },[ cart, licence ])
+
+    const checkout = () => {
+
+        const payload = {
+            items: items,
+            payment_method_id: payemetMethod,
+            source: "guichet"
+        }
+        console.log( payload )
+    }   
 
   return (
     <PanierWrapper>
@@ -59,14 +76,7 @@ const Panier = observer(() => {
                 <Wrapper>
                     <Left>
                         <PanieBox>
-                        <div>
-                    Votre panier est vide. &nbsp;
-                    <StyledRouteLink to="/mes-commandes" color="#0066b2">
-                        Continuer mes achats
-                    </StyledRouteLink>
-                </div>   
-                            <Alert message={ message } setMessage={ setMessage } status={ status }/>
-                            
+                            <Alert message={ message } setMessage={ setMessage } status={ status }/>    
                             <Items>
                                 {
                                     items.map(item => (
@@ -75,17 +85,21 @@ const Panier = observer(() => {
                                 }  
                             </Items> 
                         </PanieBox>
-                        { cart?.count > 0 && 
-                            <PayementMethodes 
-                                setPayementMethod={ setPayementMethod } 
-                                payemetMethod={ payemetMethod }   
-                                items={ cart?.paymentMethods } 
-                            />  
-                        }
+                    { cart?.count > 0 && 
+                        <PayementMethodes 
+                            setPayementMethod={ setPayementMethod } 
+                            items={ cart?.paymentMethods } 
+                        />  
+                    }
                     </Left>
                     <Right>
-                        <CodePromotionnel />
-                        <Total />
+                        <CodePromotionnel code={ promocode } setCode={ setPromoCode } />
+                        <Total 
+                            subTotal={cart?.subTotal} total={cart?.total} 
+                            onCheckout={ checkout } licence={ licence } 
+                            setLicence={ setLicence } 
+                            validation={ validation }
+                        />
                     </Right>
                 </Wrapper>
                 )

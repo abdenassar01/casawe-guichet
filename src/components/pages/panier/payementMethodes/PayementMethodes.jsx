@@ -2,7 +2,7 @@ import { Form, Radio, Field, Label, Span,
   PayementWrapper, Text, Title, Description 
 } from "../SubComponents"
 
-const PayementMethodes = ({ payemetMethod, setPayementMethod, items }) => {
+const PayementMethodes = ({ setPayementMethod, items }) => {
 
   return (
     <PayementWrapper>
@@ -17,6 +17,7 @@ const PayementMethodes = ({ payemetMethod, setPayementMethod, items }) => {
                 type="radio" id={ method?.id }
                 value={ method?.id } 
                 name="payement_method"
+                // checked={ method?.id === 6 }
                 onChange={ (e) => {
                   setPayementMethod(e.target.value)
                 } }

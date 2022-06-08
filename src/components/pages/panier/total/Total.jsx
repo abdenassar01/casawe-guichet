@@ -1,8 +1,8 @@
 import { TotalWrapper, Tab, Heading, Radio, RegularText, 
-    Label, Field , Content, Checkout 
+    Label, Field , Content, Checkout, Validator 
 } from "../SubComponents";
 
-const Total = () => {
+const Total = ({ subTotal, total, onCheckout, licence, setLicence, validation }) => {
   return (
     <TotalWrapper>
         <Tab>
@@ -11,7 +11,7 @@ const Total = () => {
         </Tab>
         <Content>
             <RegularText>
-                Total des articles 3490 MAD
+                Total des articles: { subTotal } MAD
             </RegularText> 
             {
                 /* <RegularText>
@@ -20,24 +20,23 @@ const Total = () => {
             }
             <hr />
             <RegularText>
-                Total a paye
+                Total a paye: { total } MAD
             </RegularText>
             <hr />
             <Field>
                 <Radio 
                 type="radio" id="liecence"
-                value={ "method?.id "} 
+                value={ licence } 
                 name="liecence"
-                regular
-                onChange={ (e) => {
-                    // setPayementMethod(e.target.value)
-                } }
+                required
+                onChange={ e => setLicence(e.target.value) }
                 /> 
                 <Label htmlFor="liecence" >
                     J'ai lu <a target="_blank" rel="noreferrer" href="https://www.guichet.com/mentions-legales">les conditions générales de vente</a> et j'y adhère sans réserve.
                 </Label>
             </Field>
-            <Checkout>Passer ma commande</Checkout>
+            <Validator> { validation } </Validator>
+            <Checkout onClick={ onCheckout }>Passer ma commande</Checkout>
         </Content>
     </TotalWrapper>
   )

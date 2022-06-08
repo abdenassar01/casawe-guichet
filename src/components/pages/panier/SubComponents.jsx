@@ -12,6 +12,10 @@ export const PanierWrapper = styled.div`
 
 export const ContentBox = styled.div`
     width: 85%;
+
+    @media (max-width: 768px) {
+        width: 95%;
+    }
 `
 
 export const Tab = styled.div`
@@ -36,25 +40,26 @@ export const Heading = styled.h1`
 
 export const PanieBox = styled.div`
     margin-top: 50px;
-    padding: 60px 30px;
+    /* padding: 60px 10px; */
     color: #626467;
+    width: 97%;
     background-color: white;
+    padding: 60px 20px;
     font-weight: 300;
     font-size: 15px;
     letter-spacing: .01rem;
     line-height: 1.5em;
-    width: 94%;
     border-radius: 3px;
-
-    @media ( max-width: 760px ) {
-        width: 90%;
-    }
 `
 
 export const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    @media ( max-width: 760px ) {
+        width: 100%;
+    }
 `
 
 export const StyledRouteLink = styled(RouteLink)`
@@ -66,7 +71,7 @@ export const StyledRouteLink = styled(RouteLink)`
 `
 
 export const Items = styled.div`
-
+    width: 100%;
 `
 
 export const ItemWrapper = styled.div`
@@ -76,6 +81,7 @@ export const ItemWrapper = styled.div`
     padding-bottom: 20px;
     border-bottom: 1px solid grey;
     position: relative;
+    width: 100%;
 `
 
 
@@ -95,8 +101,8 @@ export const ItemImage = styled.div`
     width: 120px;
 
     @media ( max-width: 760px ) {
-        width: 200px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
 `
 
@@ -111,13 +117,20 @@ export const OffreName = styled.div`
     margin-bottom: 0.5rem;
     font-weight: bold;
     line-height: 1.2;
+
+    @media ( max-width: 760px ) {
+        font-size: .9rem;
+    }
 `
 
 export const Title = styled.h3`
-    font-size: 23px;
     color: black;
     font-weight: 500;
     font-size: 28px;
+
+    @media ( max-width: 760px ) {
+        font-size: 18px;
+    }
 `
 
 export const Pricing = styled.div`
@@ -159,9 +172,9 @@ export const BoldTotal = styled.span`
 `
 
 export const PayementWrapper = styled.div`
-    padding: 10px ;
+    padding: 10px 20px;
     margin-top: 20px;
-    width: 100%;
+    width: 97%;
     background-color: white;
     border-radius: 3px;
 `
@@ -174,7 +187,7 @@ export const Text = styled.p`
 `
 
 export const Form = styled.form`
-
+    width: 100%;
 `
 
 export const Field = styled.div`
@@ -196,11 +209,16 @@ export const Description = styled.div`
     font-weight: 300;
     line-height: 19px;
     max-width: 72%;
+    width: 500px;
     margin-bottom: 14px;
     margin-top: 7px;
     font-weight: 300;
     line-height: 19px;
     display: none;
+
+    @media (max-width: 670px) {
+        width: 250px;
+    }
 `
 
 export const Radio = styled.input`
@@ -223,14 +241,20 @@ export const Span = styled.span`
     margin-bottom: 1rem;
 `
 
+export const Validator = styled.span`
+    font-size: 13px;
+    color: #dc3545;
+`
+
 export const Left = styled.div`
     min-width: 60%;
     display: flex;
     flex-direction: column;
+    padding: 0;
 
 
     @media (max-width: 760px) {
-        width: 90%;
+        width: 97%;
     }
 `
 
@@ -240,7 +264,7 @@ export const Right = styled.div`
     margin-top: 50px;
 
     @media (max-width: 760px) {
-        width: 90%;
+        width: 100%;
     }
 `
 
@@ -254,11 +278,6 @@ export const CodePromotionnelWrapper = styled.div`
     flex-direction: column;
     gap: 20px;
     justify-content: flex-start; 
-
-
-    @media (max-width: 760px) {
-        width: 100%;
-    }
 `
 
 export const InputField = styled.div`

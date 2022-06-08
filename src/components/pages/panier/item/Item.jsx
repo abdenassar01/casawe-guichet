@@ -62,7 +62,7 @@ const Item = observer(({ item, setAlert, setStatus }) => {
             <Pricing>
                 <Quantity>
                     Quantité
-                    <Input type="number" value={ quantity } onChange={ handleChange } />
+                    <Input type="number" value={ quantity } onChange={ (e) => handleChange(e) } />
                 </Quantity>
                 <PricesWrapper>
                     <Price>PPC: { item?.product.price } MAD</Price>
