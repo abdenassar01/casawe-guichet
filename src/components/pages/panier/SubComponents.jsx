@@ -244,11 +244,10 @@ export const Validator = styled.span`
 `
 
 export const Left = styled.div`
-    min-width: 60%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     padding: 0;
-
 
     @media (max-width: 760px) {
         width: 97%;

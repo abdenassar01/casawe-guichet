@@ -19,6 +19,7 @@ const Item = observer(({ item, setAlert, setStatus }) => {
     const handleChange = async (e) => {
 
         if(e.target.value){
+
             setQuantity(e.target.value)
 
             const payload = {
@@ -27,7 +28,8 @@ const Item = observer(({ item, setAlert, setStatus }) => {
                 type: "up"
             }
     
-            const response = await cart.updateQuantity(item.itemId, payload)
+            const response = await cart.updateQuantity(item?.itemId, payload)
+            console.log(item?.itemId)
             if(response.status !== 200){
                 setAlert(response?.data.error)
                 setStatus(response?.data.success)

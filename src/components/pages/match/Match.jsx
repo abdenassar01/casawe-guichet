@@ -14,22 +14,22 @@ import Loading from "../../loading/Loading";
 import { TiCalendarOutline } from 'react-icons/ti'
 import { AiOutlineClose } from 'react-icons/ai'
 
-import { Navigate } from "react-router-dom";
-import { useParams } from 'react-router-dom';
-import { useQuery } from "react-query";
 import instance  from "../../../axios/axios"
-import { Helmet } from "react-helmet-async";
 
 import { useCart } from "../../../models/cart";
 import { useUserStore } from "../../../models/userStore";
 
+import { Navigate } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import { useQuery } from "react-query";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 const Match = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
-
+  
   const [ message, setMessage ] = useState("");
   const [ status, setStatus ] = useState(false);
   const [ authorized, setAuthorized ] = useState(true);
@@ -39,6 +39,14 @@ const Match = () => {
   const matchId = useParams()
 
   const cart = useCart();
+
+  function truncateString(str, num) {
+    if (str.length > num) {
+      return str.slice(0, num) + "...";
+    } else {
+      return str;
+    }
+  }
 
   const onSubmit = async (data) => {
 
@@ -51,7 +59,7 @@ const Match = () => {
       setAuthorized(false)
     }
 
-    const result = await cart.addToCart(payload)
+    const result = await cart.addToCart(payload, matchId)
     setStatus(result?.success)
     setMessage(result?.message)
   }
@@ -105,7 +113,7 @@ const Match = () => {
             <BuyPanel>
               <H1>{data?.data.event.title}</H1>
               <center>
-                <Discription  dangerouslySetInnerHTML={{ __html: data?.data.event.description }} />
+                <Discription  dangerouslySetInnerHTML={{ __html:  truncateString(data?.data.event.description, 200 ) }} />
               </center>
             </BuyPanel>
             <Form onSubmit={handleSubmit(onSubmit)}>
