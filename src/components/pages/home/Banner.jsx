@@ -1,4 +1,6 @@
-import { Section, Raw, RawItem , IconWrapper, Text, BannerHelper, GradiantShap, H4 } from './SubComponents';
+import { Section, Raw, RawItem , IconWrapper, Text, 
+    BannerHelper, GradiantShap, H4 
+} from './SubComponents';
 
 const Banner = () => {
   return (

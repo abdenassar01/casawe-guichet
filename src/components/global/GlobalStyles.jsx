@@ -15,6 +15,23 @@ const GlobalStyle = createGlobalStyle`
   body{
     background: #f2f5f7;
   }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #e0e0e0; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #0C70BD; 
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #003C72; 
+  }
 `;
  
 export default GlobalStyle;

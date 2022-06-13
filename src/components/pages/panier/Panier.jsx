@@ -78,7 +78,9 @@ const Panier = observer(() => {
                 <Wrapper>
                     <Left>
                         <PanieBox>
-                            <Alert message={ message } setMessage={ setMessage } status={ status }/>    
+                            <Alert 
+                                message={ message } setMessage={ setMessage } status={ status }
+                            />    
                             <Items>
                                 {
                                     items.map(item => (

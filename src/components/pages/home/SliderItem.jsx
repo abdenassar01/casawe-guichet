@@ -1,5 +1,3 @@
-import React from 'react'
-
 import {
     SliderItemWrapper, Image, Panel,
     ImageWrapper, Content, LinkWrapper,
@@ -16,6 +14,7 @@ import { TiSocialTwitter,
         TiSocialPinterest, 
         TiSocialFacebook 
       } from 'react-icons/ti'
+
 import { RouteLink } from '../../routes/RoutesLinks'
       
 
@@ -69,23 +68,23 @@ const SliderItem = ({ event }) => {
                     <P><BsEmojiSmile size={12}/> Offre Special</P>
                     <HelperText> Partagez cet événement </HelperText>
                     <SocialMedia>
-                        <a href={`https://www.facebook.com/login.php?skip_api_login=1&api_key=966242223397117&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fsharer%2Fsharer.php%3Fu%3Dhttps%253A%252F%252Fsport.guichet.ma%252Fbilletterie%252Fsport%252Fwac-vs-ock%26title%3DWAC%2Bvs%2BOCK&cancel_url=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Fclose_window%2F%3Fapp_id%3D966242223397117%26connect%3D0%23_%3D_&display=popup&locale=en_GB`} 
+                        <a href={`https://www.facebook.com/login.php?skip_api_login=1&api_key=966242223397117&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fsharer%2Fsharer.php%3Fu%3Dhttps%253A%252F%252Fsport.guichet.ma%252Fbilletterie%252Fsport%252F${event.title}%26title%3D${event.title}&cancel_url=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Fclose_window%2F%3Fapp_id%3D966242223397117%26connect%3D0%23_%3D_&display=popup&locale=en_GB`} 
                             target="_blank" rel="noreferrer">
                             <Icon color="#3b5999"><TiSocialFacebook size={24}/></Icon>
                         </a>
-                        <a href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fsport.guichet.ma%2Fbilletterie%2Fsport%2Fwac-vs-ock&text=WAC%20vs%20OCK`}
+                        <a href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fsport.guichet.ma%2Fbilletterie%2Fsport%2F${event.title}&text=${event.title}`}
                             target="_blank" rel="noreferrer">
                             <Icon color="#00aced"><TiSocialTwitter size={24} /></Icon>
                         </a>
-                        <a href={`https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fsport.guichet.ma%2Fbilletterie%2Fsport%2Fwac-vs-ock&description=WAC%20vs%20OCK`} 
+                        <a href={`https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fsport.guichet.ma%2Fbilletterie%2Fsport%2F${event.title}&description=${event.title}`} 
                             target="_blank" rel="noreferrer">
                             <Icon color="#c8232c"><TiSocialPinterest size={24} /></Icon>
                         </a>
-                        <a href={`https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2FshareArticle%3Furl%3Dhttps%253A%252F%252Fsport.guichet.ma%252Fbilletterie%252Fsport%252Fwac-vs-ock%26title%3DWAC%2520vs%2520OCK%26mini%3Dtrue`} 
+                        <a href={`https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2FshareArticle%3Furl%3Dhttps%253A%252F%252Fsport.guichet.ma%252Fbilletterie%252Fsport%252F${event.title}%26title%3D${event.title}%26mini%3Dtrue`} 
                             target="_blank" rel="noreferrer">
                             <Icon color="#0976b4"><TiSocialLinkedin  size={24} /></Icon>
                         </a>
-                        <a href={`https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2FshareArticle%3Furl%3Dhttps%253A%252F%252Fsport.guichet.ma%252Fbilletterie%252Fsport%252Fwac-vs-ock%26title%3DWAC%2520vs%2520OCK%26mini%3Dtrue`} 
+                        <a href={`https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2FshareArticle%3Furl%3Dhttps%253A%252F%252Fsport.guichet.ma%252Fbilletterie%252Fsport%252F${event.title}%26title%3D${event.title}%26mini%3Dtrue`} 
                             target="_blank" rel="noreferrer">
                             <Icon color="#dd4b39"><TiSocialGooglePlus size={24} /></Icon>
                         </a>

@@ -46,8 +46,12 @@ export const Discription = styled.div`
     padding-left: 20px;
     background-color: white;
     color: #626467;
-    /* overflow-x: scroll; */
+    overflow-x: scroll;
     font-size: 15px;
+
+    &::-webkit-scrollbar {
+        height: 0px;
+    }
 `
 
 export const TabPanel = styled.ul`
@@ -125,7 +129,6 @@ export const Label = styled.label`
     border-radius: 3px;
     pointer-events: none;
 `
-
 
 export const Input = styled.input`
     display: block;

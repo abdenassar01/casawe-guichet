@@ -19,7 +19,9 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from "react-query";
 import instance  from "../../../axios/axios"
 import { Helmet } from "react-helmet-async";
+
 import { useCart } from "../../../models/cart";
+import { useUserStore } from "../../../models/userStore";
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -30,16 +32,25 @@ const Match = () => {
 
   const [ message, setMessage ] = useState("");
   const [ status, setStatus ] = useState(false);
+  const [ authorized, setAuthorized ] = useState(true);
+
+  const user = useUserStore();
 
   const matchId = useParams()
 
   const cart = useCart();
 
   const onSubmit = async (data) => {
+
     const payload = {
       offer_id : data.offer,
       quantity : 1
     }
+
+    if(!user.isAuthentificated){
+      setAuthorized(false)
+    }
+
     const result = await cart.addToCart(payload)
     setStatus(result?.success)
     setMessage(result?.message)
@@ -53,6 +64,8 @@ const Match = () => {
   if (isLoading) return <Loading />
 
   if (error) return <Navigate to="/error" replace/> 
+
+  if (!authorized) return <Navigate to="/connexion" replace/>
 
   return(
   <Wrapper>
@@ -125,8 +138,8 @@ const Match = () => {
               <Title>INFOS VENDEUR</Title>
             </WrapperBox>
             <ImageLogo
-            src="https://guichet.imgix.net/providers/l72rhrgN4QVbMIDAjG6muv1mHRgCkUoOa8BJkihT.png?w=200&h=150&fit=clip&auto=format,compress&q=80" 
-            alt="" 
+                src="https://guichet.imgix.net/providers/l72rhrgN4QVbMIDAjG6muv1mHRgCkUoOa8BJkihT.png?w=200&h=150&fit=clip&auto=format,compress&q=80" 
+                alt="casawe guichet" 
             />
             <TextInfoWrapper>
               <strong>CASAWI</strong>
