@@ -5,37 +5,39 @@ import SliedrItem from "./SliderItem";
 import Tickets from "./Tickets";
 
 import instance from '../../../axios/axios';
-import InfiniteScroll from "react-infinite-scroller";
 
 import { useInfiniteQuery } from 'react-query'
 import Loading from "../../loading/Loading";
 import { Navigate } from "react-router-dom";
 
 import { Helmet } from "react-helmet-async"
-import { useState } from "react";
+
+import InfiniteScroll from "react-infinite-scroller";
 
 const Home = () => {
 
-  const [ lastPage, setLastPage ] = useState(1)
-
-  const fetchEvents = async ({ page }) => {
-    const result = instance.get(`/events?page=${ page }`);
+  const fetchEvents = async ({ pageParam = 1 }) => {
+    const results = await instance.get(`/events?page=${ pageParam }`);
+    return { 
+      results, 
+      nextPage: pageParam + 1, 
+      totalPages: Math.ceil(results.data.pagination.total /12) };
   }
 
-  const { isLoading, error, data } = useInfiniteQuery("fetchListing", ({ pageParam = 1 }) => 
-    instance.get(`/events?page=${ pageParam }`)
-    .then(response => {
-      console.log(response);
-      setLastPage(response.data.pagination.lastPage)
-      console.log(lastPage)
-      return response;
-    })
+
+  const { data, isError, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery("data", 
+    fetchEvents,
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.nextPage < lastPage.totalPages) return lastPage.nextPage;
+        return undefined;
+      },
+    }
   )
 
+  if(isError) return <Navigate to="/error" />
   if(isLoading) return <Loading />
-  
-  if(error) return <Navigate to="/error" />
-
+ 
   return (
     <Wrapper>
       <Helmet>
@@ -48,12 +50,20 @@ const Home = () => {
       </Helmet>
       <Container>
        <Slider>
-          {data.data.events.map(event => 
+          { data?.pages[0]?.results.data.events.map(event => 
             <SliedrItem event={event} key={event.id} />
           )}          
         </Slider>
+        <InfiniteScroll 
+          hasMore={ hasNextPage } 
+          loadMore={ fetchNextPage } 
+          loader={ <Loading key={0}/> } 
+        >
+          { 
+            data?.pages.map((page) => <Tickets events={ page?.results.data.events }/> )
+          }
+        </InfiniteScroll>
         <Banner />
-        <Tickets events={ data.data.events }/>
       </Container>
     </Wrapper>
   )
