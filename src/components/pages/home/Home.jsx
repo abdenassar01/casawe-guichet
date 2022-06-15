@@ -4,21 +4,32 @@ import Banner from './Banner';
 import SliedrItem from "./SliderItem";
 import Tickets from "./Tickets";
 
-import { observer } from "mobx-react-lite";
-
 import instance from '../../../axios/axios';
-import requests from '../../../axios/requests';
-import { useQuery } from 'react-query'
+import InfiniteScroll from "react-infinite-scroller";
+
+import { useInfiniteQuery } from 'react-query'
 import Loading from "../../loading/Loading";
 import { Navigate } from "react-router-dom";
 
 import { Helmet } from "react-helmet-async"
+import { useState } from "react";
 
-const Home = observer(() => {
+const Home = () => {
 
-  const { isLoading, error, data } = useQuery("fetchListing", () => 
-    instance.get(requests.listingSport)
-    .then(response => response)
+  const [ lastPage, setLastPage ] = useState(1)
+
+  const fetchEvents = async ({ page }) => {
+    const result = instance.get(`/events?page=${ page }`);
+  }
+
+  const { isLoading, error, data } = useInfiniteQuery("fetchListing", ({ pageParam = 1 }) => 
+    instance.get(`/events?page=${ pageParam }`)
+    .then(response => {
+      console.log(response);
+      setLastPage(response.data.pagination.lastPage)
+      console.log(lastPage)
+      return response;
+    })
   )
 
   if(isLoading) return <Loading />
@@ -42,10 +53,10 @@ const Home = observer(() => {
           )}          
         </Slider>
         <Banner />
-        <Tickets events={data.data.events}/>
+        <Tickets events={ data.data.events }/>
       </Container>
     </Wrapper>
   )
-})
+}
 
 export default Home
