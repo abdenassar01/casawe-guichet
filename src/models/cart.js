@@ -1,7 +1,7 @@
 import { types } from "mobx-state-tree";
 import instance from "../axios/axios";
 
-// TODO: cart always return new cart because it needs a coockie 
+// TODO: manage cart in front end 
 
 const _fetchCartAsync = async () => {
     try{
@@ -179,6 +179,8 @@ const Cart = types.model("cart", {
         return result;
     },
     async addToCart(payload){
+        // self.count += 1
+        // self.items.push()
         const response = await _addToCartAsync(payload);
         self.setCart(response?.cart);
         return response;

@@ -1,5 +1,6 @@
 const requests = { 
-    listingSport : "/events?category_id=6",
+    listingSport : "/events",
+    // listingSport : "/events?category_id=6",
     eventDetail : "/events/1155"
 }
 

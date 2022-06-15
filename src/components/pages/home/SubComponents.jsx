@@ -36,21 +36,6 @@ export const SliderItemWrapper = styled.div`
     width: 100%;
     flex:0 0 auto;
     height: fit-content;  
-
-    /* animation: slideshow 5s ease infinite;
-    animation-delay: 10s;
-
-    @keyframes slideshow {
-        from { 
-            transform: translateX(0); 
-        }
-        60% { 
-            transform:translateX(-100%); 
-        }
-        to { 
-            transform:translateX(-100%); 
-        }
-    } */
 `
 
 export const ImageWrapper = styled.div`

@@ -4,27 +4,40 @@ import Banner from './Banner';
 import SliedrItem from "./SliderItem";
 import Tickets from "./Tickets";
 
-import { observer } from "mobx-react-lite";
-
 import instance from '../../../axios/axios';
-import requests from '../../../axios/requests';
-import { useQuery } from 'react-query'
+
+import { useInfiniteQuery } from 'react-query'
 import Loading from "../../loading/Loading";
 import { Navigate } from "react-router-dom";
 
 import { Helmet } from "react-helmet-async"
 
-const Home = observer(() => {
+import InfiniteScroll from "react-infinite-scroller";
 
-  const { isLoading, error, data } = useQuery("fetchListing", () => 
-    instance.get(requests.listingSport)
-    .then(response => response)
+const Home = () => {
+
+  const fetchEvents = async ({ pageParam = 1 }) => {
+    const results = await instance.get(`/events?page=${ pageParam }`);
+    return { 
+      results, 
+      nextPage: pageParam + 1, 
+      totalPages: Math.ceil(results.data.pagination.total /12) };
+  }
+
+
+  const { data, isError, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery("data", 
+    fetchEvents,
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.nextPage < lastPage.totalPages) return lastPage.nextPage;
+        return undefined;
+      },
+    }
   )
 
+  if(isError) return <Navigate to="/error" />
   if(isLoading) return <Loading />
-  
-  if(error) return <Navigate to="/error" />
-
+ 
   return (
     <Wrapper>
       <Helmet>
@@ -37,15 +50,23 @@ const Home = observer(() => {
       </Helmet>
       <Container>
        <Slider>
-          {data.data.events.map(event => 
+          { data?.pages[0]?.results.data.events.map(event => 
             <SliedrItem event={event} key={event.id} />
           )}          
         </Slider>
+        <InfiniteScroll 
+          hasMore={ hasNextPage } 
+          loadMore={ fetchNextPage } 
+          loader={ <Loading key={0}/> } 
+        >
+          { 
+            data?.pages.map((page) => <Tickets events={ page?.results.data.events }/> )
+          }
+        </InfiniteScroll>
         <Banner />
-        <Tickets events={data.data.events}/>
       </Container>
     </Wrapper>
   )
-})
+}
 
 export default Home

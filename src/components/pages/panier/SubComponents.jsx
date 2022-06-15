@@ -201,13 +201,10 @@ export const Label = styled.label`
 `
 
 export const Description = styled.div`
-    font-size: 13px;
     background-color: #f5f5f5;
     padding: 12px 38px;
     border-radius: 5px;
     font-size: 13px;
-    font-weight: 300;
-    line-height: 19px;
     max-width: 72%;
     width: 500px;
     margin-bottom: 14px;
@@ -247,11 +244,10 @@ export const Validator = styled.span`
 `
 
 export const Left = styled.div`
-    min-width: 60%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     padding: 0;
-
 
     @media (max-width: 760px) {
         width: 97%;
@@ -281,7 +277,6 @@ export const CodePromotionnelWrapper = styled.div`
 `
 
 export const InputField = styled.div`
-    /* padding: 10px; */
     padding: 30px 0;
 
     @media (max-width: 760px) {
