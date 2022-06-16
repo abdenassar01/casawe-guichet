@@ -13,8 +13,13 @@ import { Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async"
 
 import InfiniteScroll from "react-infinite-scroller";
+import { useEffect } from "react";
 
 const Home = () => {
+
+  useEffect(() => {
+    window.scrollX = 0
+  },[])
 
   const fetchEvents = async ({ pageParam = 1 }) => {
     const results = await instance.get(`/events?page=${ pageParam }`);
@@ -36,6 +41,7 @@ const Home = () => {
   )
 
   if(isError) return <Navigate to="/error" />
+
   if(isLoading) return <Loading />
  
   return (
@@ -57,7 +63,7 @@ const Home = () => {
         <InfiniteScroll 
           hasMore={ hasNextPage } 
           loadMore={ fetchNextPage } 
-          loader={ <Loading key={0}/> } 
+          loader={ <Loading /> } 
         >
           { 
             data?.pages.map((page) => <Tickets events={ page?.results.data.events }/> )

@@ -99,17 +99,37 @@ const Product = types.model("product", {
     }
 }))
 
+const Field = types.model("field", {
+    type : types.optional(types.string, ""),
+    name : types.optional(types.string, ""),
+    label : types.optional(types.string, ""),
+    validation : types.array(types.string),
+    values : types.maybeNull(types.string)                      
+}).views(self => ({
+    get getFields(){
+        return {
+            type: self.type,
+            name : self.name,
+            label : self.label,
+            validation : self.validation.map(item => ({ item })),
+            values : self.values
+        }
+    }
+}))
+
 const Item = types.model("item", {
     itemId: types.identifier,
     product: types.maybe(Product),
     quantity: types.optional(types.number, 0),
-    total: types.optional(types.number, 0)
+    total: types.optional(types.number, 0),
+    fields: types.array(Field)
 }).actions(self => ({
     setItem(data){
         self.itemId = data.itemId;
         self.product.setProduct(data.product); 
         self.quantity = data.quantity;
         self.total = data.total;
+        self.fields = data.fields
     }
 })).views(self => ({
     get getItem(){
@@ -117,7 +137,8 @@ const Item = types.model("item", {
             itemId: self.itemId,
             quantity: self.quantity,
             total: self.total,
-            product: self.product.getProduct
+            product: self.product.getProduct,
+            fields: self.fields.map(field => field.getFields )
         }
     }
 }))
@@ -179,8 +200,6 @@ const Cart = types.model("cart", {
         return result;
     },
     async addToCart(payload){
-        // self.count += 1
-        // self.items.push()
         const response = await _addToCartAsync(payload);
         self.setCart(response?.cart);
         return response;
