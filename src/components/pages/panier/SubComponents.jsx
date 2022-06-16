@@ -40,7 +40,6 @@ export const Heading = styled.h1`
 
 export const PanieBox = styled.div`
     margin-top: 50px;
-    /* padding: 60px 10px; */
     color: #626467;
     width: 97%;
     background-color: white;
@@ -78,7 +77,7 @@ export const ItemWrapper = styled.div`
     display: flex;
     justify-content: flex-start;
     gap: 20px; 
-    padding-bottom: 20px;
+    padding: 20px 0;
     border-bottom: 1px solid grey;
     position: relative;
     width: 100%;
@@ -125,8 +124,8 @@ export const OffreName = styled.div`
 
 export const Title = styled.h3`
     color: black;
-    font-weight: 500;
-    font-size: 28px;
+    font-weight: 700;
+    font-size: 22px;
 
     @media ( max-width: 760px ) {
         font-size: 18px;
@@ -338,4 +337,56 @@ export const EmptyCart = styled.div`
     padding: 50px 20px;
     background-color: white;
     border-radius: 2px;
+`
+
+export const Fields = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`
+
+export const BeneficiareItem = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+export const FlexFields = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+`
+
+export const FieldInput = styled.input`
+    padding: 10px;
+    outline: none;
+    font-size: 14px;
+    border: 1px solid ${props => props.error ? "#f8425b" : "#ededed" };
+
+    &:focus{
+        border: 1px solid ${props => props.error ? "#f8425b" : "#66afe9" };
+        box-shadow: 1px 1px 5px ${props => props.error ? "#f8425b" : "#66afe9" };
+    }
+`
+
+export const FieldLabel = styled.label`
+  font-weight: 400;
+`
+
+export const BenificiareField = styled.div`
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    width: ${props => props.width ? props.width : "45%"};
+
+    @media (max-width: 768px){
+        width: 95%;
+    }
+`
+
+export const BenificaireTitle = styled.p`
+    font-size: 18px;
+    margin-top: 20px;
+    color: black;
+    font-weight: 700;
 `

@@ -14,6 +14,7 @@ import { useCart } from "../../../models/cart";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import Total from "./total/Total";
+import { useForm } from "react-hook-form";
 
 
 const Panier = observer(() => {
@@ -27,6 +28,8 @@ const Panier = observer(() => {
     const [ promocode, setPromoCode ] = useState();
     const [ licence, setLicence ] = useState(false);
     const [ validation, setValidation ] = useState("");
+
+    const { register, handleSubmit } = useForm();
 
     useEffect(() => {
         
@@ -48,9 +51,10 @@ const Panier = observer(() => {
         fetchCart();
     },[ cart, licence ])
 
-    const checkout = () => {
+    const checkout = (data) => {
 
         const payload = {
+            benificiare: data,
             items: items,
             payment_method_id: payemetMethod,
             source: "guichet"
@@ -84,7 +88,13 @@ const Panier = observer(() => {
                             <Items>
                                 {
                                     items.map(item => (
-                                        <Item key={item?.itemId} item={item} setAlert={ setMessage } setStatus={ setStatus } />
+                                        <Item 
+                                            key={item?.itemId} 
+                                            item={ item } 
+                                            setAlert={ setMessage } 
+                                            setStatus={ setStatus } 
+                                            register={ register }
+                                        />
                                     ))
                                 }  
                             </Items> 
@@ -100,7 +110,7 @@ const Panier = observer(() => {
                         <CodePromotionnel code={ promocode } setCode={ setPromoCode } />
                         <Total 
                             subTotal={cart?.subTotal} total={cart?.total} 
-                            onCheckout={ checkout } licence={ licence } 
+                            onCheckout={ handleSubmit(checkout) } licence={ licence } 
                             setLicence={ setLicence } 
                             validation={ validation }
                         />

@@ -1,7 +1,7 @@
 import {  ItemImage, ItemContent, Icon,
-    OffreName, Title, Pricing, Quantity, 
+    OffreName, Title, Pricing, Quantity, BenificaireTitle,
     Input, PricesWrapper, Price, BoldTotal,
-    ItemWrapper
+    ItemWrapper, Fields, BeneficiareItem, FlexFields
 } from "../SubComponents";
 
 import { useCart } from "../../../../models/cart";
@@ -9,8 +9,9 @@ import { useCart } from "../../../../models/cart";
 import { RiCloseFill } from "react-icons/ri";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
+import Beneficiare from "./fields/Beneficiare";
 
-const Item = observer(({ item, setAlert, setStatus }) => {
+const Item = observer(({ item, setAlert, setStatus, register }) => {
 
     const cart = useCart();
 
@@ -52,7 +53,24 @@ const Item = observer(({ item, setAlert, setStatus }) => {
         }
     }
 
+    const printFields = () => {
+        const rows = []
+
+        for(let i = 0 ; i < quantity ; i++ ){
+            rows.push(
+                <BeneficiareItem key={i}>
+                    <BenificaireTitle>Benificaire { i+1 }</BenificaireTitle>
+                    <FlexFields>
+                        <Beneficiare fields={ item?.fields } register={ register } />
+                    </FlexFields>
+                </BeneficiareItem>        
+            )
+        }
+        return rows;
+    }
+
   return (
+
     <ItemWrapper>
         <Icon>
             <RiCloseFill size={25} onClick={ removeItem } />
@@ -71,6 +89,11 @@ const Item = observer(({ item, setAlert, setStatus }) => {
                     <Price>Sous-total: <BoldTotal>{ item?.total } MAD</BoldTotal></Price>
                 </PricesWrapper>
             </Pricing>
+            <Fields>
+                {
+                    printFields()
+                }
+            </Fields>
         </ItemContent>
     </ItemWrapper>
   )

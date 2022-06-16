@@ -16,9 +16,10 @@ const CodePromotionnel = ({ setCode }) => {
         <InputField>
           <PromoBox 
             type="text" placeholder="Saisisser votre code" 
-            value={ promo } onChange={ e => setPromo(e.target.value) }
+            value={ promo } 
+            onChange={ e => setPromo(e.target.value) }
           />
-          <OkButton onClick={ setCode(promo) }>Ok</OkButton>
+          <OkButton onClick={ () => setCode(promo) }>Ok</OkButton>
         </InputField>
     </CodePromotionnelWrapper>
   )
